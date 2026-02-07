@@ -1,0 +1,16 @@
+export const colors = {
+  primary: '#00D4AA',
+  secondary: '#FFD700',
+  error: '#FF6B6B',
+  warning: '#FFA500',
+  success: '#00FF88',
+  muted: '#888888',
+  info: '#87CEEB',
+  directory: '#5FAFFF',
+  file: '#FFFFFF',
+  prompt: '#00D4AA',
+  narrative: '#DDA0DD',
+  hint1: '#87CEEB',
+  hint2: '#FFD700',
+  hint3: '#FF6B6B',
+};
