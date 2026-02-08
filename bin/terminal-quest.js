@@ -5,7 +5,7 @@ import { execFileSync } from 'node:child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// tsx を使って TypeScript を直接実行
-const tsx = resolve(__dirname, '..', 'node_modules', '.bin', 'tsx');
-const entry = resolve(__dirname, '..', 'src', 'index.tsx');
-execFileSync(tsx, [entry], { stdio: 'inherit' });
+// ビルド済みのJSを実行
+const node = process.execPath;
+const entry = resolve(__dirname, '..', 'dist', 'index.js');
+execFileSync(node, [entry], { stdio: 'inherit' });
