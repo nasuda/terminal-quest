@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Terminal Quest - ストーリー駆動型ターミナルコマンド学習CLI。Ink (React for CLI) を使ったインタラクティブなターミナルアプリ。9つのストーリー（計50ミッション）でターミナルコマンドを学ぶ。
+Terminal Quest - ストーリー駆動型ターミナルコマンド学習CLI。Ink (React for CLI) を使ったインタラクティブなターミナルアプリ。3つのコース（小学生向け・はじめて・エンジニア）のストーリーでターミナルコマンドを学ぶ。
 
 ## Getting Started
 
@@ -30,7 +30,9 @@ npm start            # ビルド済みを実行
 - **TypeScript ESM** + **Ink 5** (React for CLI) + **ink-text-input**
 - `src/engine/` - コアエンジン（UI非依存）: VirtualFS, CommandHandler, MissionEngine, HintEngine, TabCompletion, Achievements
 - `src/engine/commands/` - 23コマンド実装（pwd, ls, cd, cat, grep, cp, echo, mkdir, mv, rm, find, touch, head, tail, wc, sort, uniq, cut, chmod, git, help, hint, clear, man）
-- `src/data/` - 型定義、9ストーリーデータ、コマンドメタデータ（CommandExample: { cmd, desc } 形式で説明付き例文）
+- `src/data/` - 型定義、ストーリーデータ（コース別）、コマンドメタデータ（CommandExample: { cmd, desc } 形式で説明付き例文）
+- `src/data/stories/` - 各ストーリーファイル（コースプレフィックス: k=kids, 00=beginner, 番号=engineer）
+- `bin/` - ランチャースクリプト（tsxでTypeScript直接実行）
 - `src/screens/` - 7画面コンポーネント
 - `src/components/` - 6再利用UIコンポーネント
 - `src/state/` - ゲーム状態管理（ProgressStore: ~/.terminal-quest/progress.json）
@@ -47,9 +49,19 @@ npm start            # ビルド済みを実行
 - 達成バッジシステムで学習モチベーション向上
 - MissionBrief画面で新コマンドを具体例付きで紹介（各例に日本語の説明）
 - ターミナル画面は通常のターミナル風レイアウト（上からコマンドと結果が流れる）
+- コース制: stories にcourseフィールド（'kids' | 'beginner' | 'engineer'）でコース分類
+- StorySelectScreenはコース別グループ表示（courseConfigで定義）
+- bin/terminal-quest.js: tsxランチャーで、ビルド不要でTypeScriptを直接実行可能
 
-## Stories
+## Courses & Stories
 
+### ✨ 小学生向けコース (kids)
+- k1: "宝探し冒険" - 冒険の世界でコマンドを学ぶ（pwd, ls, cd, cat）
+
+### 💻 はじめてコース (beginner)
+- 00: "はじめてのパソコン冒険" - 自分のパソコンを探検（pwd, ls, cd, cat）
+
+### 🖥️ エンジニアコース (engineer)
 1. "初めてのサーバー管理" (5M) - pwd, ls, cd, cat, grep, cp, echo ★常にアンロック
 2. "散らかったプロジェクト" (4M) - mkdir, mv, rm, find, touch, wc ★Story 1完了で解放
 3. "ログ探偵" (4M) - head, tail, wc, sort, uniq, grep応用 ★Story 1完了で解放
@@ -60,11 +72,15 @@ npm start            # ビルド済みを実行
 
 ## Status
 
-全Phase完了（Phase 1-6 + 改善Phase）
+全Phase完了（Phase 1-6 + 改善Phase） + コース制導入
 - 23コマンド実装済み（パイプ・リダイレクト対応、sort -t/-k、man）
-- 9ストーリー（50ミッション）実装済み
+- 3コース（kids/beginner/engineer）、ストーリーデータ拡張中
+- エンジニアコース: 7ストーリー（30ミッション）実装済み
+- 小学生向け・はじめてコース: 各1ストーリー追加済み
 - UI全画面実装済み（Title, StorySelect, MissionBrief, Terminal, MissionComplete, Progress, Settings）
+- StorySelectScreenはコース別グループ表示に対応
 - Tabオートコンプリート（コマンド名・ファイルパス補完）
 - コマンド履歴（↑↓キー）、help、clear、objectives、man 対応
 - 達成バッジシステム（7種類のバッジ）
+- bin/terminal-quest.jsでビルド不要実行（tsx直接実行）
 - テスト 147件パス、TypeScriptエラー0
