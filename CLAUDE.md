@@ -48,7 +48,7 @@ npm install -g terminal-quest   # グローバルインストール
 ## Architecture
 
 - **TypeScript ESM** + **Ink 5** (React for CLI) + **ink-text-input**
-- `src/engine/` - コアエンジン（UI非依存）: VirtualFS, CommandHandler, MissionEngine, HintEngine, TabCompletion, Achievements
+- `src/engine/` - コアエンジン（UI非依存）: VirtualFS, CommandHandler, MissionEngine, HintEngine, TabCompletion, Achievements, CommandFeedback
 - `src/engine/commands/` - 23コマンド実装（pwd, ls, cd, cat, grep, cp, echo, mkdir, mv, rm, find, touch, head, tail, wc, sort, uniq, cut, chmod, git, help, hint, clear, man）
 - `src/data/` - 型定義、ストーリーデータ（コース別）、コマンドメタデータ（CommandExample: { cmd, desc } 形式で説明付き例文）
 - `src/data/stories/` - 各ストーリーファイル（コースプレフィックス: k=kids, 00=beginner, 番号=engineer）
@@ -67,6 +67,10 @@ npm install -g terminal-quest   # グローバルインストール
 - gitコマンドは .git/ ディレクトリ内のファイルで状態シミュレーション
 - Tabオートコンプリートでコマンド名・パス補完（Ctrl+Hでヒント）
 - 達成バッジシステムで学習モチベーション向上
+- ミッション完了時にふりかえり問題（4択クイズ）で理解度確認（Mission.review: ReviewQuestion）
+- ミッションごとの学習目標（Mission.goal）を設定
+- CommandFeedback: Levenshtein距離によるtypoコマンド提案、ミッション固有フィードバック
+- コマンド実行回数カウント（StoryProgress.commandsPerMission）
 - MissionBrief画面で新コマンドを具体例付きで紹介（各例に日本語の説明）
 - ターミナル画面は通常のターミナル風レイアウト（上からコマンドと結果が流れる）
 - コース制: stories にcourseフィールド（'kids' | 'beginner' | 'engineer'）でコース分類
@@ -76,10 +80,10 @@ npm install -g terminal-quest   # グローバルインストール
 ## Courses & Stories
 
 ### ✨ 小学生向けコース (kids)
-- k1: "宝探し冒険" - 冒険の世界でコマンドを学ぶ（pwd, ls, cd, cat）
+- k1: "宝探し冒険" (10M) - 冒険の世界で21コマンドを学ぶ
 
 ### 💻 はじめてコース (beginner)
-- 00: "はじめてのパソコン冒険" - 自分のパソコンを探検（pwd, ls, cd, cat）
+- 00: "はじめてのパソコン冒険" (10M) - 自分のパソコンを探検して21コマンドを学ぶ
 
 ### 🖥️ エンジニアコース (engineer)
 1. "初めてのサーバー管理" (5M) - pwd, ls, cd, cat, grep, cp, echo ★常にアンロック
@@ -102,6 +106,9 @@ npm install -g terminal-quest   # グローバルインストール
 - Tabオートコンプリート（コマンド名・ファイルパス補完）
 - コマンド履歴（↑↓キー）、help、clear、objectives、man 対応
 - 達成バッジシステム（7種類のバッジ）
-- npm v1.0.0 公開済み（`npx terminal-quest` で誰でも実行可能）
+- 全ミッションにgoal（学習目標）とreview（ふりかえり4択問題）を実装
+- CommandFeedbackエンジン（typo提案・ミッション固有フィードバック）
+- story-integrity.test.tsで全ストーリーデータの整合性を自動検証
+- npm v1.0.2 公開済み（`npx terminal-quest` で誰でも実行可能）
 - ビルド済みdist配布方式（tsxは開発専用）
-- テスト 147件パス、TypeScriptエラー0
+- テスト 184件パス、TypeScriptエラー0
