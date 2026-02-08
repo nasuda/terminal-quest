@@ -25,6 +25,25 @@ npm run test:watch   # テスト watch mode
 npm start            # ビルド済みを実行
 ```
 
+## npm公開
+
+```bash
+npm login            # npmアカウントでログイン
+npm publish          # 公開（prepublishOnlyでテスト自動実行）
+```
+
+ユーザーの利用方法:
+```bash
+npx terminal-quest              # インストール不要で即実行
+npm install -g terminal-quest   # グローバルインストール
+```
+
+### 公開設定
+- `files`: bin/, src/（テスト除外）, tsconfig.json のみ配布（約58KB）
+- `engines`: Node.js >= 18
+- `license`: MIT
+- `prepublishOnly`: テスト自動実行
+
 ## Architecture
 
 - **TypeScript ESM** + **Ink 5** (React for CLI) + **ink-text-input**
@@ -83,4 +102,5 @@ npm start            # ビルド済みを実行
 - コマンド履歴（↑↓キー）、help、clear、objectives、man 対応
 - 達成バッジシステム（7種類のバッジ）
 - bin/terminal-quest.jsでビルド不要実行（tsx直接実行）
+- npm公開準備完了（v1.0.0、MIT License、files制限済み）
 - テスト 147件パス、TypeScriptエラー0
