@@ -13,22 +13,12 @@ interface TerminalOutputProps {
 }
 
 export function TerminalOutput({ lines, maxLines = 20 }: TerminalOutputProps) {
-  const visibleLines = maxLines > 0 ? lines.slice(-maxLines) : lines;
+  const filtered = lines.filter(line => line.type !== 'separator');
+  const visibleLines = maxLines > 0 ? filtered.slice(-maxLines) : filtered;
 
   return (
     <Box flexDirection="column">
       {visibleLines.map((line, i) => {
-        if (line.type === 'separator') {
-          return (
-            <Text key={i} color={colors.muted}>
-              {line.text}
-            </Text>
-          );
-        }
-
-        const isNewGroup = line.type === 'system' && i > 0
-          && visibleLines[i - 1]?.type !== 'separator';
-
         let color: string;
         switch (line.type) {
           case 'error':
@@ -44,15 +34,10 @@ export function TerminalOutput({ lines, maxLines = 20 }: TerminalOutputProps) {
             color = colors.file;
         }
 
-        const indent = (line.type === 'output' || line.type === 'error') ? '  ' : '';
-
         return (
-          <React.Fragment key={i}>
-            {isNewGroup && <Text> </Text>}
-            <Text color={color}>
-              {indent}{line.text}
-            </Text>
-          </React.Fragment>
+          <Text key={i} color={color}>
+            {line.text}
+          </Text>
         );
       })}
     </Box>

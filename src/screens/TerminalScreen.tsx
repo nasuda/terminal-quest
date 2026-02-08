@@ -86,7 +86,6 @@ export function TerminalScreen({
       const cwd = missionEngine.getFS().getCwd();
       setOutputLines(prev => [
         ...prev,
-        ...(prev.length > 0 ? [{ text: '\u2500'.repeat(40), type: 'separator' as const }] : []),
         { text: `${cwd} $ ${trimmed}`, type: 'system' as const },
       ]);
 
@@ -202,16 +201,15 @@ export function TerminalScreen({
         />
       )}
 
-      <Box flexDirection="column" marginTop={1} minHeight={10}>
-        <TerminalOutput lines={outputLines} maxLines={15} />
+      <Box flexDirection="column" marginTop={1}>
+        <TerminalOutput lines={outputLines} maxLines={30} />
+        <TerminalPrompt
+          cwd={missionEngine.getFS().getCwd()}
+          onSubmit={handleCommand}
+          history={commandHistory}
+          tabCompletion={tabCompletion ?? undefined}
+        />
       </Box>
-
-      <TerminalPrompt
-        cwd={missionEngine.getFS().getCwd()}
-        onSubmit={handleCommand}
-        history={commandHistory}
-        tabCompletion={tabCompletion ?? undefined}
-      />
     </Box>
   );
 }
