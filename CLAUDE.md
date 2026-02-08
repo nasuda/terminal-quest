@@ -39,10 +39,11 @@ npm install -g terminal-quest   # グローバルインストール
 ```
 
 ### 公開設定
-- `files`: bin/, src/（テスト除外）, tsconfig.json のみ配布（約58KB）
+- `files`: bin/, dist/（テスト・sourcemap除外）, LICENSE のみ配布（約63KB）
 - `engines`: Node.js >= 18
 - `license`: MIT
-- `prepublishOnly`: テスト自動実行
+- `prepublishOnly`: ビルド→テスト自動実行
+- 2FA(パスキー)環境ではGranular Access Tokenで公開
 
 ## Architecture
 
@@ -51,7 +52,7 @@ npm install -g terminal-quest   # グローバルインストール
 - `src/engine/commands/` - 23コマンド実装（pwd, ls, cd, cat, grep, cp, echo, mkdir, mv, rm, find, touch, head, tail, wc, sort, uniq, cut, chmod, git, help, hint, clear, man）
 - `src/data/` - 型定義、ストーリーデータ（コース別）、コマンドメタデータ（CommandExample: { cmd, desc } 形式で説明付き例文）
 - `src/data/stories/` - 各ストーリーファイル（コースプレフィックス: k=kids, 00=beginner, 番号=engineer）
-- `bin/` - ランチャースクリプト（tsxでTypeScript直接実行）
+- `bin/` - ランチャースクリプト（dist/index.jsを直接import）
 - `src/screens/` - 7画面コンポーネント
 - `src/components/` - 6再利用UIコンポーネント
 - `src/state/` - ゲーム状態管理（ProgressStore: ~/.terminal-quest/progress.json）
@@ -70,7 +71,7 @@ npm install -g terminal-quest   # グローバルインストール
 - ターミナル画面は通常のターミナル風レイアウト（上からコマンドと結果が流れる）
 - コース制: stories にcourseフィールド（'kids' | 'beginner' | 'engineer'）でコース分類
 - StorySelectScreenはコース別グループ表示（courseConfigで定義）
-- bin/terminal-quest.js: tsxランチャーで、ビルド不要でTypeScriptを直接実行可能
+- bin/terminal-quest.js: ビルド済みdist/index.jsを直接import（tsx不要、軽量）
 
 ## Courses & Stories
 
@@ -101,6 +102,6 @@ npm install -g terminal-quest   # グローバルインストール
 - Tabオートコンプリート（コマンド名・ファイルパス補完）
 - コマンド履歴（↑↓キー）、help、clear、objectives、man 対応
 - 達成バッジシステム（7種類のバッジ）
-- bin/terminal-quest.jsでビルド不要実行（tsx直接実行）
-- npm公開準備完了（v1.0.0、MIT License、files制限済み）
+- npm v1.0.0 公開済み（`npx terminal-quest` で誰でも実行可能）
+- ビルド済みdist配布方式（tsxは開発専用）
 - テスト 147件パス、TypeScriptエラー0
