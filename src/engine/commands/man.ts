@@ -52,7 +52,7 @@ export function man(fs: VirtualFS, args: string[]): CommandResult {
 
   lines.push('EXAMPLES');
   for (const ex of meta.examples) {
-    lines.push(`    $ ${ex}`);
+    lines.push(`    $ ${ex.cmd.padEnd(28)} ${ex.desc}`);
   }
 
   return { output: lines.join('\n') };

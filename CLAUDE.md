@@ -30,7 +30,7 @@ npm start            # ビルド済みを実行
 - **TypeScript ESM** + **Ink 5** (React for CLI) + **ink-text-input**
 - `src/engine/` - コアエンジン（UI非依存）: VirtualFS, CommandHandler, MissionEngine, HintEngine, TabCompletion, Achievements
 - `src/engine/commands/` - 23コマンド実装（pwd, ls, cd, cat, grep, cp, echo, mkdir, mv, rm, find, touch, head, tail, wc, sort, uniq, cut, chmod, git, help, hint, clear, man）
-- `src/data/` - 型定義、9ストーリーデータ、コマンドメタデータ
+- `src/data/` - 型定義、9ストーリーデータ、コマンドメタデータ（CommandExample: { cmd, desc } 形式で説明付き例文）
 - `src/screens/` - 7画面コンポーネント
 - `src/components/` - 6再利用UIコンポーネント
 - `src/state/` - ゲーム状態管理（ProgressStore: ~/.terminal-quest/progress.json）
@@ -45,6 +45,8 @@ npm start            # ビルド済みを実行
 - gitコマンドは .git/ ディレクトリ内のファイルで状態シミュレーション
 - Tabオートコンプリートでコマンド名・パス補完（Ctrl+Hでヒント）
 - 達成バッジシステムで学習モチベーション向上
+- MissionBrief画面で新コマンドを具体例付きで紹介（各例に日本語の説明）
+- ターミナル画面は通常のターミナル風レイアウト（上からコマンドと結果が流れる）
 
 ## Stories
 
