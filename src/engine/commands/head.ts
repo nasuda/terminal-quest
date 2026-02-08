@@ -52,6 +52,7 @@ export function head(fs: VirtualFS, args: string[]): CommandResult {
     return { output: '', error: 'head: missing file operand' };
   }
 
+  if (content === '') return { output: '' };
   const lines = content.split('\n');
   const selected = lines.slice(0, lineCount);
   return { output: selected.join('\n') };

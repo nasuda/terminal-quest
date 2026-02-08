@@ -395,4 +395,97 @@ describe('CommandHandler', () => {
       expect(result.output).toBe('hello');
     });
   });
+
+  // --- wc line count fix ---
+  describe('wc line count', () => {
+    it('should count newlines correctly for content ending with newline', () => {
+      // hello.txt has 3 lines with no trailing newline -> 2 newlines -> 2 lines
+      const result = handler.execute('wc -l hello.txt');
+      expect(result.output).toBe('2 hello.txt');
+    });
+
+    it('should return 0 lines for empty file', () => {
+      fs.writeFile('/tmp/empty.txt', '');
+      handler.execute('cd /tmp');
+      const result = handler.execute('wc -l empty.txt');
+      expect(result.output).toBe('0 empty.txt');
+    });
+
+    it('should count single line with trailing newline as 1', () => {
+      fs.writeFile('/tmp/oneline.txt', 'hello\n');
+      handler.execute('cd /tmp');
+      const result = handler.execute('wc -l oneline.txt');
+      expect(result.output).toBe('1 oneline.txt');
+    });
+
+    it('should count lines from pipe correctly', () => {
+      const result = handler.execute('echo "line1\nline2\nline3" | wc -l');
+      // pipe content: "line1\nline2\nline3" → 2 newlines
+      expect(result.output).toBe('2');
+    });
+  });
+
+  // --- head/tail empty file ---
+  describe('head/tail empty file', () => {
+    it('head should return empty for empty file', () => {
+      fs.writeFile('/tmp/empty.txt', '');
+      handler.execute('cd /tmp');
+      const result = handler.execute('head empty.txt');
+      expect(result.output).toBe('');
+    });
+
+    it('tail should return empty for empty file', () => {
+      fs.writeFile('/tmp/empty.txt', '');
+      handler.execute('cd /tmp');
+      const result = handler.execute('tail empty.txt');
+      expect(result.output).toBe('');
+    });
+  });
+
+  // --- sort -t/-k ---
+  describe('sort -t/-k', () => {
+    it('should sort by field with delimiter', () => {
+      fs.writeFile('/tmp/data.csv', 'Bob,30\nAlice,25\nCharlie,35');
+      handler.execute('cd /tmp');
+      const result = handler.execute('sort -t, -k2 -n data.csv');
+      expect(result.output).toBe('Alice,25\nBob,30\nCharlie,35');
+    });
+
+    it('should sort by field in reverse', () => {
+      fs.writeFile('/tmp/data.csv', 'Bob,30\nAlice,25\nCharlie,35');
+      handler.execute('cd /tmp');
+      const result = handler.execute('sort -t, -k2 -n -r data.csv');
+      expect(result.output).toBe('Charlie,35\nBob,30\nAlice,25');
+    });
+  });
+
+  // --- ls -l path resolution ---
+  describe('ls -l path resolution', () => {
+    it('should show permissions for subdirectory entries', () => {
+      const result = handler.execute('ls -l docs');
+      expect(result.output).toContain('readme.md');
+      expect(result.output).toMatch(/[d-][rwx-]{9}/);
+    });
+  });
+
+  // --- man command ---
+  describe('man', () => {
+    it('should show command reference for no args', () => {
+      const result = handler.execute('man');
+      expect(result.output).toContain('Terminal Quest');
+      expect(result.output).toContain('Navigation');
+    });
+
+    it('should show detail for specific command', () => {
+      const result = handler.execute('man ls');
+      expect(result.output).toContain('NAME');
+      expect(result.output).toContain('USAGE');
+      expect(result.output).toContain('EXAMPLES');
+    });
+
+    it('should error for unknown command', () => {
+      const result = handler.execute('man nonexistent');
+      expect(result.error).toContain('マニュアルはありません');
+    });
+  });
 });

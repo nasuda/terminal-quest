@@ -33,6 +33,7 @@ export interface Mission {
   objectives: Objective[];
   initialFS: FSNode;
   initialCwd: string;
+  newCommands?: string[];
 }
 
 export interface Story {
@@ -42,6 +43,7 @@ export interface Story {
   emoji: string;
   missions: Mission[];
   unlockRequires: string[];
+  course?: 'kids' | 'beginner' | 'engineer';
 }
 
 export interface StoryProgress {
@@ -51,11 +53,19 @@ export interface StoryProgress {
   hintsUsed: Record<string, number>;
 }
 
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  emoji: string;
+}
+
 export interface GameProgress {
   completedStories: string[];
   storyProgress: Record<string, StoryProgress>;
   totalCommandsExecuted: number;
   totalHintsUsed: number;
+  achievements: string[];
 }
 
 export type Screen =

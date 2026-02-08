@@ -11,7 +11,12 @@ export function loadProgress(): GameProgress {
   try {
     if (!existsSync(SAVE_FILE)) return { ...initialProgress };
     const data = readFileSync(SAVE_FILE, 'utf-8');
-    return JSON.parse(data) as GameProgress;
+    const parsed = JSON.parse(data) as GameProgress;
+    // Migration: add achievements if missing
+    if (!parsed.achievements) {
+      parsed.achievements = [];
+    }
+    return parsed;
   } catch {
     return { ...initialProgress };
   }

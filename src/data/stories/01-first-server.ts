@@ -208,6 +208,7 @@ export const story01: Story = {
       narrative:
         '先輩からの引き継ぎメモには「まずは現在いるディレクトリを確認」と書いてある。ターミナルを開いたら、まず自分がどこにいるのか把握しよう。',
       initialCwd: '/home/admin',
+      newCommands: ['pwd', 'ls'],
       initialFS: mission1FS,
       objectives: [
         {
@@ -239,6 +240,7 @@ export const story01: Story = {
       narrative:
         'サーバーの設定ファイルを確認する必要がある。設定ファイルは /etc に保管されている。ディレクトリを移動して、設定内容を確認しよう。',
       initialCwd: '/home/admin',
+      newCommands: ['cd', 'cat'],
       initialFS: mission2FS,
       objectives: [
         {
@@ -280,6 +282,7 @@ export const story01: Story = {
       narrative:
         'ユーザーから「エラーが出てる」と報告が。ログファイルを調べて、何が起きているか確認しよう。',
       initialCwd: '/home/admin',
+      newCommands: ['grep'],
       initialFS: mission3FS,
       objectives: [
         {
@@ -317,6 +320,7 @@ export const story01: Story = {
       narrative:
         '設定を変更する前に、バックアップを取る習慣をつけよう。何かあったときに元に戻せるように、コピーを作成する。',
       initialCwd: '/etc/app',
+      newCommands: ['cp'],
       initialFS: mission4FS,
       objectives: [
         {
@@ -343,6 +347,7 @@ export const story01: Story = {
       narrative:
         'デバッグモードが無効になっている。config.json の debug を true に変更しよう。echo とリダイレクトを使ってファイルを書き換える。',
       initialCwd: '/etc/app',
+      newCommands: ['echo'],
       initialFS: mission5FS,
       objectives: [
         {
@@ -368,4 +373,5 @@ export const story01: Story = {
     },
   ],
   unlockRequires: [],
+  course: 'engineer',
 };

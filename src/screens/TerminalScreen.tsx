@@ -5,6 +5,7 @@ import { stories } from '../data/stories/index.js';
 import { CommandHandler } from '../engine/CommandHandler.js';
 import { MissionEngine } from '../engine/MissionEngine.js';
 import { HintEngine } from '../engine/HintEngine.js';
+import { TabCompletion } from '../engine/TabCompletion.js';
 import { TerminalPrompt } from '../components/TerminalPrompt.js';
 import { TerminalOutput, type OutputLine } from '../components/TerminalOutput.js';
 import { ObjectivePanel } from '../components/ObjectivePanel.js';
@@ -42,17 +43,21 @@ export function TerminalScreen({
   });
 
   const [hintEngine] = useState(() => new HintEngine());
+  const [tabCompletion] = useState(() => {
+    if (!missionEngine) return null;
+    return new TabCompletion(missionEngine.getFS());
+  });
   const [outputLines, setOutputLines] = useState<OutputLine[]>([]);
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [completedObjectives, setCompletedObjectives] = useState<string[]>([]);
   const [currentHint, setCurrentHint] = useState<Hint | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
 
-  useInput((_input, key) => {
+  useInput((input, key) => {
     if (key.escape) {
       onNavigate({ type: 'storySelect' });
     }
-    if (key.tab && mission && missionEngine) {
+    if (input === 'h' && key.ctrl && mission && missionEngine) {
       handleHintRequest();
     }
   });
@@ -81,6 +86,7 @@ export function TerminalScreen({
       const cwd = missionEngine.getFS().getCwd();
       setOutputLines(prev => [
         ...prev,
+        ...(prev.length > 0 ? [{ text: '\u2500'.repeat(40), type: 'separator' as const }] : []),
         { text: `${cwd} $ ${trimmed}`, type: 'system' as const },
       ]);
 
@@ -182,7 +188,7 @@ export function TerminalScreen({
           {story.emoji} {mission.title}
         </Text>
         <Text color={colors.muted}>
-          Esc: 戻る | Tab/hint: ヒント | obj: 目標
+          Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標
         </Text>
       </Box>
 
@@ -204,6 +210,7 @@ export function TerminalScreen({
         cwd={missionEngine.getFS().getCwd()}
         onSubmit={handleCommand}
         history={commandHistory}
+        tabCompletion={tabCompletion ?? undefined}
       />
     </Box>
   );

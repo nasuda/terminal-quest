@@ -22,6 +22,7 @@ import { sort } from './sort.js';
 import { uniq } from './uniq.js';
 import { cut } from './cut.js';
 import { chmod } from './chmod.js';
+import { man } from './man.js';
 
 export interface CommandResult {
   output: string;
@@ -54,4 +55,5 @@ export const commandRegistry: Record<string, CommandFn> = {
   uniq,
   cut,
   chmod,
+  man,
 };

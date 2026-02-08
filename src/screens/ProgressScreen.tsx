@@ -3,6 +3,7 @@ import { Box, Text, useInput } from 'ink';
 import { colors } from '../utils/colors.js';
 import { ProgressBar } from '../components/ProgressBar.js';
 import { stories } from '../data/stories/index.js';
+import { achievements } from '../engine/Achievements.js';
 import type { GameProgress, Screen } from '../data/types.js';
 
 interface ProgressScreenProps {
@@ -62,6 +63,18 @@ export function ProgressScreen({ progress, onNavigate }: ProgressScreenProps) {
                 <ProgressBar current={completed} total={story.missions.length} width={15} />
               </Box>
             </Box>
+          );
+        })}
+      </Box>
+
+      <Box marginTop={1} flexDirection="column">
+        <Text bold color={colors.secondary}>バッジ:</Text>
+        {achievements.map(badge => {
+          const earned = (progress.achievements ?? []).includes(badge.id);
+          return (
+            <Text key={badge.id} color={earned ? colors.success : colors.muted}>
+              {earned ? badge.emoji : '🔒'} {badge.title} - {badge.description}
+            </Text>
           );
         })}
       </Box>

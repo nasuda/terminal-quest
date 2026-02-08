@@ -39,11 +39,9 @@ export function ls(fs: VirtualFS, args: string[]): CommandResult {
     const lines = entries
       .filter(e => showAll || !e.name.startsWith('.'))
       .map(e => {
-        const perms = fs.getPermissions(
-          targetPath === '.' || targetPath === ''
-            ? e.name
-            : `${targetPath}/${e.name}`
-        );
+        const resolvedDir = fs.resolvePath(targetPath);
+        const fullPath = resolvedDir === '/' ? `/${e.name}` : `${resolvedDir}/${e.name}`;
+        const perms = fs.getPermissions(fullPath);
         const suffix = e.type === 'directory' ? '/' : '';
         return `${perms} ${e.name}${suffix}`;
       });

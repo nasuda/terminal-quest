@@ -76,6 +76,9 @@ function gitStatus(fs: VirtualFS, _args: string[]): CommandResult {
           if (current !== snapshot) {
             modified.push(filePath);
           }
+        } else {
+          // No snapshot -- treat as modified
+          modified.push(filePath);
         }
       } else {
         modified.push(filePath);

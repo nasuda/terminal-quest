@@ -280,6 +280,7 @@ export const story02: Story = {
       narrative:
         'プロジェクトにはソースコード、ドキュメント、テストが混在している。まずはディレクトリを整理しよう。',
       initialCwd: '/home/dev/project',
+      newCommands: ['mkdir'],
       initialFS: mission1FS,
       objectives: [
         {
@@ -321,6 +322,7 @@ export const story02: Story = {
       narrative:
         'ディレクトリができた。次はファイルを適切な場所に移動しよう。',
       initialCwd: '/home/dev/project',
+      newCommands: ['mv'],
       initialFS: mission2FS,
       objectives: [
         {
@@ -365,6 +367,7 @@ export const story02: Story = {
       narrative:
         'プロジェクト内に .tmp ファイルや .bak ファイルが大量にある。不要ファイルを見つけて削除しよう。',
       initialCwd: '/home/dev/project',
+      newCommands: ['rm', 'find'],
       initialFS: mission3FS,
       objectives: [
         {
@@ -409,6 +412,7 @@ export const story02: Story = {
       narrative:
         'プロジェクト構造が整った。新しいファイルを作成して、プロジェクトの状態を確認しよう。',
       initialCwd: '/home/dev/project',
+      newCommands: ['touch', 'wc'],
       initialFS: mission4FS,
       objectives: [
         {
@@ -438,4 +442,5 @@ export const story02: Story = {
     },
   ],
   unlockRequires: ['story-01'],
+  course: 'engineer',
 };

@@ -52,6 +52,7 @@ export function tail(fs: VirtualFS, args: string[]): CommandResult {
     return { output: '', error: 'tail: missing file operand' };
   }
 
+  if (content === '') return { output: '' };
   const lines = content.split('\n');
   const selected = lines.slice(-lineCount);
   return { output: selected.join('\n') };

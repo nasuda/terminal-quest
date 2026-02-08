@@ -393,6 +393,7 @@ export const story05: Story = {
       narrative:
         '先輩が「リポジトリがおかしい」と焦っている。まずは状況を確認しよう。',
       initialCwd: '/home/dev/repo',
+      newCommands: ['git'],
       initialFS: mission1FS,
       objectives: [
         {
@@ -544,4 +545,5 @@ export const story05: Story = {
     },
   ],
   unlockRequires: ['story-02'],
+  course: 'engineer',
 };

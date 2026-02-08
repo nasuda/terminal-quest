@@ -4,7 +4,7 @@ import { colors } from '../utils/colors.js';
 
 export interface OutputLine {
   text: string;
-  type: 'output' | 'error' | 'system' | 'success';
+  type: 'output' | 'error' | 'system' | 'success' | 'separator';
 }
 
 interface TerminalOutputProps {
@@ -18,6 +18,17 @@ export function TerminalOutput({ lines, maxLines = 20 }: TerminalOutputProps) {
   return (
     <Box flexDirection="column">
       {visibleLines.map((line, i) => {
+        if (line.type === 'separator') {
+          return (
+            <Text key={i} color={colors.muted}>
+              {line.text}
+            </Text>
+          );
+        }
+
+        const isNewGroup = line.type === 'system' && i > 0
+          && visibleLines[i - 1]?.type !== 'separator';
+
         let color: string;
         switch (line.type) {
           case 'error':
@@ -32,10 +43,16 @@ export function TerminalOutput({ lines, maxLines = 20 }: TerminalOutputProps) {
           default:
             color = colors.file;
         }
+
+        const indent = (line.type === 'output' || line.type === 'error') ? '  ' : '';
+
         return (
-          <Text key={i} color={color}>
-            {line.text}
-          </Text>
+          <React.Fragment key={i}>
+            {isNewGroup && <Text> </Text>}
+            <Text color={color}>
+              {indent}{line.text}
+            </Text>
+          </React.Fragment>
         );
       })}
     </Box>

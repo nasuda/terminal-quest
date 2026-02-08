@@ -264,6 +264,7 @@ export const story04: Story = {
       narrative:
         'デプロイしたファイルの実行権限を設定しよう。',
       initialCwd: '/var/www/app',
+      newCommands: ['chmod'],
       initialFS: mission2FS,
       objectives: [
         {
@@ -342,4 +343,5 @@ export const story04: Story = {
     },
   ],
   unlockRequires: ['story-02', 'story-03'],
+  course: 'engineer',
 };

@@ -51,7 +51,7 @@ export function wc(fs: VirtualFS, args: string[]): CommandResult {
     return { output: '', error: 'wc: missing file operand' };
   }
 
-  const lines = content === '' ? 0 : content.split('\n').length;
+  const lines = content === '' ? 0 : (content.match(/\n/g) || []).length;
   const words = content === '' ? 0 : content.split(/\s+/).filter(Boolean).length;
   const bytes = new TextEncoder().encode(content).length;
 

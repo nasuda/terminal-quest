@@ -182,6 +182,27 @@ const serverLogLines = [
   '{"timestamp":"2024-01-15T08:52:05","level":"INFO","service":"web","message":"Server stopped"}',
 ].join('\n');
 
+const reportLogLines = [
+  'ERROR web Template rendering failed',
+  'ERROR db Query timeout exceeded',
+  'ERROR api Rate limit exceeded',
+  'INFO web Request processed',
+  'INFO api Health check OK',
+  'ERROR web CSS compilation error',
+  'ERROR db Deadlock detected',
+  'INFO db Backup started',
+  'ERROR api Invalid JSON payload',
+  'INFO web Static files served',
+  'ERROR web Memory limit warning',
+  'ERROR db Connection pool exhausted',
+  'INFO api Token refreshed',
+  'ERROR api Service unavailable',
+  'ERROR web SSL certificate expiring',
+  'INFO db Replication sync',
+  'ERROR db Foreign key violation',
+  'INFO web Heartbeat OK',
+].join('\n');
+
 const mission4FS: FSNode = {
   type: 'directory',
   children: {
@@ -194,6 +215,10 @@ const mission4FS: FSNode = {
             'server-log.txt': {
               type: 'file',
               content: serverLogLines,
+            },
+            'report.log': {
+              type: 'file',
+              content: reportLogLines,
             },
           },
         },
@@ -284,6 +309,7 @@ export const story06: Story = {
       narrative:
         'CSVデータから特定のフィールドを抽出して分析しよう。',
       initialCwd: '/home/data',
+      newCommands: ['cut'],
       initialFS: mission3FS,
       objectives: [
         {
@@ -333,8 +359,36 @@ export const story06: Story = {
             { level: 3, text: '「grep ERROR server-log.txt > errors.txt」と入力してEnterを押してください。' },
           ],
         },
+        {
+          id: 'obj-06-04-02',
+          description: 'report.log からサービス別ERROR件数を集計する（4段パイプ）',
+          checks: [
+            { type: 'command_executed', command: 'uniq' },
+            { type: 'output_contains', pattern: 'web' },
+            { type: 'output_contains', pattern: 'db' },
+          ],
+          hints: [
+            { level: 1, text: 'ERROR行を抽出し、サービス名だけ取り出して集計しましょう。' },
+            { level: 2, text: 'grep ERROR で抽出 → cut -d" " -f2 でサービス名 → sort → uniq -c で集計できます。' },
+            { level: 3, text: '「grep ERROR report.log | cut -d" " -f2 | sort | uniq -c」と入力してEnterを押してください。' },
+          ],
+        },
+        {
+          id: 'obj-06-04-03',
+          description: 'ERROR件数の多い順にTOP3を表示する（6段パイプ）',
+          checks: [
+            { type: 'command_executed', command: 'head' },
+            { type: 'output_contains', pattern: 'web' },
+          ],
+          hints: [
+            { level: 1, text: '前の集計結果をさらにソートして上位だけ取り出しましょう。' },
+            { level: 2, text: '前の4段パイプの結果に | sort -rn | head -n 3 を追加すると上位3件が取れます。' },
+            { level: 3, text: '「grep ERROR report.log | cut -d" " -f2 | sort | uniq -c | sort -rn | head -n 3」と入力してEnterを押してください。' },
+          ],
+        },
       ],
     },
   ],
   unlockRequires: ['story-03'],
+  course: 'engineer',
 };

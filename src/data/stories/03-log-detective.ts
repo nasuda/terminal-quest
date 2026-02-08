@@ -179,6 +179,7 @@ export const story03: Story = {
       narrative:
         '大量のログがある。まずはファイルの最初と最後を確認しよう。',
       initialCwd: '/var/log',
+      newCommands: ['head', 'tail'],
       initialFS: mission1FS,
       objectives: [
         {
@@ -247,6 +248,7 @@ export const story03: Story = {
       narrative:
         'どのIPアドレスからアクセスが多いか調べよう。',
       initialCwd: '/var/log',
+      newCommands: ['sort', 'uniq'],
       initialFS: mission3FS,
       objectives: [
         {
@@ -297,4 +299,5 @@ export const story03: Story = {
     },
   ],
   unlockRequires: ['story-01'],
+  course: 'engineer',
 };

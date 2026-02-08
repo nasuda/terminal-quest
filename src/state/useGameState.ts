@@ -2,6 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 import type { GameProgress, Screen, StoryProgress } from '../data/types.js';
 import { initialGameState } from './GameState.js';
 import { loadProgress, saveProgress } from './ProgressStore.js';
+import { checkAchievements } from '../engine/Achievements.js';
+import { stories } from '../data/stories/index.js';
 
 export function useGameState() {
   const [screen, setScreen] = useState<Screen>(initialGameState.screen);
@@ -64,6 +66,24 @@ export function useGameState() {
       totalCommandsExecuted: prev.totalCommandsExecuted + 1,
     }));
   }, []);
+
+  useEffect(() => {
+    const engineerStoryIds = stories
+      .filter(s => s.course === 'engineer')
+      .map(s => s.id);
+    const newAchievements = checkAchievements(progress, engineerStoryIds);
+    if (newAchievements.length > 0) {
+      setProgress(prev => {
+        const currentAchievements = prev.achievements ?? [];
+        const toAdd = newAchievements.filter(a => !currentAchievements.includes(a));
+        if (toAdd.length === 0) return prev;
+        return {
+          ...prev,
+          achievements: [...currentAchievements, ...toAdd],
+        };
+      });
+    }
+  }, [progress]);
 
   const resetAll = useCallback(() => {
     setProgress(initialGameState.progress);

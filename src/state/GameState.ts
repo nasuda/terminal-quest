@@ -10,6 +10,7 @@ export const initialProgress: GameProgress = {
   storyProgress: {},
   totalCommandsExecuted: 0,
   totalHintsUsed: 0,
+  achievements: [],
 };
 
 export const initialGameState: GameState = {
