@@ -1,18 +1,45 @@
 {
   "name": "terminal-quest",
-  "version": "0.1.0",
-  "description": "ストーリー駆動型ターミナルコマンド学習CLI",
+  "version": "1.0.0",
+  "description": "ストーリー駆動型ターミナルコマンド学習CLI - Learn terminal commands through interactive stories",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "terminal-quest": "bin/terminal-quest.js"
   },
+  "files": [
+    "bin/",
+    "src/",
+    "!src/**/*.test.ts",
+    "tsconfig.json"
+  ],
   "scripts": {
     "dev": "tsx src/index.tsx",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "terminal",
+    "cli",
+    "learning",
+    "tutorial",
+    "command-line",
+    "interactive",
+    "japanese",
+    "education"
+  ],
+  "author": "nasuda",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nasuda/terminal-quest.git"
+  },
+  "homepage": "https://github.com/nasuda/terminal-quest",
+  "engines": {
+    "node": ">=18"
   },
   "dependencies": {
     "ink": "^5.1.0",
