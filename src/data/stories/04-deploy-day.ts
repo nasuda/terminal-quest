@@ -230,6 +230,7 @@ export const story04: Story = {
       id: 'mission-04-01',
       title: 'デプロイ先の準備',
       description: 'mkdir -p と cp -r でデプロイ先を準備しよう。',
+      goal: 'mkdir -p と cp -r で本番環境のディレクトリ構成を構築できるようになる',
       narrative:
         'デプロイ先のディレクトリを作成して、ソースをコピーしよう。',
       initialCwd: '/home/deploy',
@@ -261,6 +262,7 @@ export const story04: Story = {
       id: 'mission-04-02',
       title: '権限の設定',
       description: 'chmod コマンドでファイルの実行権限を設定しよう。',
+      goal: 'chmod でスクリプトに実行権限を付与できるようになる',
       narrative:
         'デプロイしたファイルの実行権限を設定しよう。',
       initialCwd: '/var/www/app',
@@ -283,6 +285,7 @@ export const story04: Story = {
       id: 'mission-04-03',
       title: 'バックアップ作成',
       description: '古いバックアップを削除して、新しいバックアップを作ろう。',
+      goal: 'rm -rf で古いディレクトリを削除し、cp -r で新しいバックアップを作れるようになる',
       narrative:
         '古いバックアップを削除して、新しいバックアップを作ろう。',
       initialCwd: '/var/www',
@@ -314,6 +317,7 @@ export const story04: Story = {
       id: 'mission-04-04',
       title: '最終確認',
       description: 'デプロイが完了したか最終確認しよう。',
+      goal: 'find と cat でデプロイ結果を検証できるようになる',
       narrative:
         'デプロイが完了した。最終確認をしよう。',
       initialCwd: '/var/www/app',

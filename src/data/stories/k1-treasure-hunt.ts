@@ -401,6 +401,13 @@ export const storyK1: Story = {
       title: '冒険のはじまり',
       description:
         'いまいる場所をたしかめて、まわりを見てみよう！',
+      goal: 'pwd と ls をつかって、いまいる場所とまわりにあるものがわかるようになる',
+      review: {
+        question: 'いまいるばしょをひょうじするコマンドはどれかな？',
+        choices: ['ls', 'cd', 'pwd'],
+        correctIndex: 2,
+        explanation: 'pwd はいまいるばしょ（ディレクトリ）をひょうじするコマンドだよ。「Print Working Directory」のりゃくだよ。',
+      },
       narrative:
         'きみは冒険の世界にやってきた！スタート地点にいるみたいだけど、ここはどこだろう？まずは「いまいる場所」をたしかめて、まわりに何があるか見てみよう。',
       initialCwd: '/冒険の世界/スタート地点',
@@ -416,6 +423,11 @@ export const storyK1: Story = {
             { level: 2, text: '「pwd」っていう3文字のコマンドだよ。' },
             { level: 3, text: '「pwd」とにゅうりょくして Enter をおしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'ls', message: 'ls はまわりを見るコマンドだよ。いまいる場所をしるには、べつのコマンドをつかうよ。' },
+            { pattern: 'cd', message: 'cd はべつの場所にいどうするコマンドだよ。いまいる場所をたしかめるには、べつのコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。いまいる場所をしるには、べつのコマンドをつかうよ。' },
+          ],
         },
         {
           id: 'obj-k1-01-02',
@@ -426,6 +438,11 @@ export const storyK1: Story = {
             { level: 2, text: '「ls」っていう2文字のコマンドだよ。' },
             { level: 3, text: '「ls」とにゅうりょくして Enter をおしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'pwd', message: 'pwd はいまいる場所をひょうじするコマンドだよ。まわりを見るには、べつのコマンドをつかうよ。' },
+            { pattern: 'cd', message: 'cd はべつの場所にいどうするコマンドだよ。まわりにあるものを見るには、べつのコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。まわりにあるものを見るには、べつのコマンドをつかうよ。' },
+          ],
         },
       ],
     },
@@ -435,6 +452,13 @@ export const storyK1: Story = {
       title: '森を冒険しよう',
       description:
         '魔法の森にいって、古い巻物を読んでみよう！',
+      goal: 'cd でべつの場所にいどうし、cat でファイルを読めるようになる',
+      review: {
+        question: 'べつのばしょにいどうするコマンドはどれかな？',
+        choices: ['pwd', 'ls', 'cd', 'cat'],
+        correctIndex: 2,
+        explanation: 'cd はべつのばしょ（ディレクトリ）にいどうするコマンドだよ。「Change Directory」のりゃくだよ。',
+      },
       narrative:
         '案内板に「魔法の森には何かひみつがある」と書いてあった。森にいって、手がかりをさがそう！巻物を読んだら、スタート地点にもどってこよう。',
       initialCwd: '/冒険の世界/スタート地点',
@@ -450,6 +474,11 @@ export const storyK1: Story = {
             { level: 2, text: '「cd」のあとに、いきたい場所の名前を書くよ。' },
             { level: 3, text: '「cd /冒険の世界/魔法の森」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'pwd', message: 'pwd はいまいる場所をたしかめるコマンドだよ。べつの場所にいくには、いどうするコマンドをつかうよ。' },
+            { pattern: 'ls', message: 'ls はまわりにあるものを見るコマンドだよ。べつの場所にいくには、いどうするコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。べつの場所にいくには、いどうするコマンドをつかうよ。' },
+          ],
         },
         {
           id: 'obj-k1-02-02',
@@ -459,6 +488,11 @@ export const storyK1: Story = {
             { level: 1, text: 'ファイルの中身を読むコマンドがあるよ。' },
             { level: 2, text: '「cat」のあとにファイル名を書くと、中身が読めるよ。' },
             { level: 3, text: '「cat 古い巻物.txt」とにゅうりょくしてね。' },
+          ],
+          feedbacks: [
+            { pattern: 'pwd', message: 'pwd はいまいる場所をたしかめるコマンドだよ。ファイルの中身を読むには、べつのコマンドをつかうよ。' },
+            { pattern: 'ls', message: 'ls はまわりにあるものを見るコマンドだよ。ファイルの中身を読むには、べつのコマンドをつかうよ。' },
+            { pattern: 'cd', message: 'cd はべつの場所にいどうするコマンドだよ。ファイルの中身を読むには、べつのコマンドをつかうよ。' },
           ],
         },
         {
@@ -470,6 +504,11 @@ export const storyK1: Story = {
             { level: 2, text: 'スタート地点のフルパスを指定しよう。' },
             { level: 3, text: '「cd /冒険の世界/スタート地点」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'pwd', message: 'pwd はいまいる場所をたしかめるコマンドだよ。もどるには、いどうするコマンドをつかうよ。' },
+            { pattern: 'ls', message: 'ls はまわりにあるものを見るコマンドだよ。もどるには、いどうするコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。もどるには、いどうするコマンドをつかうよ。' },
+          ],
         },
       ],
     },
@@ -479,6 +518,13 @@ export const storyK1: Story = {
       title: '秘密基地を作ろう',
       description:
         'じぶんだけの秘密基地をつくろう！部屋もつくって、ノートもおこう。',
+      goal: 'mkdir でフォルダをつくり、touch でファイルをつくれるようになる',
+      review: {
+        question: 'あたらしいフォルダをつくるコマンドはどれかな？',
+        choices: ['touch', 'mkdir', 'rm', 'ls'],
+        correctIndex: 1,
+        explanation: 'mkdir はあたらしいフォルダ（ディレクトリ）をつくるコマンドだよ。「Make Directory」のりゃくだよ。',
+      },
       narrative:
         '冒険には秘密基地がひつようだ！まずは基地をつくって、たからものをしまう部屋と、冒険のきろくをつけるノートを用意しよう。',
       initialCwd: '/冒険の世界',
@@ -494,6 +540,11 @@ export const storyK1: Story = {
             { level: 2, text: '「mkdir」のあとにフォルダの名前を書くよ。' },
             { level: 3, text: '「mkdir 秘密基地」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'touch', message: 'touch はからっぽのファイルをつくるコマンドだよ。フォルダをつくるには、べつのコマンドをつかうよ。' },
+            { pattern: 'ls', message: 'ls はまわりにあるものを見るコマンドだよ。あたらしいフォルダをつくるには、べつのコマンドをつかうよ。' },
+            { pattern: 'cd', message: 'cd はべつの場所にいどうするコマンドだよ。あたらしいフォルダをつくるには、べつのコマンドをつかうよ。' },
+          ],
         },
         {
           id: 'obj-k1-03-02',
@@ -503,6 +554,10 @@ export const storyK1: Story = {
             { level: 1, text: '秘密基地の中にもうひとつフォルダをつくろう。' },
             { level: 2, text: '「mkdir」でパスを指定して、中にフォルダがつくれるよ。' },
             { level: 3, text: '「mkdir 秘密基地/宝物庫」とにゅうりょくしてね。' },
+          ],
+          feedbacks: [
+            { pattern: 'touch', message: 'touch はファイルをつくるコマンドだよ。フォルダをつくるには、さっきとおなじコマンドをつかうよ。' },
+            { pattern: 'cd', message: 'cd はいどうするコマンドだよ。フォルダをつくるには、さっきつかったコマンドをもういちどつかおう。' },
           ],
         },
         {
@@ -516,6 +571,11 @@ export const storyK1: Story = {
             { level: 2, text: '「touch」のあとにファイル名を書くと、ファイルがつくれるよ。' },
             { level: 3, text: '「touch 秘密基地/冒険ノート.txt」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'mkdir', message: 'mkdir はフォルダをつくるコマンドだよ。からっぽのファイルをつくるには、べつのコマンドをつかうよ。' },
+            { pattern: 'echo', message: 'echo はもじをひょうじするコマンドだよ。からっぽのファイルをつくるには、べつのコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。からっぽのファイルをつくるには、べつのコマンドをつかうよ。' },
+          ],
         },
       ],
     },
@@ -525,6 +585,13 @@ export const storyK1: Story = {
       title: '宝物を集めよう',
       description:
         'いろんな場所にある宝物を秘密基地にあつめよう！',
+      goal: 'cp でコピー、mv でいどうができるようになる',
+      review: {
+        question: 'ファイルをコピーするコマンドはどれかな？',
+        choices: ['mv', 'cp', 'rm', 'cat'],
+        correctIndex: 1,
+        explanation: 'cp はファイルをコピーするコマンドだよ。もとのファイルはそのままのこるよ。「copy」のりゃくだよ。',
+      },
       narrative:
         '冒険の世界にはたからものがいっぱい！魔法の森にある宝石をコピーして、古いお城にある伝説の剣を秘密基地にうつそう。',
       initialCwd: '/冒険の世界',
@@ -548,6 +615,11 @@ export const storyK1: Story = {
               text: '「cp 魔法の森/光る宝石.txt 秘密基地/宝物庫/光る宝石.txt」とにゅうりょくしてね。',
             },
           ],
+          feedbacks: [
+            { pattern: 'mv', message: 'mv はファイルをいどうするコマンドだよ。コピーするには、もとのファイルをのこしたままつくるコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。ファイルをコピーするには、べつのコマンドをつかうよ。' },
+            { pattern: 'rm', message: 'rm はファイルをけすコマンドだよ。コピーするには、べつのコマンドをつかうよ。' },
+          ],
         },
         {
           id: 'obj-k1-04-02',
@@ -566,6 +638,11 @@ export const storyK1: Story = {
               text: '「mv 古いお城/宝物庫/伝説の剣.txt 秘密基地/宝物庫/伝説の剣.txt」とにゅうりょくしてね。',
             },
           ],
+          feedbacks: [
+            { pattern: 'cp', message: 'cp はコピーするコマンドだよ。もとのファイルをなくして、べつの場所にうつすには、べつのコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。ファイルをうつすには、べつのコマンドをつかうよ。' },
+            { pattern: 'rm', message: 'rm はファイルをけすコマンドだよ。うつすには、けすのではなくいどうするコマンドをつかうよ。' },
+          ],
         },
       ],
     },
@@ -575,6 +652,13 @@ export const storyK1: Story = {
       title: 'トラップを片付けよう',
       description:
         'ひみつの洞窟にしかけられたトラップを見つけて、かたづけよう！',
+      goal: 'find でファイルをさがし、rm でけせるようになる',
+      review: {
+        question: 'ファイルをけすコマンドはどれかな？',
+        choices: ['cp', 'mv', 'rm', 'find'],
+        correctIndex: 2,
+        explanation: 'rm はファイルをけすコマンドだよ。「remove」のりゃくだよ。けしたファイルはもとにもどせないから、きをつけてつかおうね。',
+      },
       narrative:
         'ひみつの洞窟にはトラップがしかけてある！まずはトラップがどこにあるか見つけて、ぜんぶかたづけよう。そうすれば安全にたからものがとれるよ。',
       initialCwd: '/冒険の世界/ひみつの洞窟',
@@ -593,6 +677,11 @@ export const storyK1: Story = {
               text: '「find . -name トラップ*」とにゅうりょくしてね。',
             },
           ],
+          feedbacks: [
+            { pattern: 'ls', message: 'ls はいまいるフォルダの中身を見るコマンドだよ。おくのフォルダもふくめてさがすには、べつのコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。ファイルをさがすには、べつのコマンドをつかうよ。' },
+            { pattern: 'grep', message: 'grep はファイルの中のことばをさがすコマンドだよ。ファイルの名前でさがすには、べつのコマンドをつかうよ。' },
+          ],
         },
         {
           id: 'obj-k1-05-02',
@@ -607,6 +696,10 @@ export const storyK1: Story = {
             { level: 1, text: 'ファイルをけすコマンドがあるよ。' },
             { level: 2, text: '「rm」のあとにけしたいファイル名を書くよ。' },
             { level: 3, text: '「rm トラップ1.txt」とにゅうりょくしてね。' },
+          ],
+          feedbacks: [
+            { pattern: 'mv', message: 'mv はファイルをいどうするコマンドだよ。ファイルをけすには、べつのコマンドをつかうよ。' },
+            { pattern: 'find', message: 'find はファイルをさがすコマンドだよ。もうみつけたから、つぎはけすコマンドをつかおう。' },
           ],
         },
         {
@@ -623,6 +716,9 @@ export const storyK1: Story = {
             { level: 2, text: '「rm」コマンドをつかおう。' },
             { level: 3, text: '「rm トラップ2.txt」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'mv', message: 'mv はいどうするコマンドだよ。けすには、さっきとおなじコマンドをつかおう。' },
+          ],
         },
         {
           id: 'obj-k1-05-04',
@@ -638,6 +734,9 @@ export const storyK1: Story = {
             { level: 2, text: 'パスを指定すればべつのフォルダの中のファイルもけせるよ。' },
             { level: 3, text: '「rm 奥の部屋/トラップ3.txt」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'cd', message: 'cd でいどうしなくても、パスをしていすればべつのフォルダの中のファイルもけせるよ。' },
+          ],
         },
       ],
     },
@@ -647,6 +746,13 @@ export const storyK1: Story = {
       title: '暗号を解読しよう',
       description:
         '暗号文から手がかりをさがして、けっかを書きのこそう！',
+      goal: 'grep でことばをさがし、echo でファイルに書きこめるようになる',
+      review: {
+        question: 'ファイルの中からことばをさがすコマンドはどれかな？',
+        choices: ['find', 'cat', 'grep', 'echo'],
+        correctIndex: 2,
+        explanation: 'grep はファイルの中からことばをさがすコマンドだよ。find がファイルの「名前」をさがすのにたいして、grep はファイルの「中身」をさがすよ。',
+      },
       narrative:
         '洞窟のおくで暗号文を見つけた！この中に「魔法」というキーワードがかくれているらしい。さがしだして、わかったことを書きのこそう。',
       initialCwd: '/冒険の世界/ひみつの洞窟',
@@ -661,6 +767,10 @@ export const storyK1: Story = {
             { level: 1, text: 'ファイルの中からことばをさがすコマンドがあるよ。' },
             { level: 2, text: '「grep」のあとにさがしたいことばとファイル名を書くよ。' },
             { level: 3, text: '「grep 魔法 暗号文.txt」とにゅうりょくしてね。' },
+          ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイルのぜんぶを読むコマンドだよ。とくていのことばだけさがすには、べつのコマンドをつかうよ。' },
+            { pattern: 'find', message: 'find はファイルの名前をさがすコマンドだよ。ファイルの中身からことばをさがすには、べつのコマンドをつかうよ。' },
           ],
         },
         {
@@ -680,6 +790,10 @@ export const storyK1: Story = {
               text: '「echo "魔法使いが宝の地図をくれた" > 解読結果.txt」とにゅうりょくしてね。',
             },
           ],
+          feedbacks: [
+            { pattern: 'touch', message: 'touch はからっぽのファイルをつくるコマンドだよ。中身もいっしょに書きこむには、べつのコマンドと「>」をつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルを読むコマンドだよ。ファイルに書きこむには、べつのコマンドと「>」をつかうよ。' },
+          ],
         },
       ],
     },
@@ -689,6 +803,13 @@ export const storyK1: Story = {
       title: '古い書物を読もう',
       description:
         'ながい魔法の書の最初と最後をかくにんして、何ページあるかかぞえよう！',
+      goal: 'head と tail でファイルの一部を読み、wc で行数をかぞえられるようになる',
+      review: {
+        question: 'ファイルのさいしょの方だけ読むコマンドはどれかな？',
+        choices: ['cat', 'head', 'tail', 'wc'],
+        correctIndex: 1,
+        explanation: 'head はファイルのさいしょの方だけひょうじするコマンドだよ。さいごの方を見るには tail をつかうよ。',
+      },
       narrative:
         '古いお城の図書室で、ぶあつい魔法の書を見つけた！ぜんぶ読むのは大変だから、最初と最後だけ読んで、ページ数もかくにんしよう。',
       initialCwd: '/冒険の世界/古いお城/図書室',
@@ -704,6 +825,10 @@ export const storyK1: Story = {
             { level: 2, text: '「head」コマンドをつかうと、ファイルのさいしょの方だけ見られるよ。' },
             { level: 3, text: '「head 魔法の書.txt」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイルのぜんぶをひょうじするよ。さいしょの方だけ見るには、べつのコマンドをつかうよ。' },
+            { pattern: 'tail', message: 'tail はファイルのさいごの方をひょうじするコマンドだよ。さいしょの方を見るには、べつのコマンドをつかうよ。' },
+          ],
         },
         {
           id: 'obj-k1-07-02',
@@ -713,6 +838,10 @@ export const storyK1: Story = {
             { level: 1, text: 'ファイルのさいごだけ読むコマンドがあるよ。' },
             { level: 2, text: '「tail」コマンドをつかうと、ファイルのさいごの方だけ見られるよ。' },
             { level: 3, text: '「tail 魔法の書.txt」とにゅうりょくしてね。' },
+          ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイルのぜんぶをひょうじするよ。さいごの方だけ見るには、べつのコマンドをつかうよ。' },
+            { pattern: 'head', message: 'head はファイルのさいしょの方をひょうじするコマンドだよ。さいごの方を見るには、べつのコマンドをつかうよ。' },
           ],
         },
         {
@@ -727,6 +856,11 @@ export const storyK1: Story = {
             { level: 2, text: '「wc」コマンドをつかうと、行の数がわかるよ。' },
             { level: 3, text: '「wc 魔法の書.txt」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイルの中身をひょうじするよ。行の数をかぞえるには、べつのコマンドをつかうよ。' },
+            { pattern: 'head', message: 'head はファイルのさいしょの方をひょうじするよ。行数をかぞえるには、べつのコマンドをつかうよ。' },
+            { pattern: 'tail', message: 'tail はファイルのさいごの方をひょうじするよ。行数をかぞえるには、べつのコマンドをつかうよ。' },
+          ],
         },
       ],
     },
@@ -736,6 +870,13 @@ export const storyK1: Story = {
       title: '仲間リストを整理しよう',
       description:
         '冒険者の名簿をきれいに整理しよう！',
+      goal: 'sort、uniq、cut をつかってデータを整理できるようになる',
+      review: {
+        question: 'おなじ行をまとめてくれるコマンドはどれかな？',
+        choices: ['sort', 'uniq', 'cut', 'grep'],
+        correctIndex: 1,
+        explanation: 'uniq はとなりあうおなじ行をまとめるコマンドだよ。sort でならべてから uniq をつかうと、ぜんぶのおなじ行をまとめられるよ。',
+      },
       narrative:
         '古いお城で冒険者の名簿を見つけた。でも同じ名前が何回も書いてある。きれいに整理して、どんな職業の仲間がいるか調べよう。',
       initialCwd: '/冒険の世界/古いお城',
@@ -751,6 +892,10 @@ export const storyK1: Story = {
             { level: 2, text: '「sort」コマンドで行をじゅんばんにできるよ。' },
             { level: 3, text: '「sort 冒険者名簿.csv」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイルをそのままひょうじするよ。じゅんばんにならべるには、べつのコマンドをつかうよ。' },
+            { pattern: 'uniq', message: 'uniq はおなじ行をまとめるコマンドだよ。まずはじゅんばんにならべるコマンドをつかおう。' },
+          ],
         },
         {
           id: 'obj-k1-08-02',
@@ -760,6 +905,10 @@ export const storyK1: Story = {
             { level: 1, text: 'おなじものをまとめるコマンドがあるよ。パイプ「|」もつかってみよう。' },
             { level: 2, text: '「sort」したあとに「|」で「uniq」につなげると、おなじ行をまとめられるよ。' },
             { level: 3, text: '「sort 冒険者名簿.csv | uniq」とにゅうりょくしてね。' },
+          ],
+          feedbacks: [
+            { pattern: 'grep', message: 'grep はことばをさがすコマンドだよ。おなじ行をまとめるには、べつのコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルをそのままひょうじするよ。おなじ行をまとめるには、sort と パイプ「|」をつかうよ。' },
           ],
         },
         {
@@ -774,6 +923,10 @@ export const storyK1: Story = {
               text: '「cut -d, -f2 冒険者名簿.csv」とにゅうりょくしてね。',
             },
           ],
+          feedbacks: [
+            { pattern: 'grep', message: 'grep はことばをさがすコマンドだよ。とくていの部分だけきりだすには、べつのコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルのぜんぶをひょうじするよ。とくていの部分だけきりだすには、べつのコマンドをつかうよ。' },
+          ],
         },
       ],
     },
@@ -783,6 +936,13 @@ export const storyK1: Story = {
       title: '封印を解こう',
       description:
         'ふういんされた呪文をとけるようにして、魔法をつかおう！',
+      goal: 'chmod でけんげんをかえ、パイプで grep をつなげられるようになる',
+      review: {
+        question: 'ファイルのけんげん（つかえるかどうか）をかえるコマンドはどれかな？',
+        choices: ['chown', 'chmod', 'mv', 'cp'],
+        correctIndex: 1,
+        explanation: 'chmod はファイルのけんげん（パーミッション）をかえるコマンドだよ。「change mode」のりゃくだよ。',
+      },
       narrative:
         '古いお城のおくで、ふういんされた呪文を見つけた！ふういんを解いて実行できるようにしよう。そして魔法の石から、つかいたい魔法をえらびだそう。',
       initialCwd: '/冒険の世界/古いお城',
@@ -798,6 +958,10 @@ export const storyK1: Story = {
             { level: 2, text: '「chmod」コマンドで「+x」をつけると、実行できるようになるよ。' },
             { level: 3, text: '「chmod +x 封印の呪文.sh」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。ふういんを解く（けんげんをかえる）には、べつのコマンドをつかうよ。' },
+            { pattern: 'rm', message: 'rm はファイルをけすコマンドだよ。ふういんを解くには、けんげんをかえるコマンドをつかおう。' },
+          ],
         },
         {
           id: 'obj-k1-09-02',
@@ -808,6 +972,9 @@ export const storyK1: Story = {
             { level: 2, text: '「cat」でファイルを読んで、「|」で「grep」につなげると、ほしい行だけとりだせるよ。' },
             { level: 3, text: '「cat 魔法の石.txt | grep 光」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'find', message: 'find はファイルの名前をさがすコマンドだよ。ファイルの中身からさがすには、grep をつかうよ。パイプ「|」でつなげてみよう。' },
+          ],
         },
       ],
     },
@@ -817,6 +984,13 @@ export const storyK1: Story = {
       title: '冒険の記録をつけよう',
       description:
         'gitをつかって、冒険のきろくをかくにんしよう！',
+      goal: 'git status と git log で変更のきろくをかくにんできるようになる',
+      review: {
+        question: 'いままでのきろく（ログ）を見るgitコマンドはどれかな？',
+        choices: ['git status', 'git log', 'git add', 'git diff'],
+        correctIndex: 1,
+        explanation: 'git log はいままでのへんこうのきろく（コミット）をひょうじするコマンドだよ。git status はいまのじょうたいをたしかめるコマンドだよ。',
+      },
       narrative:
         '秘密基地にもどってきた。冒険のきろくがgitでのこしてある。いままでの冒険をふりかえってみよう！',
       initialCwd: '/冒険の世界/秘密基地',
@@ -835,6 +1009,10 @@ export const storyK1: Story = {
             { level: 2, text: '「git status」でいまのじょうたいがわかるよ。' },
             { level: 3, text: '「git status」とにゅうりょくしてね。' },
           ],
+          feedbacks: [
+            { pattern: 'ls', message: 'ls はフォルダの中身を見るコマンドだよ。gitのじょうたいを見るには、git のコマンドをつかうよ。' },
+            { pattern: 'cat', message: 'cat はファイルを読むコマンドだよ。gitのじょうたいをかくにんするには、git のコマンドをつかうよ。' },
+          ],
         },
         {
           id: 'obj-k1-10-02',
@@ -847,6 +1025,9 @@ export const storyK1: Story = {
             { level: 1, text: 'きろく（ログ）を見るgitコマンドがあるよ。' },
             { level: 2, text: '「git log」でいままでのきろくが見られるよ。' },
             { level: 3, text: '「git log」とにゅうりょくしてね。' },
+          ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。gitのきろくを見るには、git のコマンドをつかうよ。' },
           ],
         },
       ],

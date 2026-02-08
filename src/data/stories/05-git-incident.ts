@@ -390,6 +390,7 @@ export const story05: Story = {
       id: 'mission-05-01',
       title: '状況確認',
       description: 'git status と git log で現在のリポジトリの状態を把握しよう。',
+      goal: 'git status と git log でリポジトリの状態と履歴を把握できるようになる',
       narrative:
         '先輩が「リポジトリがおかしい」と焦っている。まずは状況を確認しよう。',
       initialCwd: '/home/dev/repo',
@@ -428,6 +429,7 @@ export const story05: Story = {
       id: 'mission-05-02',
       title: '変更の退避',
       description: 'git stash で作業中の変更を一旦退避しよう。',
+      goal: 'git stash で作業中の変更を安全に退避できるようになる',
       narrative:
         '作業中の変更を一旦退避して、安全な状態に戻そう。',
       initialCwd: '/home/dev/repo',
@@ -452,6 +454,7 @@ export const story05: Story = {
       id: 'mission-05-03',
       title: 'ブランチ操作',
       description: 'git branch と git checkout でブランチを操作しよう。',
+      goal: 'git branch でブランチ確認、git checkout -b で新しいブランチを作れるようになる',
       narrative:
         '修正用のブランチを作って切り替えよう。',
       initialCwd: '/home/dev/repo',
@@ -489,6 +492,7 @@ export const story05: Story = {
       id: 'mission-05-04',
       title: '変更の確認',
       description: 'git diff で変更内容を確認して問題箇所を特定しよう。',
+      goal: 'git diff でコードの変更差分を確認し問題を特定できるようになる',
       narrative:
         '変更内容を確認して、問題の箇所を特定しよう。',
       initialCwd: '/home/dev/repo',
@@ -513,6 +517,7 @@ export const story05: Story = {
       id: 'mission-05-05',
       title: 'マージ',
       description: '修正をメインブランチに統合しよう。',
+      goal: 'git checkout と git merge でブランチを統合できるようになる',
       narrative:
         '修正が完了した。メインブランチに統合しよう。',
       initialCwd: '/home/dev/repo',

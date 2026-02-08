@@ -238,6 +238,7 @@ export const story06: Story = {
       id: 'mission-06-01',
       title: 'パイプ入門',
       description: 'パイプ（|）を使ってコマンドの出力を次のコマンドに渡そう。',
+      goal: 'パイプ（|）でコマンドの出力を別のコマンドに渡せるようになる',
       narrative:
         'パイプ(|)を使うと、コマンドの出力を次のコマンドの入力にできる。',
       initialCwd: '/home/data',
@@ -272,6 +273,7 @@ export const story06: Story = {
       id: 'mission-06-02',
       title: 'データ加工',
       description: 'sort と uniq、grep と wc をパイプで組み合わせてデータを分析しよう。',
+      goal: 'パイプで複数コマンドを連携させてデータ集計・分析ができるようになる',
       narrative:
         'データの集計と分析にパイプを活用しよう。',
       initialCwd: '/home/data',
@@ -306,6 +308,7 @@ export const story06: Story = {
       id: 'mission-06-03',
       title: 'フィールド抽出',
       description: 'cut コマンドでCSVから特定のフィールドを抽出しよう。',
+      goal: 'cut でCSVの特定列を抽出し、sort でフィールド指定ソートができるようになる',
       narrative:
         'CSVデータから特定のフィールドを抽出して分析しよう。',
       initialCwd: '/home/data',
@@ -341,6 +344,7 @@ export const story06: Story = {
       id: 'mission-06-04',
       title: '総合演習',
       description: '複数のコマンドをパイプで繋いで、データを抽出してファイルに保存しよう。',
+      goal: '6段パイプで抽出・加工・集計・ソートを一括実行できるようになる',
       narrative:
         '最終課題。複数のコマンドをパイプで繋いで、データから必要な情報を抽出し、ファイルに保存しよう。',
       initialCwd: '/home/data',

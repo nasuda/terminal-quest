@@ -488,4 +488,122 @@ describe('CommandHandler', () => {
       expect(result.error).toContain('マニュアルはありません');
     });
   });
+
+  // --- pipe chains ---
+  describe('pipe chains', () => {
+    it('should pipe echo into grep', () => {
+      const result = handler.execute('echo hello | grep hello');
+      expect(result.output).toContain('hello');
+      expect(result.error).toBeUndefined();
+    });
+
+    it('should pipe cat into head -n 1', () => {
+      const result = handler.execute('cat hello.txt | head -n 1');
+      expect(result.output).toBe('Hello, World!');
+    });
+
+    it('should pipe cat into tail -n 1', () => {
+      const result = handler.execute('cat hello.txt | tail -n 1');
+      expect(result.output).toBe('Hello again!');
+    });
+
+    it('should handle 3-stage pipe: cat | grep | wc -l', () => {
+      // hello.txt: "Hello, World!\nThis is a test file.\nHello again!"
+      // grep Hello matches 2 lines -> "Hello, World!\nHello again!"
+      // wc -l counts newlines: 1 newline in that string
+      const result = handler.execute('cat hello.txt | grep Hello | wc -l');
+      expect(result.output).toBe('1');
+    });
+
+    it('should pipe cat into sort', () => {
+      const result = handler.execute('cat notes.txt | sort');
+      // notes.txt: "Some notes here\nImportant note\nAnother line"
+      // sorted: Another line, Important note, Some notes here
+      expect(result.output).toBe('Another line\nImportant note\nSome notes here');
+    });
+
+    it('should pipe cat into sort then uniq', () => {
+      const result = handler.execute('cat notes.txt | sort | uniq');
+      expect(result.output).toBe('Another line\nImportant note\nSome notes here');
+    });
+  });
+
+  // --- pipe errors ---
+  describe('pipe errors', () => {
+    it('should error on empty pipe segment', () => {
+      const result = handler.execute('echo hello | | grep hello');
+      expect(result.error).toContain('syntax error');
+    });
+
+    it('should error on trailing pipe', () => {
+      const result = handler.execute('echo hello |');
+      expect(result.error).toBeDefined();
+    });
+
+    it('should error when command not found in pipe', () => {
+      const result = handler.execute('echo hello | nonexistent');
+      expect(result.error).toContain('command not found');
+    });
+  });
+
+  // --- pipe + redirect ---
+  describe('pipe + redirect', () => {
+    it('should pipe output and redirect to file', () => {
+      const result = handler.execute('cat hello.txt | grep Hello > /tmp/result.txt');
+      expect(result.error).toBeUndefined();
+      const content = fs.readFile('/tmp/result.txt');
+      expect(content).toContain('Hello');
+    });
+  });
+
+  // --- command edge cases ---
+  describe('command edge cases', () => {
+    it('should error when rm target does not exist', () => {
+      const result = handler.execute('rm nonexistent.txt');
+      expect(result.error).toBeDefined();
+    });
+
+    it('should error when cp destination directory does not exist', () => {
+      const result = handler.execute('cp hello.txt /nonexistent/dir/');
+      expect(result.error).toBeDefined();
+    });
+
+    it('should find files by name pattern with find -name', () => {
+      const result = handler.execute('find . -name "*.txt"');
+      expect(result.output).toContain('hello.txt');
+      expect(result.output).toContain('notes.txt');
+    });
+
+    it('should find files by type with find -type f', () => {
+      const result = handler.execute('find . -type f');
+      expect(result.output).toContain('hello.txt');
+    });
+
+    it('should show counts for multiple files with wc -l', () => {
+      const result = handler.execute('wc -l hello.txt notes.txt');
+      // hello.txt has 2 newlines, notes.txt has 2 newlines
+      expect(result.output).toContain('hello.txt');
+      expect(result.output).toContain('notes.txt');
+      expect(result.output).toContain('total');
+    });
+  });
+
+  // --- grep -c ---
+  describe('grep -c', () => {
+    it('should count matching lines with -c', () => {
+      const result = handler.execute('grep -c Hello hello.txt');
+      // hello.txt has 2 lines containing "Hello": "Hello, World!" and "Hello again!"
+      expect(result.output).toBe('2');
+    });
+
+    it('should return 0 when no lines match with -c', () => {
+      const result = handler.execute('grep -c ERROR hello.txt');
+      expect(result.output).toBe('0');
+    });
+
+    it('should count matching lines from stdin with -c', () => {
+      const result = handler.execute('echo "Hello World\nHello Again\nBye" | grep -c Hello');
+      expect(result.output).toBe('2');
+    });
+  });
 });

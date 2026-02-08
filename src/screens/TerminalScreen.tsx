@@ -10,13 +10,14 @@ import { TerminalPrompt } from '../components/TerminalPrompt.js';
 import { TerminalOutput, type OutputLine } from '../components/TerminalOutput.js';
 import { ObjectivePanel } from '../components/ObjectivePanel.js';
 import { HintBar } from '../components/HintBar.js';
+import { suggestCommand, checkMissionFeedback } from '../engine/CommandFeedback.js';
 import type { Hint, Screen } from '../data/types.js';
 
 interface TerminalScreenProps {
   storyId: string;
   missionIndex: number;
   onNavigate: (screen: Screen) => void;
-  onMissionComplete: (storyId: string, missionId: string, hintsUsed: number) => void;
+  onMissionComplete: (storyId: string, missionId: string, hintsUsed: number, commandCount: number) => void;
   onStoryComplete: (storyId: string) => void;
   onCommandExecuted: () => void;
 }
@@ -31,6 +32,7 @@ export function TerminalScreen({
 }: TerminalScreenProps) {
   const story = stories.find(s => s.id === storyId);
   const mission = story?.missions[missionIndex];
+  const course = story?.course;
 
   const [missionEngine] = useState(() => {
     if (!mission) return null;
@@ -47,11 +49,20 @@ export function TerminalScreen({
     if (!missionEngine) return null;
     return new TabCompletion(missionEngine.getFS());
   });
-  const [outputLines, setOutputLines] = useState<OutputLine[]>([]);
+  const [outputLines, setOutputLines] = useState<OutputLine[]>(() => {
+    if (course === 'kids') {
+      return [{ text: '💡 コマンドをにゅうりょくして Enter キーをおしてね。Tab キーでじどうほかんできるよ。', type: 'system' as const }];
+    }
+    if (course === 'beginner') {
+      return [{ text: '💡 コマンドを入力して Enter を押してください。Tab キーで補完、↑↓キーで履歴を呼び出せます。', type: 'system' as const }];
+    }
+    return [];
+  });
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [completedObjectives, setCompletedObjectives] = useState<string[]>([]);
   const [currentHint, setCurrentHint] = useState<Hint | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
+  const [commandCount, setCommandCount] = useState(0);
 
   useInput((input, key) => {
     if (key.escape) {
@@ -81,6 +92,7 @@ export function TerminalScreen({
       if (!trimmed || !commandHandler || !missionEngine || !mission) return;
 
       setCommandHistory(prev => [...prev, trimmed]);
+      setCommandCount(prev => prev + 1);
       onCommandExecuted();
 
       const cwd = missionEngine.getFS().getCwd();
@@ -116,13 +128,38 @@ export function TerminalScreen({
       }
 
       if (result.error) {
-        setOutputLines(prev => [...prev, { text: result.error!, type: 'error' as const }]);
+        let errorText = result.error!;
+        if (course === 'kids' && errorText.endsWith(': command not found')) {
+          const cmdName = errorText.replace(': command not found', '');
+          errorText = `「${cmdName}」というコマンドはないよ。もういちどたしかめてみてね。`;
+        }
+        setOutputLines(prev => [...prev, { text: errorText, type: 'error' as const }]);
+
+        // Command suggestion for typos
+        if (result.error!.endsWith(': command not found')) {
+          const suggestion = suggestCommand(trimmed);
+          if (suggestion) {
+            setOutputLines(prev => [...prev, { text: `💡 もしかして: ${suggestion}`, type: 'system' as const }]);
+          }
+        }
       } else if (result.output) {
         const lines = result.output.split('\n');
         setOutputLines(prev => [
           ...prev,
           ...lines.map(line => ({ text: line, type: 'output' as const })),
         ]);
+      }
+
+      // Mission-specific feedback (check for all commands, not just errors)
+      const currentObjIndex = missionEngine.getCurrentObjectiveIndex();
+      if (currentObjIndex < mission.objectives.length) {
+        const obj = mission.objectives[currentObjIndex];
+        if (obj.feedbacks) {
+          const feedback = checkMissionFeedback(trimmed, obj.feedbacks);
+          if (feedback) {
+            setOutputLines(prev => [...prev, { text: `💡 ${feedback}`, type: 'system' as const }]);
+          }
+        }
       }
 
       const parts = trimmed.split(/\s+/);
@@ -147,12 +184,12 @@ export function TerminalScreen({
 
         if (missionEngine.isAllComplete()) {
           setTimeout(() => {
-            onMissionComplete(storyId, mission.id, hintEngine.getTotalHintsUsed());
+            onMissionComplete(storyId, mission.id, hintEngine.getTotalHintsUsed(), commandCount + 1);
             const isLast = story ? missionIndex >= story.missions.length - 1 : false;
             if (isLast) {
               onStoryComplete(storyId);
             }
-            onNavigate({ type: 'missionComplete', storyId, missionIndex });
+            onNavigate({ type: 'missionComplete', storyId, missionIndex, commandCount: commandCount + 1 });
           }, 500);
         }
       }
@@ -165,6 +202,7 @@ export function TerminalScreen({
       missionIndex,
       story,
       completedObjectives,
+      commandCount,
       hintEngine,
       onCommandExecuted,
       onMissionComplete,
@@ -175,7 +213,7 @@ export function TerminalScreen({
   );
 
   if (!story || !mission || !missionEngine) {
-    return <Text color={colors.error}>ミッションデータが見つかりません</Text>;
+    return <Text color={colors.error}>ミッションデータが見つかりません (story={storyId}, mission={missionIndex})</Text>;
   }
 
   const currentObj = mission.objectives[missionEngine.getCurrentObjectiveIndex()];
@@ -187,7 +225,11 @@ export function TerminalScreen({
           {story.emoji} {mission.title}
         </Text>
         <Text color={colors.muted}>
-          Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標
+          {course === 'kids'
+            ? 'Esc: もどる | Tab: ほかん | hint: ヒント | obj: もくひょう'
+            : course === 'beginner'
+              ? 'Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標一覧'
+              : 'Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標'}
         </Text>
       </Box>
 

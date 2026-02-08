@@ -246,6 +246,7 @@ export const story07: Story = {
   missions: [
     {
       id: 'mission-07-01',
+      goal: '削除前に ls と cat で中身を確認する習慣を身につける',
       title: '\u3046\u3063\u304B\u308A\u524A\u9664',
       description:
         '\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3059\u308B\u524D\u306B\u3001\u307E\u305A\u4E2D\u8EAB\u3092\u78BA\u8A8D\u3059\u308B\u7FD2\u6163\u3092\u3064\u3051\u3088\u3046\u3002',
@@ -291,6 +292,7 @@ export const story07: Story = {
     },
     {
       id: 'mission-07-02',
+      goal: '削除する前にバックアップを取る安全な運用手順を身につける',
       title: '\u30D0\u30C3\u30AF\u30A2\u30C3\u30D7\u306E\u6975\u610F',
       description:
         '\u524A\u9664\u3059\u308B\u524D\u306B\u30D0\u30C3\u30AF\u30A2\u30C3\u30D7\u3092\u53D6\u308B\u7FD2\u6163\u3092\u8EAB\u306B\u3064\u3051\u3088\u3046\u3002',
@@ -336,6 +338,7 @@ export const story07: Story = {
     },
     {
       id: 'mission-07-03',
+      goal: 'rm -rf の威力を理解し、正しい対象だけを削除できるようになる',
       title: 'rm -rf \u306E\u6B63\u4F53',
       description:
         'rm -rf \u306E\u5A01\u529B\u3092\u7406\u89E3\u3057\u3001\u6B63\u3057\u3044\u30C7\u30A3\u30EC\u30AF\u30C8\u30EA\u3060\u3051\u3092\u524A\u9664\u3057\u3088\u3046\u3002',
@@ -378,6 +381,7 @@ export const story07: Story = {
     },
     {
       id: 'mission-07-04',
+      goal: 'find で削除対象を事前確認してから安全に削除するワークフローを習得する',
       title: '\u5B89\u5168\u306A\u7FD2\u6163',
       description:
         'find \u3067\u524A\u9664\u5BFE\u8C61\u3092\u78BA\u8A8D\u3057\u3066\u304B\u3089\u3001\u5B89\u5168\u306B\u524A\u9664\u3057\u3088\u3046\u3002',

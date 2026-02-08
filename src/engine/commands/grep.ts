@@ -13,6 +13,7 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
   let ignoreCase = false;
   let showLineNumbers = false;
   let recursive = false;
+  let countOnly = false;
   const nonFlagArgs: string[] = [];
 
   for (const arg of args) {
@@ -21,6 +22,7 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
         if (ch === 'i') ignoreCase = true;
         else if (ch === 'n') showLineNumbers = true;
         else if (ch === 'r') recursive = true;
+        else if (ch === 'c') countOnly = true;
         else return { output: '', error: `grep: invalid option -- '${ch}'` };
       }
     } else {
@@ -51,15 +53,22 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
 
     const lines = stdin.split('\n');
     const results: string[] = [];
+    let matchCount = 0;
     for (let i = 0; i < lines.length; i++) {
       if (regex.test(lines[i])) {
-        let line = '';
-        if (showLineNumbers) {
-          line += `${i + 1}:`;
+        matchCount++;
+        if (!countOnly) {
+          let line = '';
+          if (showLineNumbers) {
+            line += `${i + 1}:`;
+          }
+          line += lines[i];
+          results.push(line);
         }
-        line += lines[i];
-        results.push(line);
       }
+    }
+    if (countOnly) {
+      return { output: String(matchCount) };
     }
     return { output: results.join('\n') };
   }
@@ -73,27 +82,35 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
   }
 
   const results: string[] = [];
+  const fileCounts: { path: string; count: number }[] = [];
   const multipleFiles = targets.length > 1 || recursive;
 
   function searchFile(filePath: string): void {
     try {
       const content = fs.readFile(filePath);
       const lines = content.split('\n');
+      let fileMatchCount = 0;
       for (let i = 0; i < lines.length; i++) {
         if (regex.test(lines[i])) {
-          let line = '';
-          if (multipleFiles) {
-            line += `${filePath}:`;
+          fileMatchCount++;
+          if (!countOnly) {
+            let line = '';
+            if (multipleFiles) {
+              line += `${filePath}:`;
+            }
+            if (showLineNumbers) {
+              line += `${i + 1}:`;
+            }
+            line += lines[i];
+            results.push(line);
           }
-          if (showLineNumbers) {
-            line += `${i + 1}:`;
-          }
-          line += lines[i];
-          results.push(line);
         }
       }
-    } catch {
-      // Skip files that can't be read
+      if (countOnly) {
+        fileCounts.push({ path: filePath, count: fileMatchCount });
+      }
+    } catch (e) {
+      results.push(`grep: ${filePath}: ${e instanceof Error ? e.message : 'cannot read file'}`);
     }
   }
 
@@ -108,8 +125,8 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
           searchRecursive(fullPath);
         }
       }
-    } catch {
-      // Skip directories that can't be read
+    } catch (e) {
+      results.push(`grep: ${dirPath}: ${e instanceof Error ? e.message : 'cannot read directory'}`);
     }
   }
 
@@ -123,6 +140,14 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
     } else if (fs.isDirectory(target) && !recursive) {
       return { output: '', error: `grep: ${target}: Is a directory` };
     }
+  }
+
+  if (countOnly) {
+    if (multipleFiles) {
+      return { output: fileCounts.map(fc => `${fc.path}:${fc.count}`).join('\n') };
+    }
+    const total = fileCounts.reduce((sum, fc) => sum + fc.count, 0);
+    return { output: String(total) };
   }
 
   return { output: results.join('\n') };

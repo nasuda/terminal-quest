@@ -25,7 +25,7 @@ export function MissionBriefScreen({ storyId, missionIndex, onNavigate }: Missio
   });
 
   if (!story || !mission) {
-    return <Text color={colors.error}>ミッションが見つかりません</Text>;
+    return <Text color={colors.error}>ミッションが見つかりません (story={storyId}, mission={missionIndex})</Text>;
   }
 
   return (
@@ -63,6 +63,12 @@ export function MissionBriefScreen({ storyId, missionIndex, onNavigate }: Missio
               </Box>
             );
           })}
+        </Box>
+      )}
+
+      {mission.goal && (
+        <Box marginTop={1}>
+          <Text color={colors.primary}>🎯 到達目標: {mission.goal}</Text>
         </Box>
       )}
 

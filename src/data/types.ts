@@ -16,6 +16,14 @@ export interface Objective {
   description: string;
   checks: ObjectiveCheck[];
   hints: Hint[];
+  feedbacks?: Array<{ pattern: string; message: string }>;
+}
+
+export interface ReviewQuestion {
+  question: string;
+  choices: string[];
+  correctIndex: number;
+  explanation: string;
 }
 
 export interface FSNode {
@@ -34,6 +42,8 @@ export interface Mission {
   initialFS: FSNode;
   initialCwd: string;
   newCommands?: string[];
+  goal?: string;
+  review?: ReviewQuestion;
 }
 
 export interface Story {
@@ -51,6 +61,7 @@ export interface StoryProgress {
   completedMissions: string[];
   currentMissionIndex: number;
   hintsUsed: Record<string, number>;
+  commandsPerMission?: Record<string, number>;
 }
 
 export interface Achievement {
@@ -73,6 +84,6 @@ export type Screen =
   | { type: 'storySelect' }
   | { type: 'missionBrief'; storyId: string; missionIndex: number }
   | { type: 'terminal'; storyId: string; missionIndex: number }
-  | { type: 'missionComplete'; storyId: string; missionIndex: number }
+  | { type: 'missionComplete'; storyId: string; missionIndex: number; commandCount?: number }
   | { type: 'progress' }
   | { type: 'settings' };

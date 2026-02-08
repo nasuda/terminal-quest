@@ -277,6 +277,7 @@ export const story02: Story = {
       id: 'mission-02-01',
       title: 'ディレクトリを作ろう',
       description: 'mkdir コマンドでディレクトリを作成して、プロジェクト構造を整理しよう。',
+      goal: 'mkdir でプロジェクトのディレクトリ構造を設計・作成できるようになる',
       narrative:
         'プロジェクトにはソースコード、ドキュメント、テストが混在している。まずはディレクトリを整理しよう。',
       initialCwd: '/home/dev/project',
@@ -291,6 +292,10 @@ export const story02: Story = {
             { level: 1, text: 'ディレクトリを作成するコマンドがあります。' },
             { level: 2, text: '"Make Directory" の略で、mkdir コマンドを使います。' },
             { level: 3, text: '「mkdir src」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'touch', message: 'touch は空のファイルを作成するコマンドです。ディレクトリを作成するには、別のコマンドを使います。' },
+            { pattern: 'cd', message: 'cd はディレクトリを移動するコマンドです。新しいディレクトリを作成するには、別のコマンドを使います。' },
           ],
         },
         {
@@ -319,6 +324,7 @@ export const story02: Story = {
       id: 'mission-02-02',
       title: 'ファイルを移動せよ',
       description: 'mv コマンドでファイルを適切なディレクトリに移動しよう。',
+      goal: 'mv でファイルを適切な場所に移動・整理できるようになる',
       narrative:
         'ディレクトリができた。次はファイルを適切な場所に移動しよう。',
       initialCwd: '/home/dev/project',
@@ -336,6 +342,10 @@ export const story02: Story = {
             { level: 1, text: 'ファイルを移動するコマンドがあります。' },
             { level: 2, text: '"Move" の略で、mv コマンドを使います。mv 元 先 の形式です。' },
             { level: 3, text: '「mv app.js src/」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'cp', message: 'cp はファイルをコピーするコマンドです。元のファイルを残さず移動するには、別のコマンドを使います。' },
+            { pattern: 'rm', message: 'rm はファイルを削除するコマンドです。ファイルを別の場所に移動するには、別のコマンドを使います。' },
           ],
         },
         {
@@ -364,6 +374,7 @@ export const story02: Story = {
       id: 'mission-02-03',
       title: '不要なファイルを削除',
       description: '.tmp ファイルや .bak ファイルを見つけて削除しよう。',
+      goal: 'find で不要ファイルを検索し、rm で安全に削除できるようになる',
       narrative:
         'プロジェクト内に .tmp ファイルや .bak ファイルが大量にある。不要ファイルを見つけて削除しよう。',
       initialCwd: '/home/dev/project',
@@ -382,6 +393,10 @@ export const story02: Story = {
             { level: 2, text: 'find コマンドで名前パターンを指定して検索できます。' },
             { level: 3, text: '「find . -name "*.tmp"」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'ls', message: 'ls は現在のディレクトリの中身を表示するコマンドです。サブディレクトリも含めてファイルを検索するには、別のコマンドを使います。' },
+            { pattern: 'grep', message: 'grep はファイルの中身を検索するコマンドです。ファイル名で検索するには、別のコマンドを使います。' },
+          ],
         },
         {
           id: 'obj-02-03-02',
@@ -391,6 +406,10 @@ export const story02: Story = {
             { level: 1, text: 'ファイルを削除するコマンドがあります。' },
             { level: 2, text: '"Remove" の略で、rm コマンドを使います。' },
             { level: 3, text: '「rm cache.tmp」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'mv', message: 'mv はファイルを移動するコマンドです。ファイルを削除するには、別のコマンドを使います。' },
+            { pattern: 'find', message: 'find はファイルを検索するコマンドです。すでに見つけたファイルを削除するには、別のコマンドを使います。' },
           ],
         },
         {
@@ -409,6 +428,7 @@ export const story02: Story = {
       id: 'mission-02-04',
       title: '新しいファイルを作成',
       description: '新しいファイルを作成して、プロジェクトの状態を確認しよう。',
+      goal: 'touch でファイルを作成し、wc でコードの行数を確認できるようになる',
       narrative:
         'プロジェクト構造が整った。新しいファイルを作成して、プロジェクトの状態を確認しよう。',
       initialCwd: '/home/dev/project',
@@ -423,6 +443,10 @@ export const story02: Story = {
             { level: 1, text: '空のファイルを作成するコマンドがあります。' },
             { level: 2, text: 'touch コマンドでファイルを作成できます。' },
             { level: 3, text: '「touch CHANGELOG.md」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'mkdir', message: 'mkdir はディレクトリを作成するコマンドです。空のファイルを作成するには、別のコマンドを使います。' },
+            { pattern: 'echo', message: 'echo はテキストを出力するコマンドです。空のファイルを作成するだけなら、もっと簡単なコマンドがあります。' },
           ],
         },
         {

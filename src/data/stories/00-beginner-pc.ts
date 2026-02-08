@@ -466,6 +466,13 @@ export const story00: Story = {
       id: 'mission-00-01',
       title: 'ここはどこ？',
       description: '新しいパソコンを開いたら、まずは今いる場所を確認して、どんなファイルがあるか見てみよう。',
+      goal: 'pwd と ls を使って、今いる場所とファイル構成を把握できるようになる',
+      review: {
+        question: '今いるフォルダの場所を表示するコマンドはどれですか？',
+        choices: ['ls', 'cd', 'pwd', 'cat'],
+        correctIndex: 2,
+        explanation: 'pwd (Print Working Directory) は、今いるフォルダのパスを画面に表示するコマンドです。',
+      },
       narrative:
         'やったー！新しいパソコンが届いた！さっそくターミナルを開いてみたけど、真っ黒な画面が出てきた。ここはどこだろう？まずは自分がどこにいるのか確認して、周りに何があるのか見てみよう。',
       initialCwd: '/home/watashi',
@@ -499,6 +506,13 @@ export const story00: Story = {
       id: 'mission-00-02',
       title: 'フォルダの中を見て回ろう',
       description: 'フォルダを移動して、中にあるファイルを読んでみよう。',
+      goal: 'cd でフォルダを移動し、cat でファイルの中身を読めるようになる',
+      review: {
+        question: 'フォルダを移動するコマンドはどれですか？',
+        choices: ['ls', 'cd', 'cat', 'pwd'],
+        correctIndex: 1,
+        explanation: 'cd (Change Directory) は、別のフォルダに移動するコマンドです。',
+      },
       narrative:
         'パソコンの中には「写真」「音楽」「レシピ」などのフォルダがあるみたい。フォルダの中に移動して、どんなファイルがあるか見てみよう！',
       initialCwd: '/home/watashi',
@@ -542,6 +556,13 @@ export const story00: Story = {
       id: 'mission-00-03',
       title: '写真アルバムを作ろう',
       description: '写真を整理するために、新しいフォルダやファイルを作ってみよう。',
+      goal: 'mkdir でフォルダを作り、touch で空のファイルを作れるようになる',
+      review: {
+        question: '新しいフォルダを作るコマンドはどれですか？',
+        choices: ['touch', 'mkdir', 'cp', 'mv'],
+        correctIndex: 1,
+        explanation: 'mkdir (Make Directory) は、新しいフォルダ（ディレクトリ）を作成するコマンドです。',
+      },
       narrative:
         '写真フォルダの中がごちゃごちゃしてきた。「旅行」や「ペット」のフォルダを作って、写真を整理しよう！',
       initialCwd: '/home/watashi/写真',
@@ -585,6 +606,13 @@ export const story00: Story = {
       id: 'mission-00-04',
       title: 'ファイルを整理しよう',
       description: '間違った場所にあるファイルをコピーしたり、移動したりして整理しよう。',
+      goal: 'cp でファイルをコピーし、mv や rm で整理できるようになる',
+      review: {
+        question: 'ファイルをコピーするコマンドはどれですか？',
+        choices: ['mv', 'cp', 'rm', 'cat'],
+        correctIndex: 1,
+        explanation: 'cp (Copy) は、ファイルやフォルダをコピーするコマンドです。mv は移動、rm は削除です。',
+      },
       narrative:
         'あれ？「大事なメモ.txt」がホームフォルダに置きっぱなしだ。これは「メモ」フォルダに入れるべきだよね。ファイルをコピーしたり移動したりして、きちんと整理しよう。',
       initialCwd: '/home/watashi',
@@ -618,6 +646,13 @@ export const story00: Story = {
       id: 'mission-00-05',
       title: 'いらないファイルを片付けよう',
       description: '不要な一時ファイルを探し出して、削除しよう。',
+      goal: 'find でファイルを検索し、rm で不要ファイルを削除できるようになる',
+      review: {
+        question: 'ファイルを名前で検索するコマンドはどれですか？',
+        choices: ['grep', 'find', 'ls', 'cat'],
+        correctIndex: 1,
+        explanation: 'find は、ファイルやフォルダを名前やタイプで検索するコマンドです。grep はファイルの中身を検索します。',
+      },
       narrative:
         'パソコンの中に「.tmp」という拡張子の一時ファイルがたまっている。これは不要なファイルなので、探し出して片付けよう！',
       initialCwd: '/home/watashi',
@@ -671,6 +706,13 @@ export const story00: Story = {
       id: 'mission-00-06',
       title: '日記を書こう',
       description: '新しい日記を書いて、過去の日記から特定の言葉を探してみよう。',
+      goal: 'echo でファイルに書き込み、grep で特定の言葉を検索できるようになる',
+      review: {
+        question: 'ファイルの中から特定の文字列を検索するコマンドはどれですか？',
+        choices: ['find', 'cat', 'grep', 'echo'],
+        correctIndex: 2,
+        explanation: 'grep は、ファイルの中身から指定した文字列を含む行を検索するコマンドです。find はファイル名で検索します。',
+      },
       narrative:
         '日記フォルダに過去の日記がある。今日の日記を書いて、それから過去の日記から気になる言葉を探してみよう！',
       initialCwd: '/home/watashi/日記',
@@ -704,6 +746,13 @@ export const story00: Story = {
       id: 'mission-00-07',
       title: '長いレポートを確認しよう',
       description: '長いレポートの最初と最後だけを見たり、行数を数えたりしてみよう。',
+      goal: 'head と tail でファイルの一部を確認し、wc で行数を数えられるようになる',
+      review: {
+        question: 'ファイルの最後の数行だけを表示するコマンドはどれですか？',
+        choices: ['head', 'tail', 'cat', 'wc'],
+        correctIndex: 1,
+        explanation: 'tail はファイルの末尾（最後の部分）を表示するコマンドです。head は最初の部分を表示します。',
+      },
       narrative:
         '旅行のレポートが長くて全部読むのは大変。最初の部分と最後の部分だけ確認して、全体の行数も数えてみよう。',
       initialCwd: '/home/watashi',
@@ -749,6 +798,13 @@ export const story00: Story = {
       id: 'mission-00-08',
       title: '連絡先を整理しよう',
       description: '連絡先データを並べ替えたり、重複を取り除いたりしてみよう。',
+      goal: 'sort、uniq、cut を使ってデータを加工・整理できるようになる',
+      review: {
+        question: '重複した行を取り除くために sort と組み合わせて使うコマンドはどれですか？',
+        choices: ['grep', 'cut', 'uniq', 'wc'],
+        correctIndex: 2,
+        explanation: 'uniq は、隣接する重複行を取り除くコマンドです。sort で並べ替えてから使うのがポイントです。',
+      },
       narrative:
         '連絡先のファイルがぐちゃぐちゃで、同じ人が何回も登録されている。きれいに並べ替えて、重複を取り除こう！',
       initialCwd: '/home/watashi',
@@ -795,6 +851,13 @@ export const story00: Story = {
       id: 'mission-00-09',
       title: '共有ファイルの設定',
       description: 'ファイルの権限を設定して、スクリプトを実行できるようにしよう。',
+      goal: 'chmod で権限を変更し、パイプでコマンドを連携できるようになる',
+      review: {
+        question: 'ファイルに実行権限を追加するコマンドはどれですか？',
+        choices: ['chown +x', 'chmod +x', 'cp +x', 'mv +x'],
+        correctIndex: 1,
+        explanation: 'chmod (Change Mode) はファイルの権限を変更するコマンドです。+x で実行権限を追加します。',
+      },
       narrative:
         '共有フォルダにある集計スクリプトを実行したいけど、実行する権限がない。権限を設定して使えるようにしよう！',
       initialCwd: '/home/watashi',
@@ -828,6 +891,13 @@ export const story00: Story = {
       id: 'mission-00-10',
       title: '変更履歴を管理しよう',
       description: 'git を使ってレポートの変更履歴を確認してみよう。',
+      goal: 'git status と git log で変更の状態と履歴を確認できるようになる',
+      review: {
+        question: 'ファイルの変更状態を確認する git コマンドはどれですか？',
+        choices: ['git log', 'git status', 'git diff', 'git add'],
+        correctIndex: 1,
+        explanation: 'git status は、どのファイルが変更されたか、ステージされているかなどの現在の状態を表示します。',
+      },
       narrative:
         'レポートフォルダでは git を使って変更履歴を管理している。どんな変更が行われたか確認してみよう！',
       initialCwd: '/home/watashi/レポート',

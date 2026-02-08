@@ -50,6 +50,7 @@ export function App() {
           <MissionCompleteScreen
             storyId={screen.storyId}
             missionIndex={screen.missionIndex}
+            commandCount={screen.commandCount}
             onNavigate={navigateTo}
           />
         );

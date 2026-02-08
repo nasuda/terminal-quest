@@ -35,31 +35,59 @@ export function wc(fs: VirtualFS, args: string[]): CommandResult {
     showBytes = true;
   }
 
-  let content: string;
-  let filename: string | undefined;
-
   if (files.length > 0) {
-    filename = files[0];
-    try {
-      content = fs.readFile(filename);
-    } catch (e) {
-      return { output: '', error: `wc: ${(e as Error).message}` };
+    const outputLines: string[] = [];
+    let totalLines = 0;
+    let totalWords = 0;
+    let totalBytes = 0;
+
+    for (const filename of files) {
+      let content: string;
+      try {
+        content = fs.readFile(filename);
+      } catch (e) {
+        return { output: '', error: `wc: ${(e as Error).message}` };
+      }
+
+      const lines = content === '' ? 0 : (content.match(/\n/g) || []).length;
+      const words = content === '' ? 0 : content.split(/\s+/).filter(Boolean).length;
+      const bytes = new TextEncoder().encode(content).length;
+
+      totalLines += lines;
+      totalWords += words;
+      totalBytes += bytes;
+
+      const parts: string[] = [];
+      if (showLines) parts.push(String(lines));
+      if (showWords) parts.push(String(words));
+      if (showBytes) parts.push(String(bytes));
+      parts.push(filename);
+      outputLines.push(parts.join(' '));
     }
+
+    if (files.length > 1) {
+      const totalParts: string[] = [];
+      if (showLines) totalParts.push(String(totalLines));
+      if (showWords) totalParts.push(String(totalWords));
+      if (showBytes) totalParts.push(String(totalBytes));
+      totalParts.push('total');
+      outputLines.push(totalParts.join(' '));
+    }
+
+    return { output: outputLines.join('\n') };
   } else if (stdin !== undefined) {
-    content = stdin;
+    const content = stdin;
+    const lines = content === '' ? 0 : (content.match(/\n/g) || []).length;
+    const words = content === '' ? 0 : content.split(/\s+/).filter(Boolean).length;
+    const bytes = new TextEncoder().encode(content).length;
+
+    const parts: string[] = [];
+    if (showLines) parts.push(String(lines));
+    if (showWords) parts.push(String(words));
+    if (showBytes) parts.push(String(bytes));
+
+    return { output: parts.join(' ') };
   } else {
     return { output: '', error: 'wc: missing file operand' };
   }
-
-  const lines = content === '' ? 0 : (content.match(/\n/g) || []).length;
-  const words = content === '' ? 0 : content.split(/\s+/).filter(Boolean).length;
-  const bytes = new TextEncoder().encode(content).length;
-
-  const parts: string[] = [];
-  if (showLines) parts.push(String(lines));
-  if (showWords) parts.push(String(words));
-  if (showBytes) parts.push(String(bytes));
-  if (filename) parts.push(filename);
-
-  return { output: parts.join(' ') };
 }

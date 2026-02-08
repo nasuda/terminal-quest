@@ -17,7 +17,7 @@ export function useGameState() {
     setScreen(newScreen);
   }, []);
 
-  const completeMission = useCallback((storyId: string, missionId: string, hintsUsed: number) => {
+  const completeMission = useCallback((storyId: string, missionId: string, hintsUsed: number, commandCount?: number) => {
     setProgress(prev => {
       const storyProg: StoryProgress = prev.storyProgress[storyId] ?? {
         storyId,
@@ -36,6 +36,10 @@ export function useGameState() {
         hintsUsed: {
           ...storyProg.hintsUsed,
           [missionId]: hintsUsed,
+        },
+        commandsPerMission: {
+          ...storyProg.commandsPerMission,
+          ...(commandCount != null ? { [missionId]: commandCount } : {}),
         },
       };
 

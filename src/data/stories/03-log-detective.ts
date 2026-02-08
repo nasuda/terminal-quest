@@ -176,6 +176,7 @@ export const story03: Story = {
       id: 'mission-03-01',
       title: 'ログファイルの調査',
       description: 'head と tail コマンドでログファイルの最初と最後を確認しよう。',
+      goal: 'head と tail で大きなログファイルの概要を素早く把握できるようになる',
       narrative:
         '大量のログがある。まずはファイルの最初と最後を確認しよう。',
       initialCwd: '/var/log',
@@ -211,6 +212,7 @@ export const story03: Story = {
       id: 'mission-03-02',
       title: 'エラーの分析',
       description: 'grep と wc コマンドで 500 エラーの件数を数えよう。',
+      goal: 'grep でエラーを抽出し、パイプで wc -l に渡して件数を数えられるようになる',
       narrative:
         '500エラーが出ている。何件あるか数えよう。',
       initialCwd: '/var/log',
@@ -245,6 +247,7 @@ export const story03: Story = {
       id: 'mission-03-03',
       title: 'アクセスパターンの分析',
       description: 'sort と uniq コマンドでIPアドレスのアクセス頻度を調べよう。',
+      goal: 'sort | uniq -c でデータの出現頻度を集計できるようになる',
       narrative:
         'どのIPアドレスからアクセスが多いか調べよう。',
       initialCwd: '/var/log',
@@ -277,6 +280,7 @@ export const story03: Story = {
       id: 'mission-03-04',
       title: 'レポート作成',
       description: 'grep とリダイレクトを使って、調査結果をファイルに保存しよう。',
+      goal: 'コマンドの出力をリダイレクト（>）でファイルに保存できるようになる',
       narrative:
         '調査結果をレポートファイルにまとめよう。',
       initialCwd: '/var/log',
