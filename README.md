@@ -26,14 +26,24 @@ npm install -g terminal-quest
 terminal-quest
 ```
 
+### 動作環境
+
+- **macOS** / **Linux** / **Windows（WSL）**
+- Node.js v18 以上
+- 外部依存なし（Docker不要、GUI不要、ネットワーク不要）
+
+純粋なnpmパッケージとして動作する**TUIアプリ**です。Ink（React for CLI）で構築されており、ターミナルさえあればどこでも動きます。
+
 ## 特徴
 
-- **安全** - すべてのコマンドは仮想ファイルシステム上で動作。実際のファイルには一切触れません
+- **安全な仮想環境** - すべてのコマンドはインメモリの仮想ファイルシステム上で動作。実際のファイルには一切触れません
 - **ストーリー駆動** - 物語を進めながら自然にコマンドを習得
-- **3つのコース** - レベルに合わせて選べるコース
+- **3つのコース** - 小学生向け・はじめて・エンジニアの3コースで、レベルに合わせた学習体験
+- **結果ベースの判定** - コマンドの文字列ではなく実行結果で目標達成を判定。`grep foo file` でも `cat file | grep foo` でも正解になります
+- **到達目標** - 各ミッションに「何ができるようになるか」を明示
+- **段階的ヒント** - 困ったら3段階（方向性→コマンド候補→ほぼ答え）のヒントで学習をサポート
+- **間違いフィードバック** - タイプミスには類似コマンドを提案、間違ったコマンドにはミッション固有のガイダンスを表示
 - **ふりかえり問題** - ミッション完了後に4択クイズで理解度チェック
-- **コマンド提案** - タイプミスしても近いコマンドを提案してくれる
-- **段階的ヒント** - 困ったら3段階のヒントで学習をサポート
 - **Tab補完** - コマンド名やファイルパスをTabキーで補完
 - **達成バッジ** - 学習の進捗に応じてバッジを獲得
 
@@ -90,6 +100,27 @@ objectives  現在の目標を確認
 man <cmd>   コマンドのマニュアル
 ```
 
+## アーキテクチャ
+
+```
+src/
+├── engine/          コアエンジン（UI非依存）
+│   ├── VirtualFS        インメモリ仮想ファイルシステム
+│   ├── CommandHandler    23コマンド実装（パイプ・リダイレクト対応）
+│   ├── MissionEngine     結果ベースの目標判定
+│   ├── HintEngine        3段階ヒント管理
+│   ├── CommandFeedback   タイプミス検出・ミッション固有フィードバック
+│   └── TabCompletion     コマンド名・パス補完
+├── data/stories/    ストーリーデータ（コース別、全9ストーリー）
+├── screens/         7画面コンポーネント（Ink/React）
+├── components/      再利用UIコンポーネント
+└── state/           ゲーム状態管理（~/.terminal-quest/progress.json に永続化）
+```
+
+- **仮想FS上で完結** — 実際のファイルシステムやシェルは一切使用しません
+- **結果ベースの判定** — ObjectiveCheck がコマンドの出力・FS状態を検査し、解法の自由度を確保
+- **コース別UX** — kids コースはひらがな中心のガイダンスとエラーメッセージ、engineer コースは実務寄りの表現
+
 ## 開発
 
 ```bash
@@ -97,9 +128,15 @@ git clone https://github.com/nasuda/terminal-quest.git
 cd terminal-quest
 npm install
 npm run dev       # 開発実行
-npm test          # テスト実行
+npm test          # テスト実行（183件）
 npm run build     # ビルド
 ```
+
+### 技術スタック
+
+- TypeScript (ESM) + [Ink 5](https://github.com/vadimdemedes/ink) (React for CLI)
+- Vitest（テスト）
+- npm配布（`bin/terminal-quest.js` → `dist/index.js` 直接import、tsx不要）
 
 ## ライセンス
 

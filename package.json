@@ -1,6 +1,6 @@
 {
   "name": "terminal-quest",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "ストーリー駆動型ターミナルコマンド学習CLI - Learn terminal commands through interactive stories",
   "type": "module",
   "main": "dist/index.js",
