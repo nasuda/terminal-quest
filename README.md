@@ -46,6 +46,7 @@ terminal-quest
 - **ふりかえり問題** - ミッション完了後に4択クイズで理解度チェック
 - **Tab補完** - コマンド名やファイルパスをTabキーで補完
 - **達成バッジ** - 学習の進捗に応じてバッジを獲得
+- **やりなおし機能** - 進捗のあるストーリーを「はじめから」やりなおせる
 
 ## コース一覧
 
@@ -97,6 +98,7 @@ terminal-quest
 help        使えるコマンド一覧
 hint        ヒントを表示
 objectives  現在の目標を確認
+cmds        このミッションの新コマンドを確認
 man <cmd>   コマンドのマニュアル
 ```
 
@@ -128,7 +130,7 @@ git clone https://github.com/nasuda/terminal-quest.git
 cd terminal-quest
 npm install
 npm run dev       # 開発実行
-npm test          # テスト実行（183件）
+npm test          # テスト実行（184件）
 npm run build     # ビルド
 ```
 
