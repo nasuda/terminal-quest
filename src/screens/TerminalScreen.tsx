@@ -11,6 +11,7 @@ import { TerminalOutput, type OutputLine } from '../components/TerminalOutput.js
 import { ObjectivePanel } from '../components/ObjectivePanel.js';
 import { HintBar } from '../components/HintBar.js';
 import { suggestCommand, checkMissionFeedback } from '../engine/CommandFeedback.js';
+import { getCommandMeta } from '../data/commands-meta.js';
 import type { Hint, Screen } from '../data/types.js';
 
 interface TerminalScreenProps {
@@ -63,6 +64,7 @@ export function TerminalScreen({
   const [currentHint, setCurrentHint] = useState<Hint | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
   const [commandCount, setCommandCount] = useState(0);
+  const [cmdsHintShown, setCmdsHintShown] = useState<Set<string>>(new Set());
 
   useInput((input, key) => {
     if (key.escape) {
@@ -79,12 +81,24 @@ export function TerminalScreen({
     if (currentObjIndex >= mission.objectives.length) return;
 
     const obj = mission.objectives[currentObjIndex];
+
+    // newCommandsがあり、まだこの目標でcmdsプレヒントを出していない場合
+    if (mission.newCommands && mission.newCommands.length > 0 && !cmdsHintShown.has(obj.id)) {
+      setCmdsHintShown(prev => new Set(prev).add(obj.id));
+      const cmdsMsg = course === 'kids'
+        ? 'まずは cmds とにゅうりょくして、つかえるコマンドをかくにんしてみよう！'
+        : 'まず cmds と入力して、このミッションのコマンドを確認してみましょう。';
+      setCurrentHint({ level: 0, text: cmdsMsg });
+      setHintLevel(0);
+      return;
+    }
+
     const hint = hintEngine.getNextHint(obj.id, obj.hints);
     if (hint) {
       setCurrentHint(hint);
       setHintLevel(hintEngine.getCurrentLevel(obj.id));
     }
-  }, [mission, missionEngine, hintEngine]);
+  }, [mission, missionEngine, hintEngine, cmdsHintShown, course]);
 
   const handleCommand = useCallback(
     (input: string) => {
@@ -117,6 +131,37 @@ export function TerminalScreen({
             },
           ]);
         });
+        return;
+      }
+
+      if (trimmed === 'cmds') {
+        if (mission.newCommands && mission.newCommands.length > 0) {
+          setOutputLines(prev => [
+            ...prev,
+            { text: '📖 このミッションの新しいコマンド:', type: 'system' as const },
+          ]);
+          for (const cmdName of mission.newCommands) {
+            const meta = getCommandMeta(cmdName);
+            if (!meta) continue;
+            setOutputLines(prev => [
+              ...prev,
+              { text: `  ${meta.name} - ${meta.description}`, type: 'output' as const },
+              ...meta.examples.map(ex => ({
+                text: `    $ ${ex.cmd.padEnd(28)} ${ex.desc}`,
+                type: 'output' as const,
+              })),
+            ]);
+          }
+        } else {
+          setOutputLines(prev => [
+            ...prev,
+            { text: 'このミッションに新しいコマンドはありません。', type: 'system' as const },
+          ]);
+        }
+        setOutputLines(prev => [
+          ...prev,
+          { text: '💡 全コマンド一覧は man、詳細は man <コマンド名> で確認できます。', type: 'system' as const },
+        ]);
         return;
       }
 
@@ -226,10 +271,10 @@ export function TerminalScreen({
         </Text>
         <Text color={colors.muted}>
           {course === 'kids'
-            ? 'Esc: もどる | Tab: ほかん | hint: ヒント | obj: もくひょう'
+            ? 'Esc: もどる | Tab: ほかん | hint: ヒント | obj: もくひょう | cmds: コマンド'
             : course === 'beginner'
-              ? 'Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標一覧'
-              : 'Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標'}
+              ? 'Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標 | cmds: コマンド'
+              : 'Esc: 戻る | Tab: 補完 | Ctrl+H: ヒント | hint: ヒント | obj: 目標 | cmds: コマンド'}
         </Text>
       </Box>
 

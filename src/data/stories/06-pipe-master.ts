@@ -73,7 +73,7 @@ const salesCsvLines = [
   '営業,175000',
   '人事,135000',
   '開発,240000',
-].join('\n');
+].join('\n') + '\n';
 
 const mission2FS: FSNode = {
   type: 'directory',
@@ -266,8 +266,22 @@ export const story06: Story = {
             { level: 2, text: 'cat と grep をパイプで繋ぎます。直接 grep にファイルを指定してもOKです。' },
             { level: 3, text: '「cat logs/access.log | grep ERROR」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'grep error', message: '大文字と小文字は区別されます。ERROR を検索するには大文字で「grep ERROR」と入力しましょう。' },
+          ],
         },
       ],
+      review: {
+        question: 'パイプ（|）の役割は何ですか？',
+        choices: [
+          'ファイルを削除する',
+          '左のコマンドの出力を右のコマンドの入力に渡す',
+          'ファイルに保存する',
+          'コマンドを同時に実行する',
+        ],
+        correctIndex: 1,
+        explanation: 'パイプ（|）は左のコマンドの出力を、右のコマンドの入力として渡します。これにより複数のコマンドをつなげて、複雑なデータ処理ができます。',
+      },
     },
     {
       id: 'mission-06-02',
@@ -281,20 +295,24 @@ export const story06: Story = {
       objectives: [
         {
           id: 'obj-06-02-01',
-          description: '部門の種類を確認する',
+          description: 'cut と sort | uniq でユニークな部門名をすべて表示する',
           checks: [
-            { type: 'command_executed', command: 'sort' },
+            { type: 'command_executed', command: 'cut' },
             { type: 'output_contains', pattern: '\u55B6\u696D' },
           ],
           hints: [
             { level: 1, text: 'CSVの特定の列を抽出して、重複を除去しましょう。' },
-            { level: 2, text: 'cut -d, -f1 で部門列を抽出し、sort | uniq でユニークな値を取得できます。' },
+            { level: 2, text: 'cut コマンドで列を指定します。-d, は「カンマ区切り」、-f1 は「1列目」の意味です。その結果を sort | uniq に渡しましょう。' },
             { level: 3, text: '「cut -d, -f1 sales.csv | sort | uniq」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'cut -f1', message: '-d オプションで区切り文字を指定し忘れていませんか？CSVなので -d, が必要です。' },
+            { pattern: 'sort.*uniq.*sales', message: 'まず cut で部門列を抽出してから、sort | uniq に渡しましょう。' },
           ],
         },
         {
           id: 'obj-06-02-02',
-          description: 'データの件数を数える（20件）',
+          description: 'wc -l で sales.csv の行数を数える',
           checks: [{ type: 'output_contains', pattern: '20' }],
           hints: [
             { level: 1, text: '行数を数えるコマンドを使いましょう。' },
@@ -303,6 +321,17 @@ export const story06: Story = {
           ],
         },
       ],
+      review: {
+        question: 'sort | uniq の順番が重要な理由は何ですか？',
+        choices: [
+          'uniq の方が処理が遅いから',
+          'uniq は隣り合う重複行しか除去しないので、先に sort で並べる必要がある',
+          'sort が uniq の結果を上書きするから',
+          '特に理由はない。逆順でも同じ結果になる',
+        ],
+        correctIndex: 1,
+        explanation: 'uniq は「隣り合った行」が同じ場合だけ重複を除去します。そのため、先に sort でデータを並べ替えて同じ値を隣り合わせにしてから、uniq で重複除去するのが正しい手順です。',
+      },
     },
     {
       id: 'mission-06-03',
@@ -330,15 +359,29 @@ export const story06: Story = {
         },
         {
           id: 'obj-06-03-02',
-          description: 'データを年齢でソートする',
+          description: 'sort -t, -k3 -n で年齢（3列目）の数値順にソートする',
           checks: [{ type: 'command_executed', command: 'sort' }],
           hints: [
             { level: 1, text: '数値でソートするオプションがあります。' },
-            { level: 2, text: 'sort に -t（区切り文字）-k（フィールド）-n（数値ソート）を指定します。' },
+            { level: 2, text: 'sort -t, は「カンマ区切り」、-k3 は「3番目の列でソート」、-n は「数値として並べる」の意味です。年齢は3列目にあります。' },
             { level: 3, text: '「sort -t, -k3 -n employees.csv」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: '^sort employees', message: 'オプションなしの sort は1列目で文字順にソートします。年齢（3列目）で数値ソートするには -t, -k3 -n が必要です。' },
           ],
         },
       ],
+      review: {
+        question: 'cut -d, -f2 の -d と -f はそれぞれ何を指定しますか？',
+        choices: [
+          '-d はディレクトリ、-f はファイル',
+          '-d は区切り文字（delimiter）、-f はフィールド番号',
+          '-d は削除、-f はフィルター',
+          '-d はデータ型、-f はフォーマット',
+        ],
+        correctIndex: 1,
+        explanation: '-d は区切り文字（delimiter）を指定します。-d, ならカンマ区切りです。-f はフィールド番号で、-f2 なら2番目の列を取り出します。CSVデータの加工に欠かせないコマンドです。',
+      },
     },
     {
       id: 'mission-06-04',
@@ -365,7 +408,7 @@ export const story06: Story = {
         },
         {
           id: 'obj-06-04-02',
-          description: 'report.log からサービス別ERROR件数を集計する（4段パイプ）',
+          description: 'ERROR行からサービス名を抽出し、サービス別エラー件数を集計する（4段パイプ）',
           checks: [
             { type: 'command_executed', command: 'uniq' },
             { type: 'output_contains', pattern: 'web' },
@@ -386,11 +429,22 @@ export const story06: Story = {
           ],
           hints: [
             { level: 1, text: '前の集計結果をさらにソートして上位だけ取り出しましょう。' },
-            { level: 2, text: '前の4段パイプの結果に | sort -rn | head -n 3 を追加すると上位3件が取れます。' },
+            { level: 2, text: '件数の多い順に並べるには sort -rn（数値の逆順ソート）を使います。上位だけ取るには head を使いましょう。' },
             { level: 3, text: '「grep ERROR report.log | cut -d" " -f2 | sort | uniq -c | sort -rn | head -n 3」と入力してEnterを押してください。' },
           ],
         },
       ],
+      review: {
+        question: '「grep ERROR report.log | cut -d" " -f2 | sort | uniq -c」のパイプの流れとして正しいのはどれ？',
+        choices: [
+          'ファイル作成 → 検索 → 並べ替え → カウント',
+          'ERROR行を抽出 → サービス名を取り出し → 並べ替え → 重複をカウント',
+          '並べ替え → 抽出 → カウント → 表示',
+          'カウント → 並べ替え → 抽出 → 表示',
+        ],
+        correctIndex: 1,
+        explanation: 'パイプは左から右へ順番に処理されます。まず grep でERROR行だけを抽出し、cut でサービス名の列を取り出し、sort で並べ替えてから、uniq -c で重複をカウントします。',
+      },
     },
   ],
   unlockRequires: ['story-03'],

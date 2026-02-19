@@ -428,13 +428,13 @@ const mission10FS: FSNode = {
                     },
                     branches: {
                       type: 'file',
-                      content: '* main',
+                      content: 'main',
                     },
                     log: {
                       type: 'file',
                       content: gitLogContent10,
                     },
-                    'status-output': {
+                    status: {
                       type: 'file',
                       content: gitStatusOutput10,
                     },
@@ -525,7 +525,7 @@ export const story00: Story = {
           checks: [{ type: 'cwd_equals', path: '/home/watashi/音楽' }],
           hints: [
             { level: 1, text: 'フォルダを移動するコマンドがあります。' },
-            { level: 2, text: '「Change Directory」の略で、2文字のコマンドの後に移動先のフォルダ名を指定します。' },
+            { level: 2, text: '「Change Directory」の略で、cd のあとに移動したいフォルダの名前を書きます。例えば cd 音楽 のように。' },
             { level: 3, text: '「cd 音楽」と入力してEnterキーを押してみましょう。' },
           ],
         },
@@ -541,7 +541,7 @@ export const story00: Story = {
         },
         {
           id: 'obj-00-02-03',
-          description: 'ホームフォルダに戻ろう',
+          description: 'ホームフォルダに戻ろう（.. は「1つ上のフォルダ」の意味）',
           checks: [{ type: 'cwd_equals', path: '/home/watashi' }],
           hints: [
             { level: 1, text: 'cd コマンドで上のフォルダに戻れます。' },
@@ -595,8 +595,11 @@ export const story00: Story = {
           checks: [{ type: 'file_exists', path: '/home/watashi/写真/旅行/おもいで.txt' }],
           hints: [
             { level: 1, text: '空のファイルを作るコマンドがあります。' },
-            { level: 2, text: 'touch コマンドでファイルを作れます。フォルダ名/ファイル名 で指定できます。' },
+            { level: 2, text: 'touch コマンドでファイルを作れます。フォルダ名/ファイル名 のように書くと、フォルダの中にファイルを作れます。/ は「の中の」という意味です。' },
             { level: 3, text: '「touch 旅行/おもいで.txt」と入力してみましょう。' },
+          ],
+          feedbacks: [
+            { pattern: '^touch おもいで', message: '旅行フォルダの中に作りたいので、「旅行/おもいで.txt」のようにフォルダ名/ファイル名 で指定しましょう。' },
           ],
         },
       ],
@@ -625,8 +628,11 @@ export const story00: Story = {
           checks: [{ type: 'file_exists', path: '/home/watashi/メモ/大事なメモ.txt' }],
           hints: [
             { level: 1, text: 'ファイルをコピーするコマンドがあります。' },
-            { level: 2, text: '「Copy」の略で、2文字のコマンドです。コピー元とコピー先を指定します。' },
+            { level: 2, text: '「Copy」の略で、2文字のコマンドです。cp のあとに「コピーしたいファイル名」「コピー先」の順に書きます。' },
             { level: 3, text: '「cp 大事なメモ.txt メモ/大事なメモ.txt」と入力してみましょう。' },
+          ],
+          feedbacks: [
+            { pattern: 'cp メモ/', message: '順番が逆かもしれません。cp のあとはまず「コピーしたいファイル」、次に「コピー先」を書きます。' },
           ],
         },
         {
@@ -665,8 +671,8 @@ export const story00: Story = {
           checks: [{ type: 'output_contains', pattern: '.tmp' }],
           hints: [
             { level: 1, text: 'ファイルを名前で検索するコマンドがあります。' },
-            { level: 2, text: 'find コマンドで、特定の名前のファイルを探せます。-name オプションを使います。' },
-            { level: 3, text: '「find . -name "*.tmp"」と入力してみましょう。' },
+            { level: 2, text: 'find コマンドで、特定の名前のファイルを探せます。find のあとに「.」（今いるフォルダ）と -name「名前のパターン」を書きます。' },
+            { level: 3, text: '「find . -name "*.tmp"」と入力してみましょう。. は「今いるフォルダ」、* は「何でもOK」という意味です。' },
           ],
         },
         {
@@ -724,7 +730,7 @@ export const story00: Story = {
           description: '新しい日記ファイル 2024-01-17.txt を作ろう',
           checks: [{ type: 'file_exists', path: '/home/watashi/日記/2024-01-17.txt' }],
           hints: [
-            { level: 1, text: 'echo コマンドとリダイレクト（>）を使うとファイルに文字を書き込めます。' },
+            { level: 1, text: 'echo コマンドと > 記号を使うと、文字をファイルに書き込めます。> は「ファイルに書き込む」という意味です。' },
             { level: 2, text: 'echo "内容" > ファイル名 の形式で、ファイルを作って内容を書き込めます。' },
             { level: 3, text: '「echo "今日はいい天気だった。" > 2024-01-17.txt」と入力してみましょう。' },
           ],
@@ -788,7 +794,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'ファイルの行数や文字数を数えるコマンドがあります。' },
             { level: 2, text: '「Word Count」の略のコマンドで、-l オプションをつけると行数だけ表示できます。' },
-            { level: 3, text: '「wc -l レポート.txt」と入力してみましょう。' },
+            { level: 3, text: '「wc -l レポート.txt」と入力してみましょう。-l は「行数だけを数える」という意味です。' },
           ],
         },
       ],
@@ -823,12 +829,12 @@ export const story00: Story = {
         },
         {
           id: 'obj-00-08-02',
-          description: '重複を取り除こう（sort | uniq を使おう）',
+          description: '重複を取り除こう（uniq コマンド）',
           checks: [{ type: 'command_executed', command: 'uniq' }],
           hints: [
-            { level: 1, text: '重複した行を取り除くコマンドがあります。「|」（パイプ）で sort と組み合わせます。' },
-            { level: 2, text: 'sort で並べ替えた結果を uniq に渡すと、重複が取り除かれます。' },
-            { level: 3, text: '「sort 連絡先.csv | uniq」と入力してみましょう。' },
+            { level: 1, text: '重複した行を取り除くコマンドがあります。' },
+            { level: 2, text: 'uniq コマンドで重複行を取り除けます。ただし uniq は「隣り合った行」しかまとめないので、先に sort で並べてから使うのがコツです。' },
+            { level: 3, text: '「uniq 連絡先.csv」と入力してみましょう。' },
           ],
         },
         {
@@ -840,7 +846,7 @@ export const story00: Story = {
           ],
           hints: [
             { level: 1, text: 'CSVの特定の列だけを切り出すコマンドがあります。' },
-            { level: 2, text: 'cut コマンドで区切り文字（-d）と列番号（-f）を指定します。' },
+            { level: 2, text: 'cut コマンドで列を取り出せます。-d, は「カンマで区切る」、-f1 は「1列目を取り出す」という意味です。' },
             { level: 3, text: '「cut -d, -f1 連絡先.csv」と入力してみましょう。' },
           ],
         },
@@ -870,7 +876,7 @@ export const story00: Story = {
           checks: [{ type: 'command_executed', command: 'chmod' }],
           hints: [
             { level: 1, text: 'ファイルの権限（パーミッション）を変更するコマンドがあります。' },
-            { level: 2, text: '「Change Mode」の略のコマンドで、+x をつけると実行権限を追加できます。' },
+            { level: 2, text: '「Change Mode」の略のコマンドで、+x をつけるとファイルを「実行してもいいよ」という許可を追加できます。プログラムを動かすときに必要です。' },
             { level: 3, text: '「chmod +x 共有フォルダ/集計スクリプト.sh」と入力してみましょう。' },
           ],
         },
@@ -879,9 +885,9 @@ export const story00: Story = {
           description: 'やることリストを sort で並べ替えて表示しよう',
           checks: [{ type: 'command_executed', command: 'sort' }],
           hints: [
-            { level: 1, text: 'cat でファイルの中身を表示し、パイプ（|）で sort に渡してみましょう。' },
-            { level: 2, text: 'cat ファイル | sort の形式でコマンドをつなげます。' },
-            { level: 3, text: '「cat メモ/やることリスト.txt | sort」と入力してみましょう。' },
+            { level: 1, text: 'ファイルの中身を並べ替えて表示するコマンドがあります。' },
+            { level: 2, text: 'sort コマンドにファイル名を渡すと、中身を並べ替えて表示します。' },
+            { level: 3, text: '「sort メモ/やることリスト.txt」と入力してみましょう。' },
           ],
         },
       ],
@@ -922,7 +928,7 @@ export const story00: Story = {
           description: '変更の履歴を見てみよう（git log）',
           checks: [
             { type: 'command_executed', command: 'git' },
-            { type: 'output_contains', pattern: 'commit' },
+            { type: 'output_contains', pattern: 'Author:' },
           ],
           hints: [
             { level: 1, text: '過去の変更履歴を表示するGitコマンドがあります。' },

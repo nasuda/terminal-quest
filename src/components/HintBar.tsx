@@ -12,8 +12,9 @@ interface HintBarProps {
 export function HintBar({ hint, currentLevel, maxLevel }: HintBarProps) {
   if (!hint) return null;
 
-  const levelColor = hint.level === 1 ? colors.hint1 : hint.level === 2 ? colors.hint2 : colors.hint3;
-  const levelLabel = `ヒント ${hint.level}/${maxLevel}`;
+  const isPreHint = hint.level === 0;
+  const levelColor = isPreHint ? colors.primary : hint.level === 1 ? colors.hint1 : hint.level === 2 ? colors.hint2 : colors.hint3;
+  const levelLabel = isPreHint ? 'ヒント' : `ヒント ${hint.level}/${maxLevel}`;
 
   return (
     <Box borderStyle="round" borderColor={levelColor} paddingX={1} marginTop={1}>

@@ -7,7 +7,7 @@ export type ObjectiveCheck =
   | { type: 'cwd_equals'; path: string };
 
 export interface Hint {
-  level: 1 | 2 | 3;
+  level: 0 | 1 | 2 | 3;
   text: string;
 }
 

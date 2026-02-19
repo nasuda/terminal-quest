@@ -81,13 +81,13 @@ const mission1FS: FSNode = {
                     },
                     branches: {
                       type: 'file',
-                      content: '* main\n  feature/login\n  feature/api',
+                      content: 'main\nfeature/login\nfeature/api',
                     },
                     log: {
                       type: 'file',
                       content: gitLogContent,
                     },
-                    'status-output': {
+                    status: {
                       type: 'file',
                       content: gitStatusOutput,
                     },
@@ -147,13 +147,13 @@ const mission2FS: FSNode = {
                     },
                     branches: {
                       type: 'file',
-                      content: '* main\n  feature/login\n  feature/api',
+                      content: 'main\nfeature/login\nfeature/api',
                     },
                     log: {
                       type: 'file',
                       content: gitLogContent,
                     },
-                    'status-output': {
+                    status: {
                       type: 'file',
                       content: gitStatusOutput,
                     },
@@ -217,7 +217,7 @@ const mission3FS: FSNode = {
                     },
                     branches: {
                       type: 'file',
-                      content: '* main\n  feature/login\n  feature/api',
+                      content: 'main\nfeature/login\nfeature/api',
                     },
                     log: {
                       type: 'file',
@@ -268,13 +268,13 @@ const mission4FS: FSNode = {
                     },
                     branches: {
                       type: 'file',
-                      content: '  main\n  feature/login\n  feature/api\n* hotfix',
+                      content: 'main\nfeature/login\nfeature/api\nhotfix',
                     },
                     log: {
                       type: 'file',
                       content: gitLogContent,
                     },
-                    'diff-output': {
+                    diff: {
                       type: 'file',
                       content: gitDiffOutput,
                     },
@@ -334,7 +334,7 @@ const mission5FS: FSNode = {
                     },
                     branches: {
                       type: 'file',
-                      content: '  main\n  feature/login\n  feature/api\n* hotfix',
+                      content: 'main\nfeature/login\nfeature/api\nhotfix',
                     },
                     log: {
                       type: 'file',
@@ -399,13 +399,13 @@ export const story05: Story = {
       objectives: [
         {
           id: 'obj-05-01-01',
-          description: '現在の状態を確認する（変更されたファイルを発見する）',
+          description: 'git status で変更されたファイルを確認する',
           checks: [
             { type: 'command_executed', command: 'git' },
             { type: 'output_contains', pattern: 'modified' },
           ],
           hints: [
-            { level: 1, text: 'リポジトリの状態を確認するGitコマンドがあります。' },
+            { level: 1, text: '変更されたファイルや現在の状態を一覧表示するGitコマンドがあります。' },
             { level: 2, text: 'git status コマンドで変更されたファイルを確認できます。' },
             { level: 3, text: '「git status」と入力してEnterを押してください。' },
           ],
@@ -424,6 +424,17 @@ export const story05: Story = {
           ],
         },
       ],
+      review: {
+        question: 'git status と git log の違いは何ですか？',
+        choices: [
+          'どちらも同じ情報を表示する',
+          'status は現在の変更状態、log は過去のコミット履歴を表示する',
+          'status はブランチ一覧、log はファイル一覧を表示する',
+          'status は削除専用、log は作成専用のコマンド',
+        ],
+        correctIndex: 1,
+        explanation: 'git status は「今どのファイルが変更されているか」を表示します。git log は「過去にどんなコミットがあったか」の履歴を表示します。どちらも状況把握に重要です。',
+      },
     },
     {
       id: 'mission-05-02',
@@ -437,18 +448,29 @@ export const story05: Story = {
       objectives: [
         {
           id: 'obj-05-02-01',
-          description: '変更を stash に退避する',
+          description: 'git stash で作業中の変更を一時退避する',
           checks: [
             { type: 'command_executed', command: 'git' },
             { type: 'output_contains', pattern: 'stash' },
           ],
           hints: [
             { level: 1, text: '変更を一時的に退避するGitコマンドがあります。' },
-            { level: 2, text: 'git stash コマンドで変更を退避できます。後で git stash pop で戻せます。' },
+            { level: 2, text: 'git stash コマンドで変更を一時保存し、作業ツリーをクリーンな状態にできます。' },
             { level: 3, text: '「git stash」と入力してEnterを押してください。' },
           ],
         },
       ],
+      review: {
+        question: 'git stash はどんな時に使いますか？',
+        choices: [
+          '変更を完全に削除したい時',
+          '作業中の変更を一時的に退避して、後で戻したい時',
+          '新しいブランチを作成する時',
+          'ファイルの名前を変更する時',
+        ],
+        correctIndex: 1,
+        explanation: 'git stash は「今の作業を一旦棚に上げる」イメージです。別の作業をした後、git stash pop で棚から戻せます。変更を失わずに安全に退避できる便利なコマンドです。',
+      },
     },
     {
       id: 'mission-05-03',
@@ -485,8 +507,23 @@ export const story05: Story = {
             { level: 2, text: 'git checkout に -b オプションをつけると、新しいブランチを作って切り替えられます。' },
             { level: 3, text: '「git checkout -b hotfix」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'git branch hotfix$', message: 'git branch だけではブランチの作成のみで、切り替えはされません。git checkout -b hotfix で作成と切り替えを同時にできます。' },
+            { pattern: 'git checkout hotfix$', message: '-b をつけないと既存ブランチへの切り替えになります。新規作成するには git checkout -b hotfix です。' },
+          ],
         },
       ],
+      review: {
+        question: '「git checkout -b hotfix」は何をしますか？',
+        choices: [
+          'hotfix ブランチを削除する',
+          'hotfix という名前の新しいブランチを作成し、そこに切り替える',
+          '既存の hotfix ブランチに切り替える',
+          'hotfix ブランチの変更をマージする',
+        ],
+        correctIndex: 1,
+        explanation: 'git checkout -b は「新しいブランチを作って同時に切り替える」コマンドです。-b なしの git checkout hotfix は「既にある hotfix ブランチに切り替える」だけです。',
+      },
     },
     {
       id: 'mission-05-04',
@@ -500,7 +537,7 @@ export const story05: Story = {
       objectives: [
         {
           id: 'obj-05-04-01',
-          description: 'diff で変更内容を確認する',
+          description: 'git diff でコードの変更差分を確認する',
           checks: [
             { type: 'command_executed', command: 'git' },
             { type: 'output_contains', pattern: '@@' },
@@ -512,6 +549,17 @@ export const story05: Story = {
           ],
         },
       ],
+      review: {
+        question: 'git diff の出力で「+」と「-」は何を表しますか？',
+        choices: [
+          '+ は追加された行、- は削除された行',
+          '+ はファイル作成、- はファイル削除',
+          '+ は正しいコード、- は間違ったコード',
+          '+ はコミット済み、- は未コミット',
+        ],
+        correctIndex: 0,
+        explanation: 'git diff では + の行は新しく追加された行、- の行は削除された行を表します。変更前と変更後の差分がひと目でわかるので、レビューに欠かせないコマンドです。',
+      },
     },
     {
       id: 'mission-05-05',
@@ -545,8 +593,22 @@ export const story05: Story = {
             { level: 2, text: 'git merge コマンドで指定したブランチの変更を現在のブランチに統合できます。' },
             { level: 3, text: '「git merge hotfix」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'git merge main$', message: '今 main ブランチにいるので、main をマージしても意味がありません。統合したいブランチ名（hotfix）を指定しましょう。' },
+          ],
         },
       ],
+      review: {
+        question: 'git merge hotfix を実行する前に必要なことは何ですか？',
+        choices: [
+          'hotfix ブランチを削除する',
+          '統合先のブランチ（main）に切り替えておく',
+          'すべてのファイルを削除する',
+          'git stash を実行する',
+        ],
+        correctIndex: 1,
+        explanation: 'git merge は「現在いるブランチに、指定したブランチの変更を取り込む」コマンドです。なので、先に統合先のブランチ（この場合は main）に切り替えておく必要があります。',
+      },
     },
   ],
   unlockRequires: ['story-02'],

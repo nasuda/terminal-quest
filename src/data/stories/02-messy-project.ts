@@ -181,7 +181,7 @@ const appJsContent = [
   '});',
   '',
   '// End of file',
-].join('\n');
+].join('\n') + '\n';
 
 const readmeContent = [
   '# My Project',
@@ -344,8 +344,9 @@ export const story02: Story = {
             { level: 3, text: '「mv app.js src/」と入力してEnterを押してください。' },
           ],
           feedbacks: [
-            { pattern: 'cp', message: 'cp はファイルをコピーするコマンドです。元のファイルを残さず移動するには、別のコマンドを使います。' },
-            { pattern: 'rm', message: 'rm はファイルを削除するコマンドです。ファイルを別の場所に移動するには、別のコマンドを使います。' },
+            { pattern: 'cp.*src', message: 'cp はファイルをコピーするコマンドです。コピーだと元の場所にもファイルが残ります。元のファイルを残さず移動するには mv を使いましょう。' },
+            { pattern: 'cp', message: 'cp はファイルをコピーするコマンドです。元のファイルを残さず移動するには、mv コマンドを使います。' },
+            { pattern: 'rm', message: 'rm はファイルを削除するコマンドです。ファイルを別の場所に移動するには、mv コマンドを使います。' },
           ],
         },
         {
@@ -357,6 +358,9 @@ export const story02: Story = {
             { level: 2, text: 'mv コマンドで readme.md を docs/ に移動します。' },
             { level: 3, text: '「mv readme.md docs/」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'cp.*docs', message: 'cp だと元の場所にもファイルが残ります。mv を使って移動しましょう。' },
+          ],
         },
         {
           id: 'obj-02-02-03',
@@ -367,30 +371,33 @@ export const story02: Story = {
             { level: 2, text: 'mv コマンドで test.js を tests/ に移動します。' },
             { level: 3, text: '「mv test.js tests/」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'cp.*tests', message: 'cp だと元の場所にもファイルが残ります。mv を使って移動しましょう。' },
+          ],
         },
       ],
     },
     {
       id: 'mission-02-03',
       title: '不要なファイルを削除',
-      description: '.tmp ファイルや .bak ファイルを見つけて削除しよう。',
+      description: '.tmp ファイルを見つけて削除しよう。',
       goal: 'find で不要ファイルを検索し、rm で安全に削除できるようになる',
       narrative:
-        'プロジェクト内に .tmp ファイルや .bak ファイルが大量にある。不要ファイルを見つけて削除しよう。',
+        'プロジェクト内に不要な .tmp ファイルが散らばっている。find コマンドで見つけ出して、rm で削除しよう。',
       initialCwd: '/home/dev/project',
       newCommands: ['rm', 'find'],
       initialFS: mission3FS,
       objectives: [
         {
           id: 'obj-02-03-01',
-          description: '.tmp ファイルを見つける',
+          description: 'find コマンドで .tmp ファイルをすべて見つける',
           checks: [
             { type: 'command_executed', command: 'find' },
             { type: 'output_contains', pattern: '.tmp' },
           ],
           hints: [
             { level: 1, text: 'ファイルを検索するコマンドがあります。' },
-            { level: 2, text: 'find コマンドで名前パターンを指定して検索できます。' },
+            { level: 2, text: 'find コマンドは現在のディレクトリとサブディレクトリをすべて検索します。-name オプションで名前パターンを指定します。' },
             { level: 3, text: '「find . -name "*.tmp"」と入力してEnterを押してください。' },
           ],
           feedbacks: [

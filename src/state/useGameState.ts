@@ -89,6 +89,17 @@ export function useGameState() {
     }
   }, [progress]);
 
+  const resetStory = useCallback((storyId: string) => {
+    setProgress(prev => {
+      const { [storyId]: _, ...restStoryProgress } = prev.storyProgress;
+      return {
+        ...prev,
+        storyProgress: restStoryProgress,
+        completedStories: prev.completedStories.filter(id => id !== storyId),
+      };
+    });
+  }, []);
+
   const resetAll = useCallback(() => {
     setProgress(initialGameState.progress);
   }, []);
@@ -100,6 +111,7 @@ export function useGameState() {
     completeMission,
     completeStory,
     incrementCommands,
+    resetStory,
     resetAll,
   };
 }

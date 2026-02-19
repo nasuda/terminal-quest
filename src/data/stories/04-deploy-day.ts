@@ -248,15 +248,26 @@ export const story04: Story = {
         },
         {
           id: 'obj-04-01-02',
-          description: 'source の内容をデプロイ先にコピーする',
+          description: 'source/README.md を /var/www/app/ にコピーする',
           checks: [{ type: 'file_exists', path: '/var/www/app/README.md' }],
           hints: [
-            { level: 1, text: 'ディレクトリごとコピーするオプションがあります。' },
-            { level: 2, text: 'cp に -r オプションをつけると、ディレクトリを再帰的にコピーできます。' },
-            { level: 3, text: '「cp -r source/* /var/www/app/」と入力してEnterを押してください。' },
+            { level: 1, text: 'ファイルをコピーするコマンドがあります。' },
+            { level: 2, text: 'cp コマンドで source 内のファイルをデプロイ先にコピーできます。' },
+            { level: 3, text: '「cp source/README.md /var/www/app/」と入力してEnterを押してください。' },
           ],
         },
       ],
+      review: {
+        question: 'mkdir -p オプションの効果は何ですか？',
+        choices: [
+          '空のディレクトリだけを作成する',
+          '親ディレクトリも含めて一度に作成する',
+          'ディレクトリの権限を変更する',
+          '既存ディレクトリを上書きする',
+        ],
+        correctIndex: 1,
+        explanation: 'mkdir -p は親ディレクトリが存在しなくても、必要な階層をすべて一度に作成できます。例えば /var/www/app なら、/var と /var/www も同時に作られます。',
+      },
     },
     {
       id: 'mission-04-02',
@@ -271,15 +282,30 @@ export const story04: Story = {
       objectives: [
         {
           id: 'obj-04-02-01',
-          description: 'start.sh に実行権限を付与する',
+          description: 'chmod +x で start.sh に実行権限を付与する',
           checks: [{ type: 'command_executed', command: 'chmod' }],
           hints: [
-            { level: 1, text: 'ファイルの権限を変更するコマンドがあります。' },
+            { level: 1, text: 'スクリプトを実行するには、実行権限を付与する必要があります。権限を変更するコマンドを使いましょう。' },
             { level: 2, text: 'chmod コマンドで権限を変更します。+x で実行権限を追加できます。' },
             { level: 3, text: '「chmod +x start.sh」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'chmod x ', message: '「+x」の + を忘れていませんか？権限を追加するには + が必要です。' },
+            { pattern: 'chmod 755', message: '数値指定でもOKですが、このミッションでは +x の書き方を練習しましょう。' },
+          ],
         },
       ],
+      review: {
+        question: 'chmod +x の「+x」は何を意味しますか？',
+        choices: [
+          'ファイルを削除する許可を追加する',
+          'ファイルの実行権限を追加する',
+          'ファイルの書き込み権限を追加する',
+          'ファイルの読み取り権限を追加する',
+        ],
+        correctIndex: 1,
+        explanation: '+x は実行（eXecute）権限を追加します。シェルスクリプトを動かすには実行権限が必要です。+r は読み取り、+w は書き込みを表します。',
+      },
     },
     {
       id: 'mission-04-03',
@@ -293,12 +319,15 @@ export const story04: Story = {
       objectives: [
         {
           id: 'obj-04-03-01',
-          description: '古いバックアップ（backup-old）を削除する',
+          description: 'rm -rf で古いバックアップ（backup-old）をまるごと削除する',
           checks: [{ type: 'file_not_exists', path: '/var/www/backup-old' }],
           hints: [
-            { level: 1, text: 'ディレクトリを削除するにはオプションが必要です。' },
+            { level: 1, text: '中身の入ったディレクトリをまるごと削除するには、rm に特別なオプションが必要です。' },
             { level: 2, text: 'rm に -rf オプションをつけると、ディレクトリを中身ごと削除できます。' },
             { level: 3, text: '「rm -rf backup-old」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: '^rm backup-old$', message: 'ディレクトリを削除するには -rf オプションが必要です。rm -rf backup-old としましょう。' },
           ],
         },
         {
@@ -312,6 +341,17 @@ export const story04: Story = {
           ],
         },
       ],
+      review: {
+        question: 'rm -rf の -r と -f はそれぞれ何を意味しますか？',
+        choices: [
+          '-r は読み取り、-f はファイル指定',
+          '-r は再帰（中身ごと削除）、-f は強制（確認なし）',
+          '-r はリネーム、-f はフォルダ指定',
+          '-r は復元、-f は高速モード',
+        ],
+        correctIndex: 1,
+        explanation: '-r（recursive）はディレクトリを中身ごと再帰的に削除します。-f（force）は確認メッセージなしで強制的に削除します。非常に強力なので、対象を間違えないよう注意が必要です。',
+      },
     },
     {
       id: 'mission-04-04',
@@ -335,7 +375,7 @@ export const story04: Story = {
         },
         {
           id: 'obj-04-04-02',
-          description: '設定ファイルの内容を確認して production であることを確かめる',
+          description: 'cat config.json で設定を表示し、production であることを確かめる',
           checks: [{ type: 'output_contains', pattern: 'production' }],
           hints: [
             { level: 1, text: 'ファイルの内容を表示するコマンドで設定を確認しましょう。' },
@@ -344,6 +384,17 @@ export const story04: Story = {
           ],
         },
       ],
+      review: {
+        question: 'デプロイ後の最終確認として適切なのはどれですか？',
+        choices: [
+          'すぐにサーバーを再起動する',
+          'find と cat で必要なファイルが揃っているか確認する',
+          'rm -rf で不要ファイルを全て削除する',
+          '何もせずにデプロイ完了とする',
+        ],
+        correctIndex: 1,
+        explanation: 'デプロイ後は find でファイル一覧を確認し、cat で設定ファイルの内容が正しいか確かめることが重要です。思い込みで確認を飛ばすと、本番障害の原因になりかねません。',
+      },
     },
   ],
   unlockRequires: ['story-02', 'story-03'],

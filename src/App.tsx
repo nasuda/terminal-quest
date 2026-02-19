@@ -17,6 +17,7 @@ export function App() {
     completeMission,
     completeStory,
     incrementCommands,
+    resetStory,
     resetAll,
   } = useGameState();
 
@@ -25,7 +26,7 @@ export function App() {
       case 'title':
         return <TitleScreen onNavigate={navigateTo} />;
       case 'storySelect':
-        return <StorySelectScreen progress={progress} onNavigate={navigateTo} />;
+        return <StorySelectScreen progress={progress} onNavigate={navigateTo} onResetStory={resetStory} />;
       case 'missionBrief':
         return (
           <MissionBriefScreen

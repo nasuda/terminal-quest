@@ -230,15 +230,22 @@ export const story03: Story = {
             { level: 2, text: 'grep コマンドに検索パターンとファイル名を指定します。' },
             { level: 3, text: '「grep 500 access.log」と入力してEnterを押してください。' },
           ],
+          feedbacks: [
+            { pattern: 'cat', message: 'cat はファイル全体を表示します。特定の文字列を含む行だけを抽出するには grep を使いましょう。' },
+            { pattern: 'grep.*error', message: 'ログ内のステータスコードは数字（500）で記録されています。「error」ではなく「500」で検索してみましょう。' },
+          ],
         },
         {
           id: 'obj-03-02-02',
-          description: 'エラーの件数を数える（5件）',
+          description: '500 エラーが何件あるか数えて表示する',
           checks: [{ type: 'output_contains', pattern: '5' }],
           hints: [
-            { level: 1, text: '行数を数えるコマンドとパイプを組み合わせましょう。' },
+            { level: 1, text: 'grep の結果をさらに別のコマンドに渡して行数を数えられます。| （パイプ）という記号でコマンドをつなぎます。' },
             { level: 2, text: 'grep の結果を wc -l にパイプで渡すと行数を数えられます。' },
             { level: 3, text: '「grep 500 access.log | wc -l」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'wc.*access', message: 'wc -l をファイルに直接使うと全行数が出ます。500 エラーの行だけを数えるには、まず grep で抽出してからパイプ（|）で wc -l に渡しましょう。' },
           ],
         },
       ],
@@ -260,18 +267,24 @@ export const story03: Story = {
           checks: [{ type: 'command_executed', command: 'sort' }],
           hints: [
             { level: 1, text: 'データを並び替えるコマンドがあります。' },
-            { level: 2, text: 'sort コマンドで行を並び替えることができます。' },
+            { level: 2, text: 'sort コマンドで行をアルファベット順に並び替えることができます。' },
             { level: 3, text: '「sort ip-list.txt」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'uniq', message: 'uniq の前に、まず sort でデータを並べ替えましょう。sort → uniq の順番が大切です。' },
           ],
         },
         {
           id: 'obj-03-03-02',
-          description: 'ユニークなIPアドレスの一覧を出す',
+          description: 'IPアドレスの出現回数つき一覧を表示する（sort | uniq -c）',
           checks: [{ type: 'command_executed', command: 'uniq' }],
           hints: [
-            { level: 1, text: '重複を除去するコマンドがあります。sort と組み合わせましょう。' },
+            { level: 1, text: '重複する行を1つにまとめるコマンドがあります。ただし、隣り合った行しか比較しないため、先にデータを並べ替えておく必要があります。' },
             { level: 2, text: 'sort の結果をパイプで uniq に渡します。uniq -c で件数も表示できます。' },
             { level: 3, text: '「sort ip-list.txt | uniq -c」と入力してEnterを押してください。' },
+          ],
+          feedbacks: [
+            { pattern: 'uniq.*ip-list', message: 'uniq は隣り合った重複行しか除去しません。先に sort でデータを並べ替えてからパイプで uniq に渡しましょう。' },
           ],
         },
       ],

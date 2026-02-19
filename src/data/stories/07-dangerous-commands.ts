@@ -267,14 +267,14 @@ export const story07: Story = {
         },
         {
           id: 'obj-07-01-02',
-          description: 'cat \u3067\u91CD\u8981\u30D5\u30A1\u30A4\u30EB\u306E\u4E2D\u8EAB\u3092\u78BA\u8A8D\u3059\u308B',
+          description: 'cat data/important.csv で重要データの内容を確認する',
           checks: [
             { type: 'command_executed', command: 'cat' },
-            { type: 'output_contains', pattern: 'important' },
+            { type: 'output_contains', pattern: 'Tanaka' },
           ],
           hints: [
             { level: 1, text: '\u30D5\u30A1\u30A4\u30EB\u306E\u4E2D\u8EAB\u3092\u8868\u793A\u3059\u308B\u30B3\u30DE\u30F3\u30C9\u3067\u3001\u91CD\u8981\u306A\u30C7\u30FC\u30BF\u3092\u78BA\u8A8D\u3057\u307E\u3057\u3087\u3046\u3002' },
-            { level: 2, text: 'cat \u30B3\u30DE\u30F3\u30C9\u3067 data \u30C7\u30A3\u30EC\u30AF\u30C8\u30EA\u5185\u306E\u30D5\u30A1\u30A4\u30EB\u3092\u898B\u3066\u307F\u307E\u3057\u3087\u3046\u3002' },
+            { level: 2, text: 'cat コマンドで data/important.csv を見てみましょう。重要なデータが含まれています。' },
             { level: 3, text: '\u300Ccat data/important.csv\u300D\u3068\u5165\u529B\u3057\u3066Enter\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002' },
           ],
         },
@@ -287,8 +287,23 @@ export const story07: Story = {
             { level: 2, text: 'rm \u30B3\u30DE\u30F3\u30C9\u3067\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3067\u304D\u307E\u3059\u3002\u524A\u9664\u5BFE\u8C61\u3092\u9593\u9055\u3048\u306A\u3044\u3088\u3046\u306B\uFF01' },
             { level: 3, text: '\u300Crm data/backup.csv\u300D\u3068\u5165\u529B\u3057\u3066Enter\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002' },
           ],
+          feedbacks: [
+            { pattern: 'rm data/important', message: 'important.csv は重要なデータです！削除するのは backup.csv の方です。' },
+            { pattern: '^rm backup', message: 'backup.csv は data/ フォルダの中にあります。パスを指定して rm data/backup.csv としましょう。' },
+          ],
         },
       ],
+      review: {
+        question: 'ファイルを削除する前にまずやるべきことは何ですか？',
+        choices: [
+          'すぐに rm で削除する',
+          'ls と cat で中身を確認して、削除対象を間違えないようにする',
+          'ディレクトリごと rm -rf で削除する',
+          '別のサーバーにコピーする',
+        ],
+        correctIndex: 1,
+        explanation: '削除する前に ls でファイル一覧を確認し、cat で中身を見て「本当に消して大丈夫か」を確認する習慣が大切です。一度削除したファイルは元に戻せません。',
+      },
     },
     {
       id: 'mission-07-02',
@@ -316,7 +331,7 @@ export const story07: Story = {
         },
         {
           id: 'obj-07-02-02',
-          description: '\u8A2D\u5B9A\u30D5\u30A1\u30A4\u30EB\u3092\u30D0\u30C3\u30AF\u30A2\u30C3\u30D7\u3059\u308B',
+          description: 'cp で server.conf を backups/ にバックアップする',
           checks: [{ type: 'file_exists', path: '/home/project/backups/server.conf' }],
           hints: [
             { level: 1, text: '\u30D5\u30A1\u30A4\u30EB\u3092\u30B3\u30D4\u30FC\u3059\u308B\u30B3\u30DE\u30F3\u30C9\u3092\u4F7F\u3044\u307E\u3057\u3087\u3046\u3002' },
@@ -326,15 +341,26 @@ export const story07: Story = {
         },
         {
           id: 'obj-07-02-03',
-          description: '\u5B89\u5168\u306B\u5143\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3059\u308B',
+          description: '不要な app.log を rm で安全に削除する',
           checks: [{ type: 'file_not_exists', path: '/home/project/app.log' }],
           hints: [
-            { level: 1, text: '\u4E0D\u8981\u306B\u306A\u3063\u305F\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3057\u307E\u3057\u3087\u3046\u3002' },
+            { level: 1, text: 'バックアップが取れたので、不要なログファイルを安全に削除しましょう。' },
             { level: 2, text: 'rm \u30B3\u30DE\u30F3\u30C9\u3067\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3067\u304D\u307E\u3059\u3002\u30ED\u30B0\u30D5\u30A1\u30A4\u30EB\u306F\u4E0D\u8981\u3067\u3059\u306D\u3002' },
             { level: 3, text: '\u300Crm app.log\u300D\u3068\u5165\u529B\u3057\u3066Enter\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002' },
           ],
         },
       ],
+      review: {
+        question: 'ファイル削除の安全な手順として正しいのはどれ？',
+        choices: [
+          'rm で削除 → 必要だったら復元する',
+          'ls で確認 → バックアップを作成（cp） → 不要ファイルを削除（rm）',
+          'バックアップなしで即削除する',
+          'ファイル名を変更してから削除する',
+        ],
+        correctIndex: 1,
+        explanation: '安全な手順は「確認 → バックアップ → 削除」です。ls で内容を確認し、cp で重要なファイルをバックアップしてから、不要なファイルだけを rm で削除しましょう。',
+      },
     },
     {
       id: 'mission-07-03',
@@ -359,12 +385,17 @@ export const story07: Story = {
         },
         {
           id: 'obj-07-03-02',
-          description: '\u6B63\u3057\u3044\u30C7\u30A3\u30EC\u30AF\u30C8\u30EA\u3060\u3051\u3092 rm -rf \u3067\u524A\u9664\u3059\u308B',
+          description: 'rm -rf で old-build だけを削除する（src と dist は残す）',
           checks: [{ type: 'file_not_exists', path: '/home/project/old-build' }],
           hints: [
             { level: 1, text: '\u53E4\u3044\u30D3\u30EB\u30C9\u7D50\u679C\u3060\u3051\u3092\u524A\u9664\u3057\u307E\u3057\u3087\u3046\u3002\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9\u3092\u524A\u9664\u3057\u306A\u3044\u3088\u3046\u6CE8\u610F\uFF01' },
             { level: 2, text: 'rm -rf \u3067\u30C7\u30A3\u30EC\u30AF\u30C8\u30EA\u3054\u3068\u524A\u9664\u3067\u304D\u307E\u3059\u3002old-build \u3092\u524A\u9664\u3057\u307E\u3057\u3087\u3046\u3002' },
             { level: 3, text: '\u300Crm -rf old-build\u300D\u3068\u5165\u529B\u3057\u3066Enter\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002' },
+          ],
+          feedbacks: [
+            { pattern: 'rm -rf src', message: 'src はソースコードが入った大切なディレクトリです！削除するのは old-build の方です。' },
+            { pattern: 'rm -rf dist', message: 'dist は現在のビルド結果です。削除するのは old-build の方です。' },
+            { pattern: '^rm old-build$', message: 'ディレクトリを中身ごと削除するには -rf オプションが必要です。rm -rf old-build としましょう。' },
           ],
         },
         {
@@ -378,6 +409,17 @@ export const story07: Story = {
           ],
         },
       ],
+      review: {
+        question: 'rm -rf を実行する前に最も重要なことは何ですか？',
+        choices: [
+          '何も考えずに即実行する',
+          'ls で削除対象の中身を確認し、正しいディレクトリだけを指定する',
+          '-rf ではなく -r だけを使う',
+          'ファイルを先に全部移動する',
+        ],
+        correctIndex: 1,
+        explanation: 'rm -rf は確認なしでディレクトリを丸ごと削除する強力なコマンドです。必ず ls で中身を確認し、ソースコードなど重要なファイルを間違えて消さないよう、削除対象を正確に指定しましょう。',
+      },
     },
     {
       id: 'mission-07-04',
@@ -405,12 +447,16 @@ export const story07: Story = {
         },
         {
           id: 'obj-07-04-02',
-          description: '\u53E4\u3044\u30ED\u30B0\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3059\u308B',
+          description: 'find で見つけた app-2024-*.log を rm で削除する',
           checks: [{ type: 'file_not_exists', path: '/home/project/logs/app-2024-01.log' }],
           hints: [
             { level: 1, text: 'find \u3067\u898B\u3064\u3051\u305F\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3057\u307E\u3057\u3087\u3046\u3002' },
-            { level: 2, text: 'rm \u30B3\u30DE\u30F3\u30C9\u3067\u53E4\u3044\u6708\u6B21\u30ED\u30B0\u3092\u524A\u9664\u3057\u307E\u3057\u3087\u3046\u3002' },
+            { level: 2, text: '前の find で表示されたファイル名を rm コマンドに指定して削除しましょう。' },
             { level: 3, text: '\u300Crm app-2024-01.log app-2024-02.log app-2024-03.log\u300D\u3068\u5165\u529B\u3057\u3066Enter\u3092\u62BC\u3057\u3066\u304F\u3060\u3055\u3044\u3002' },
+          ],
+          feedbacks: [
+            { pattern: 'rm error.log', message: 'error.log は残すべきファイルです！削除するのは app-2024-*.log だけです。' },
+            { pattern: 'rm access.log', message: 'access.log は残すべきファイルです！削除するのは app-2024-*.log だけです。' },
           ],
         },
         {
@@ -424,6 +470,17 @@ export const story07: Story = {
           ],
         },
       ],
+      review: {
+        question: '大量のファイルを安全に削除するワークフローとして正しいのは？',
+        choices: [
+          'rm * で全部削除してから必要なものを復元する',
+          'find で削除対象を一覧表示して確認 → rm で対象だけを削除',
+          '手当たり次第に削除する',
+          'ディレクトリごと rm -rf で削除する',
+        ],
+        correctIndex: 1,
+        explanation: 'まず find で削除対象を検索・確認してから、rm で対象ファイルだけを削除するのが安全なワークフローです。「確認してから実行」が鉄則です。',
+      },
     },
   ],
 };

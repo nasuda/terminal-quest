@@ -363,13 +363,13 @@ const mission10FS: FSNode = {
                 },
                 branches: {
                   type: 'file',
-                  content: '* main',
+                  content: 'main',
                 },
                 log: {
                   type: 'file',
                   content: gitLogContent,
                 },
-                'status-output': {
+                status: {
                   type: 'file',
                   content: gitStatusOutput,
                 },
@@ -584,7 +584,7 @@ export const storyK1: Story = {
       id: 'mission-k1-04',
       title: '宝物を集めよう',
       description:
-        'いろんな場所にある宝物を秘密基地にあつめよう！',
+        'いろんな場所にある宝物を秘密基地の宝物庫にあつめよう！',
       goal: 'cp でコピー、mv でいどうができるようになる',
       review: {
         question: 'ファイルをコピーするコマンドはどれかな？',
@@ -593,14 +593,14 @@ export const storyK1: Story = {
         explanation: 'cp はファイルをコピーするコマンドだよ。もとのファイルはそのままのこるよ。「copy」のりゃくだよ。',
       },
       narrative:
-        '冒険の世界にはたからものがいっぱい！魔法の森にある宝石をコピーして、古いお城にある伝説の剣を秘密基地にうつそう。',
+        '冒険の世界にはたからものがいっぱい！魔法の森にある宝石をコピーして、古いお城にある伝説の剣を秘密基地の宝物庫にうつそう。',
       initialCwd: '/冒険の世界',
       initialFS: mission4FS,
       newCommands: ['cp', 'mv'],
       objectives: [
         {
           id: 'obj-k1-04-01',
-          description: '光る宝石を秘密基地にコピーしよう',
+          description: '光る宝石を秘密基地の宝物庫にコピーしよう',
           checks: [
             {
               type: 'file_exists',
@@ -609,7 +609,7 @@ export const storyK1: Story = {
           ],
           hints: [
             { level: 1, text: 'ファイルをコピーするコマンドがあるよ。' },
-            { level: 2, text: '「cp」のあとに「もとのファイル」「コピーさき」を書くよ。' },
+            { level: 2, text: '「cp」のあとに「もとのファイル」「コピーさき」を書くよ。もとのファイルは「魔法の森/光る宝石.txt」で、コピーさきは「秘密基地/宝物庫/」だよ。' },
             {
               level: 3,
               text: '「cp 魔法の森/光る宝石.txt 秘密基地/宝物庫/光る宝石.txt」とにゅうりょくしてね。',
@@ -623,7 +623,7 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-04-02',
-          description: '伝説の剣を秘密基地にうつそう',
+          description: '伝説の剣を秘密基地の宝物庫にうつそう',
           checks: [
             {
               type: 'file_exists',
@@ -667,14 +667,14 @@ export const storyK1: Story = {
       objectives: [
         {
           id: 'obj-k1-05-01',
-          description: 'トラップをさがそう',
+          description: 'find コマンドでトラップをさがそう',
           checks: [{ type: 'output_contains', pattern: 'トラップ' }],
           hints: [
             { level: 1, text: 'ファイルをさがすコマンドがあるよ。' },
-            { level: 2, text: '「find」コマンドで名前をしていしてさがせるよ。' },
+            { level: 2, text: '「find」コマンドで名前をしていしてさがせるよ。-name のあとにさがしたい名前を書くよ。' },
             {
               level: 3,
-              text: '「find . -name トラップ*」とにゅうりょくしてね。',
+              text: '「find . -name トラップ*」とにゅうりょくしてね。* は「なんでもOK」というマークで、「トラップ」ではじまるファイルをぜんぶさがすよ。',
             },
           ],
           feedbacks: [
@@ -784,7 +784,7 @@ export const storyK1: Story = {
           ],
           hints: [
             { level: 1, text: 'もじをファイルに書きこむコマンドがあるよ。' },
-            { level: 2, text: '「echo」と「>」をつかうと、もじをファイルに書けるよ。' },
+            { level: 2, text: '「echo」のあとに書きたいもじを「"」で囲んで、「>」のあとにファイル名を書くよ。「>」は「ファイルに書きこむ」というマークだよ。' },
             {
               level: 3,
               text: '「echo "魔法使いが宝の地図をくれた" > 解読結果.txt」とにゅうりょくしてね。',
@@ -849,7 +849,7 @@ export const storyK1: Story = {
           description: '魔法の書が何行あるかかぞえよう',
           checks: [
             { type: 'command_executed', command: 'wc' },
-            { type: 'output_contains', pattern: '20' },
+            { type: 'output_contains', pattern: '21' },
           ],
           hints: [
             { level: 1, text: 'ファイルの行数をかぞえるコマンドがあるよ。' },
@@ -903,7 +903,7 @@ export const storyK1: Story = {
           checks: [{ type: 'command_executed', command: 'uniq' }],
           hints: [
             { level: 1, text: 'おなじものをまとめるコマンドがあるよ。パイプ「|」もつかってみよう。' },
-            { level: 2, text: '「sort」したあとに「|」で「uniq」につなげると、おなじ行をまとめられるよ。' },
+            { level: 2, text: '「sort」したあとに「|」（パイプ）で「uniq」につなげると、おなじ行をまとめられるよ。「|」は「けっかをつぎのコマンドにわたす」マークだよ。' },
             { level: 3, text: '「sort 冒険者名簿.csv | uniq」とにゅうりょくしてね。' },
           ],
           feedbacks: [
@@ -913,7 +913,7 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-08-03',
-          description: '職業だけをとりだそう',
+          description: '名簿の2番目（職業）だけをとりだそう',
           checks: [{ type: 'output_contains', pattern: '職業' }],
           hints: [
             { level: 1, text: 'とくていの部分だけきりだすコマンドがあるよ。' },
@@ -944,7 +944,7 @@ export const storyK1: Story = {
         explanation: 'chmod はファイルのけんげん（パーミッション）をかえるコマンドだよ。「change mode」のりゃくだよ。',
       },
       narrative:
-        '古いお城のおくで、ふういんされた呪文を見つけた！ふういんを解いて実行できるようにしよう。そして魔法の石から、つかいたい魔法をえらびだそう。',
+        '古いお城のおくで、ふういんされた呪文を見つけた！ふういんを解いて実行できるようにしよう。そして魔法の石の中から「光の魔法」をさがしだそう。',
       initialCwd: '/冒険の世界/古いお城',
       initialFS: mission9FS,
       newCommands: ['chmod'],
@@ -1019,7 +1019,7 @@ export const storyK1: Story = {
           description: 'いままでの冒険のきろくを見よう',
           checks: [
             { type: 'command_executed', command: 'git' },
-            { type: 'output_contains', pattern: 'commit' },
+            { type: 'output_contains', pattern: 'Author:' },
           ],
           hints: [
             { level: 1, text: 'きろく（ログ）を見るgitコマンドがあるよ。' },

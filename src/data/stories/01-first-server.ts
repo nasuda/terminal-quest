@@ -299,7 +299,7 @@ export const story01: Story = {
         },
         {
           id: 'obj-01-02-03',
-          description: 'config.json の内容を表示する',
+          description: '/etc/app/config.json の内容を表示する',
           checks: [{ type: 'output_contains', pattern: 'port' }],
           hints: [
             { level: 1, text: 'ファイルの内容を表示するコマンドがあります。' },
@@ -307,6 +307,7 @@ export const story01: Story = {
             { level: 3, text: '「cat app/config.json」と入力してください。' },
           ],
           feedbacks: [
+            { pattern: 'cat.*nginx', message: 'nginx.conf はWebサーバーの設定ファイルです。今回確認したいのはアプリの設定ファイル config.json です。app/ ディレクトリの中にあります。' },
             { pattern: 'pwd', message: 'pwd は現在の場所を表示するコマンドです。ファイルの内容を読むには、別のコマンドを使います。' },
             { pattern: 'ls', message: 'ls はファイル一覧を表示するコマンドです。ファイルの中身を読むには、別のコマンドを使います。' },
             { pattern: 'cd', message: 'cd はディレクトリ移動のコマンドです。ファイルの内容を読むには、別のコマンドを使います。' },
@@ -386,7 +387,7 @@ export const story01: Story = {
       objectives: [
         {
           id: 'obj-01-04-01',
-          description: 'config.json のバックアップを作成する',
+          description: 'config.json のバックアップを作成する（.bak 拡張子をつける）',
           checks: [
             {
               type: 'file_exists',
@@ -434,7 +435,7 @@ export const story01: Story = {
             },
           ],
           hints: [
-            { level: 1, text: 'echo コマンドとリダイレクト（>）を使ってファイルに書き込めます。' },
+            { level: 1, text: 'echo コマンドとリダイレクト（>）を使うと、ファイルの内容を丸ごと上書きできます。JSON形式で全体を書き直す必要があります。' },
             { level: 2, text: 'echo "内容" > ファイル名 の形式で、ファイルの内容を上書きできます。' },
             {
               level: 3,
@@ -442,7 +443,9 @@ export const story01: Story = {
             },
           ],
           feedbacks: [
-            { pattern: 'cat', message: 'cat はファイルの内容を表示するコマンドです。ファイルに書き込むには、別のコマンドとリダイレクト（>）を使います。' },
+            { pattern: 'debug.*=.*true', message: 'JSON形式で書き込む必要があります。{"port": 3000, "debug": true} のような形式にしましょう。' },
+            { pattern: '>>', message: '>>（追記）ではなく >（上書き）を使いましょう。ファイルの内容を新しい内容に置き換えます。' },
+            { pattern: 'cat', message: 'cat はファイルの内容を表示するコマンドです。ファイルに書き込むには、echo コマンドとリダイレクト（>）を使います。' },
             { pattern: 'cp', message: 'cp はファイルをコピーするコマンドです。ファイルの内容を書き換えるには、echo とリダイレクト（>）を使いましょう。' },
           ],
         },
