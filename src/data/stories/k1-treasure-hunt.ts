@@ -4,24 +4,24 @@ import type { Story, FSNode } from '../types.js';
 const mission1FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        スタート地点: {
+        start: {
           type: 'directory',
           children: {
-            '案内板.txt': {
+            'sign.txt': {
               type: 'file',
               content:
                 'ようこそ、冒険の世界へ！\nここからきみの冒険がはじまるよ。\nまずは、いまいる場所をたしかめてみよう！\n',
             },
           },
         },
-        魔法の森: {
+        forest: {
           type: 'directory',
           children: {},
         },
-        古いお城: {
+        castle: {
           type: 'directory',
           children: {},
         },
@@ -34,32 +34,32 @@ const mission1FS: FSNode = {
 const mission2FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        スタート地点: {
+        start: {
           type: 'directory',
           children: {
-            '案内板.txt': {
+            'sign.txt': {
               type: 'file',
               content:
                 'ようこそ、冒険の世界へ！\nここからきみの冒険がはじまるよ。\nまずは、いまいる場所をたしかめてみよう！\n',
             },
           },
         },
-        魔法の森: {
+        forest: {
           type: 'directory',
           children: {
-            '光る花.txt': {
+            'flower.txt': {
               type: 'file',
               content: 'きれいに光る花だ。さわるとあたたかい。\n',
             },
-            '古い巻物.txt': {
+            'scroll.txt': {
               type: 'file',
               content:
                 'この巻物には古い言い伝えが書いてある。\n『北の洞窟に宝が眠る』\n',
             },
-            'ヒント.txt': {
+            'hint.txt': {
               type: 'file',
               content: '森を抜けたら、スタート地点に戻ってこよう。\n',
             },
@@ -74,10 +74,10 @@ const mission2FS: FSNode = {
 const mission3FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        スタート地点: {
+        start: {
           type: 'directory',
           children: {},
         },
@@ -90,25 +90,25 @@ const mission3FS: FSNode = {
 const mission4FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        魔法の森: {
+        forest: {
           type: 'directory',
           children: {
-            '光る宝石.txt': {
+            'gem.txt': {
               type: 'file',
               content: 'キラキラ光る美しい宝石だ。\n',
             },
           },
         },
-        古いお城: {
+        castle: {
           type: 'directory',
           children: {
-            宝物庫: {
+            treasure: {
               type: 'directory',
               children: {
-                '伝説の剣.txt': {
+                'sword.txt': {
                   type: 'file',
                   content: '古代の勇者が使っていた伝説の剣だ。\n',
                 },
@@ -116,10 +116,10 @@ const mission4FS: FSNode = {
             },
           },
         },
-        秘密基地: {
+        base: {
           type: 'directory',
           children: {
-            宝物庫: {
+            treasure: {
               type: 'directory',
               children: {},
             },
@@ -134,32 +134,32 @@ const mission4FS: FSNode = {
 const mission5FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        ひみつの洞窟: {
+        cave: {
           type: 'directory',
           children: {
-            'トラップ1.txt': {
+            'trap1.txt': {
               type: 'file',
               content: '⚠ これはトラップだ！さわると大変！\n',
             },
-            'トラップ2.txt': {
+            'trap2.txt': {
               type: 'file',
               content: '⚠ これはトラップだ！さわると大変！\n',
             },
-            'たからの地図.txt': {
+            'map.txt': {
               type: 'file',
               content: '宝はこの洞窟の奥にあるらしい。\n',
             },
-            奥の部屋: {
+            'back-room': {
               type: 'directory',
               children: {
-                'トラップ3.txt': {
+                'trap3.txt': {
                   type: 'file',
                   content: '⚠ これはトラップだ！さわると大変！\n',
                 },
-                '宝箱.txt': {
+                'chest.txt': {
                   type: 'file',
                   content:
                     'おめでとう！宝箱を見つけた！\n中には金貨がたくさん入っている。\n',
@@ -177,13 +177,13 @@ const mission5FS: FSNode = {
 const mission6FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        ひみつの洞窟: {
+        cave: {
           type: 'directory',
           children: {
-            '暗号文.txt': {
+            'cipher.txt': {
               type: 'file',
               content: [
                 'むかしむかし、ある国に王様がいました。',
@@ -229,16 +229,16 @@ const magicBookContent = [
 const mission7FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        古いお城: {
+        castle: {
           type: 'directory',
           children: {
-            図書室: {
+            library: {
               type: 'directory',
               children: {
-                '魔法の書.txt': {
+                'spellbook.txt': {
                   type: 'file',
                   content: magicBookContent,
                 },
@@ -255,13 +255,13 @@ const mission7FS: FSNode = {
 const mission8FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        古いお城: {
+        castle: {
           type: 'directory',
           children: {
-            '冒険者名簿.csv': {
+            'party.csv': {
               type: 'file',
               content: [
                 '名前,職業,レベル',
@@ -286,23 +286,23 @@ const mission8FS: FSNode = {
 const mission9FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        古いお城: {
+        castle: {
           type: 'directory',
           children: {
-            '封印の呪文.sh': {
+            'seal.sh': {
               type: 'file',
               content: '#!/bin/bash\necho "封印が解けた！大きな扉が開く！"\n',
               permissions: '-rw-r--r--',
             },
-            '魔法の石.txt': {
+            'stone.txt': {
               type: 'file',
               content:
                 '火の魔法\n水の魔法\n風の魔法\n土の魔法\n光の魔法\n闇の魔法\n',
             },
-            '魔法の杖.txt': {
+            'wand.txt': {
               type: 'file',
               content: '古代の杖 - すべての魔法を増幅する\n',
             },
@@ -340,7 +340,7 @@ const gitStatusOutput = [
   '  (use "git add <file>..." to update what will be committed)',
   '  (use "git restore <file>..." to discard changes in working directory)',
   '',
-  '\tmodified:   冒険日記.txt',
+  '\tmodified:   diary.txt',
   '',
   'no changes added to commit (use "git add" to track)',
 ].join('\n');
@@ -348,10 +348,10 @@ const gitStatusOutput = [
 const mission10FS: FSNode = {
   type: 'directory',
   children: {
-    冒険の世界: {
+    world: {
       type: 'directory',
       children: {
-        秘密基地: {
+        base: {
           type: 'directory',
           children: {
             '.git': {
@@ -375,7 +375,7 @@ const mission10FS: FSNode = {
                 },
               },
             },
-            '冒険日記.txt': {
+            'diary.txt': {
               type: 'file',
               content:
                 '今日は秘密基地で冒険の記録をまとめた。\n新しい仲間もできた。\n明日はもっと遠くへ冒険しよう。\n',
@@ -409,8 +409,8 @@ export const storyK1: Story = {
         explanation: 'pwd はいまいるばしょ（ディレクトリ）をひょうじするコマンドだよ。「Print Working Directory」のりゃくだよ。',
       },
       narrative:
-        'きみは冒険の世界にやってきた！スタート地点にいるみたいだけど、ここはどこだろう？まずは「いまいる場所」をたしかめて、まわりに何があるか見てみよう。',
-      initialCwd: '/冒険の世界/スタート地点',
+        'きみは冒険の世界（world）にやってきた！start（スタート地点）にいるみたいだけど、ここはどこだろう？まずは「いまいる場所」をたしかめて、まわりに何があるか見てみよう。',
+      initialCwd: '/world/start',
       initialFS: mission1FS,
       newCommands: ['pwd', 'ls'],
       objectives: [
@@ -451,7 +451,7 @@ export const storyK1: Story = {
       id: 'mission-k1-02',
       title: '森を冒険しよう',
       description:
-        '魔法の森にいって、古い巻物を読んでみよう！',
+        'forest（もり）にいって、scroll.txt（巻物）を読んでみよう！',
       goal: 'cd でべつの場所にいどうし、cat でファイルを読めるようになる',
       review: {
         question: 'べつのばしょにいどうするコマンドはどれかな？',
@@ -460,19 +460,19 @@ export const storyK1: Story = {
         explanation: 'cd はべつのばしょ（ディレクトリ）にいどうするコマンドだよ。「Change Directory」のりゃくだよ。',
       },
       narrative:
-        '案内板に「魔法の森には何かひみつがある」と書いてあった。森にいって、手がかりをさがそう！巻物を読んだら、スタート地点にもどってこよう。',
-      initialCwd: '/冒険の世界/スタート地点',
+        '案内板（sign.txt）に「森（forest）には何かひみつがある」と書いてあった。forest にいって、手がかりをさがそう！巻物を読んだら、start（スタート地点）にもどってこよう。',
+      initialCwd: '/world/start',
       initialFS: mission2FS,
       newCommands: ['cd', 'cat'],
       objectives: [
         {
           id: 'obj-k1-02-01',
-          description: '魔法の森にいどうしよう',
-          checks: [{ type: 'cwd_equals', path: '/冒険の世界/魔法の森' }],
+          description: 'forest（もり）にいどうしよう',
+          checks: [{ type: 'cwd_equals', path: '/world/forest' }],
           hints: [
             { level: 1, text: 'べつの場所にいどうするコマンドがあるよ。' },
             { level: 2, text: '「cd」のあとに、いきたい場所の名前を書くよ。' },
-            { level: 3, text: '「cd /冒険の世界/魔法の森」とにゅうりょくしてね。' },
+            { level: 3, text: '「cd /world/forest」とにゅうりょくしてね。forest はもりのことだよ。' },
           ],
           feedbacks: [
             { pattern: 'pwd', message: 'pwd はいまいる場所をたしかめるコマンドだよ。べつの場所にいくには、いどうするコマンドをつかうよ。' },
@@ -482,12 +482,15 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-02-02',
-          description: '古い巻物を読んでみよう',
-          checks: [{ type: 'output_contains', pattern: '宝' }],
+          description: 'scroll.txt（巻物）を読んでみよう',
+          checks: [
+            { type: 'command_executed', command: 'cat' },
+            { type: 'output_contains', pattern: '宝' },
+          ],
           hints: [
             { level: 1, text: 'ファイルの中身を読むコマンドがあるよ。' },
             { level: 2, text: '「cat」のあとにファイル名を書くと、中身が読めるよ。' },
-            { level: 3, text: '「cat 古い巻物.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「cat scroll.txt」とにゅうりょくしてね。scroll は巻物のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'pwd', message: 'pwd はいまいる場所をたしかめるコマンドだよ。ファイルの中身を読むには、べつのコマンドをつかうよ。' },
@@ -497,12 +500,12 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-02-03',
-          description: 'スタート地点にもどろう',
-          checks: [{ type: 'cwd_equals', path: '/冒険の世界/スタート地点' }],
+          description: 'start（スタート地点）にもどろう',
+          checks: [{ type: 'cwd_equals', path: '/world/start' }],
           hints: [
             { level: 1, text: 'さっきつかった「cd」コマンドでもどれるよ。' },
-            { level: 2, text: 'スタート地点のフルパスを指定しよう。' },
-            { level: 3, text: '「cd /冒険の世界/スタート地点」とにゅうりょくしてね。' },
+            { level: 2, text: 'start のフルパスを指定しよう。' },
+            { level: 3, text: '「cd /world/start」とにゅうりょくしてね。start はスタート地点のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'pwd', message: 'pwd はいまいる場所をたしかめるコマンドだよ。もどるには、いどうするコマンドをつかうよ。' },
@@ -517,7 +520,7 @@ export const storyK1: Story = {
       id: 'mission-k1-03',
       title: '秘密基地を作ろう',
       description:
-        'じぶんだけの秘密基地をつくろう！部屋もつくって、ノートもおこう。',
+        'じぶんだけの秘密基地（base）をつくろう！部屋もつくって、ノートもおこう。',
       goal: 'mkdir でフォルダをつくり、touch でファイルをつくれるようになる',
       review: {
         question: 'あたらしいフォルダをつくるコマンドはどれかな？',
@@ -526,19 +529,19 @@ export const storyK1: Story = {
         explanation: 'mkdir はあたらしいフォルダ（ディレクトリ）をつくるコマンドだよ。「Make Directory」のりゃくだよ。',
       },
       narrative:
-        '冒険には秘密基地がひつようだ！まずは基地をつくって、たからものをしまう部屋と、冒険のきろくをつけるノートを用意しよう。',
-      initialCwd: '/冒険の世界',
+        '冒険には秘密基地がひつようだ！まずは base（秘密基地）をつくって、たからものをしまう treasure（宝物庫）と、冒険のきろくをつける note.txt（冒険ノート）を用意しよう。',
+      initialCwd: '/world',
       initialFS: mission3FS,
       newCommands: ['mkdir', 'touch'],
       objectives: [
         {
           id: 'obj-k1-03-01',
-          description: '秘密基地をつくろう',
-          checks: [{ type: 'file_exists', path: '/冒険の世界/秘密基地' }],
+          description: 'base（秘密基地）をつくろう',
+          checks: [{ type: 'file_exists', path: '/world/base' }],
           hints: [
             { level: 1, text: 'あたらしいフォルダをつくるコマンドがあるよ。' },
             { level: 2, text: '「mkdir」のあとにフォルダの名前を書くよ。' },
-            { level: 3, text: '「mkdir 秘密基地」とにゅうりょくしてね。' },
+            { level: 3, text: '「mkdir base」とにゅうりょくしてね。base は秘密基地のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'touch', message: 'touch はからっぽのファイルをつくるコマンドだよ。フォルダをつくるには、べつのコマンドをつかうよ。' },
@@ -548,12 +551,12 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-03-02',
-          description: '秘密基地の中に宝物庫をつくろう',
-          checks: [{ type: 'file_exists', path: '/冒険の世界/秘密基地/宝物庫' }],
+          description: 'base の中に treasure（宝物庫）をつくろう',
+          checks: [{ type: 'file_exists', path: '/world/base/treasure' }],
           hints: [
             { level: 1, text: '秘密基地の中にもうひとつフォルダをつくろう。' },
             { level: 2, text: '「mkdir」でパスを指定して、中にフォルダがつくれるよ。' },
-            { level: 3, text: '「mkdir 秘密基地/宝物庫」とにゅうりょくしてね。' },
+            { level: 3, text: '「mkdir base/treasure」とにゅうりょくしてね。treasure は宝物庫のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'touch', message: 'touch はファイルをつくるコマンドだよ。フォルダをつくるには、さっきとおなじコマンドをつかうよ。' },
@@ -562,14 +565,14 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-03-03',
-          description: '冒険ノートをつくろう',
+          description: 'note.txt（冒険ノート）をつくろう',
           checks: [
-            { type: 'file_exists', path: '/冒険の世界/秘密基地/冒険ノート.txt' },
+            { type: 'file_exists', path: '/world/base/note.txt' },
           ],
           hints: [
             { level: 1, text: 'からっぽのファイルをつくるコマンドがあるよ。' },
             { level: 2, text: '「touch」のあとにファイル名を書くと、ファイルがつくれるよ。' },
-            { level: 3, text: '「touch 秘密基地/冒険ノート.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「touch base/note.txt」とにゅうりょくしてね。note は冒険ノートのことだよ。' },
           ],
           feedbacks: [
             { pattern: 'mkdir', message: 'mkdir はフォルダをつくるコマンドだよ。からっぽのファイルをつくるには、べつのコマンドをつかうよ。' },
@@ -584,7 +587,7 @@ export const storyK1: Story = {
       id: 'mission-k1-04',
       title: '宝物を集めよう',
       description:
-        'いろんな場所にある宝物を秘密基地の宝物庫にあつめよう！',
+        'いろんな場所にある宝物を base（秘密基地）の treasure（宝物庫）にあつめよう！',
       goal: 'cp でコピー、mv でいどうができるようになる',
       review: {
         question: 'ファイルをコピーするコマンドはどれかな？',
@@ -593,26 +596,26 @@ export const storyK1: Story = {
         explanation: 'cp はファイルをコピーするコマンドだよ。もとのファイルはそのままのこるよ。「copy」のりゃくだよ。',
       },
       narrative:
-        '冒険の世界にはたからものがいっぱい！魔法の森にある宝石をコピーして、古いお城にある伝説の剣を秘密基地の宝物庫にうつそう。',
-      initialCwd: '/冒険の世界',
+        '冒険の世界にはたからものがいっぱい！forest（もり）にある gem.txt（宝石）をコピーして、castle（お城）にある sword.txt（伝説の剣）を base/treasure（秘密基地の宝物庫）にうつそう。',
+      initialCwd: '/world',
       initialFS: mission4FS,
       newCommands: ['cp', 'mv'],
       objectives: [
         {
           id: 'obj-k1-04-01',
-          description: '光る宝石を秘密基地の宝物庫にコピーしよう',
+          description: 'gem.txt（宝石）を base/treasure（宝物庫）にコピーしよう',
           checks: [
             {
               type: 'file_exists',
-              path: '/冒険の世界/秘密基地/宝物庫/光る宝石.txt',
+              path: '/world/base/treasure/gem.txt',
             },
           ],
           hints: [
             { level: 1, text: 'ファイルをコピーするコマンドがあるよ。' },
-            { level: 2, text: '「cp」のあとに「もとのファイル」「コピーさき」を書くよ。もとのファイルは「魔法の森/光る宝石.txt」で、コピーさきは「秘密基地/宝物庫/」だよ。' },
+            { level: 2, text: '「cp」のあとに「もとのファイル」「コピーさき」を書くよ。もとのファイルは「forest/gem.txt」で、コピーさきは「base/treasure/」だよ。' },
             {
               level: 3,
-              text: '「cp 魔法の森/光る宝石.txt 秘密基地/宝物庫/光る宝石.txt」とにゅうりょくしてね。',
+              text: '「cp forest/gem.txt base/treasure/gem.txt」とにゅうりょくしてね。gem は宝石のことだよ。',
             },
           ],
           feedbacks: [
@@ -623,11 +626,11 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-04-02',
-          description: '伝説の剣を秘密基地の宝物庫にうつそう',
+          description: 'sword.txt（伝説の剣）を base/treasure（宝物庫）にうつそう',
           checks: [
             {
               type: 'file_exists',
-              path: '/冒険の世界/秘密基地/宝物庫/伝説の剣.txt',
+              path: '/world/base/treasure/sword.txt',
             },
           ],
           hints: [
@@ -635,7 +638,7 @@ export const storyK1: Story = {
             { level: 2, text: '「mv」のあとに「もとのファイル」「うつしさき」を書くよ。コピーとちがって、もとのファイルはなくなるよ。' },
             {
               level: 3,
-              text: '「mv 古いお城/宝物庫/伝説の剣.txt 秘密基地/宝物庫/伝説の剣.txt」とにゅうりょくしてね。',
+              text: '「mv castle/treasure/sword.txt base/treasure/sword.txt」とにゅうりょくしてね。sword は剣のことだよ。',
             },
           ],
           feedbacks: [
@@ -651,7 +654,7 @@ export const storyK1: Story = {
       id: 'mission-k1-05',
       title: 'トラップを片付けよう',
       description:
-        'ひみつの洞窟にしかけられたトラップを見つけて、かたづけよう！',
+        'cave（ひみつの洞窟）にしかけられたトラップを見つけて、かたづけよう！',
       goal: 'find でファイルをさがし、rm でけせるようになる',
       review: {
         question: 'ファイルをけすコマンドはどれかな？',
@@ -660,21 +663,24 @@ export const storyK1: Story = {
         explanation: 'rm はファイルをけすコマンドだよ。「remove」のりゃくだよ。けしたファイルはもとにもどせないから、きをつけてつかおうね。',
       },
       narrative:
-        'ひみつの洞窟にはトラップがしかけてある！まずはトラップがどこにあるか見つけて、ぜんぶかたづけよう。そうすれば安全にたからものがとれるよ。',
-      initialCwd: '/冒険の世界/ひみつの洞窟',
+        'cave（ひみつの洞窟）にはトラップがしかけてある！まずはトラップがどこにあるか見つけて、ぜんぶかたづけよう。そうすれば安全にたからものがとれるよ。',
+      initialCwd: '/world/cave',
       initialFS: mission5FS,
       newCommands: ['rm', 'find'],
       objectives: [
         {
           id: 'obj-k1-05-01',
           description: 'find コマンドでトラップをさがそう',
-          checks: [{ type: 'output_contains', pattern: 'トラップ' }],
+          checks: [
+            { type: 'command_executed', command: 'find' },
+            { type: 'output_contains', pattern: 'trap' },
+          ],
           hints: [
             { level: 1, text: 'ファイルをさがすコマンドがあるよ。' },
             { level: 2, text: '「find」コマンドで名前をしていしてさがせるよ。-name のあとにさがしたい名前を書くよ。' },
             {
               level: 3,
-              text: '「find . -name トラップ*」とにゅうりょくしてね。* は「なんでもOK」というマークで、「トラップ」ではじまるファイルをぜんぶさがすよ。',
+              text: '「find . -name trap*」とにゅうりょくしてね。trap はトラップのことだよ。* は「なんでもOK」というマークで、trap ではじまるファイルをぜんぶさがすよ。',
             },
           ],
           feedbacks: [
@@ -685,17 +691,17 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-05-02',
-          description: 'トラップ1をけそう',
+          description: 'trap1.txt（トラップ1）をけそう',
           checks: [
             {
               type: 'file_not_exists',
-              path: '/冒険の世界/ひみつの洞窟/トラップ1.txt',
+              path: '/world/cave/trap1.txt',
             },
           ],
           hints: [
             { level: 1, text: 'ファイルをけすコマンドがあるよ。' },
             { level: 2, text: '「rm」のあとにけしたいファイル名を書くよ。' },
-            { level: 3, text: '「rm トラップ1.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「rm trap1.txt」とにゅうりょくしてね。trap はトラップのことだよ。' },
           ],
           feedbacks: [
             { pattern: 'mv', message: 'mv はファイルをいどうするコマンドだよ。ファイルをけすには、べつのコマンドをつかうよ。' },
@@ -704,17 +710,17 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-05-03',
-          description: 'トラップ2をけそう',
+          description: 'trap2.txt（トラップ2）をけそう',
           checks: [
             {
               type: 'file_not_exists',
-              path: '/冒険の世界/ひみつの洞窟/トラップ2.txt',
+              path: '/world/cave/trap2.txt',
             },
           ],
           hints: [
             { level: 1, text: 'さっきとおなじようにけしてみよう。' },
             { level: 2, text: '「rm」コマンドをつかおう。' },
-            { level: 3, text: '「rm トラップ2.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「rm trap2.txt」とにゅうりょくしてね。' },
           ],
           feedbacks: [
             { pattern: 'mv', message: 'mv はいどうするコマンドだよ。けすには、さっきとおなじコマンドをつかおう。' },
@@ -722,17 +728,17 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-05-04',
-          description: '奥の部屋のトラップ3もけそう',
+          description: 'back-room（奥の部屋）の trap3.txt もけそう',
           checks: [
             {
               type: 'file_not_exists',
-              path: '/冒険の世界/ひみつの洞窟/奥の部屋/トラップ3.txt',
+              path: '/world/cave/back-room/trap3.txt',
             },
           ],
           hints: [
-            { level: 1, text: '奥の部屋の中にあるファイルもけせるよ。' },
+            { level: 1, text: '奥の部屋（back-room）の中にあるファイルもけせるよ。' },
             { level: 2, text: 'パスを指定すればべつのフォルダの中のファイルもけせるよ。' },
-            { level: 3, text: '「rm 奥の部屋/トラップ3.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「rm back-room/trap3.txt」とにゅうりょくしてね。back-room は奥の部屋のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'cd', message: 'cd でいどうしなくても、パスをしていすればべつのフォルダの中のファイルもけせるよ。' },
@@ -745,7 +751,7 @@ export const storyK1: Story = {
       id: 'mission-k1-06',
       title: '暗号を解読しよう',
       description:
-        '暗号文から手がかりをさがして、けっかを書きのこそう！',
+        'cipher.txt（暗号文）から手がかりをさがして、けっかを書きのこそう！',
       goal: 'grep でことばをさがし、echo でファイルに書きこめるようになる',
       review: {
         question: 'ファイルの中からことばをさがすコマンドはどれかな？',
@@ -754,19 +760,22 @@ export const storyK1: Story = {
         explanation: 'grep はファイルの中からことばをさがすコマンドだよ。find がファイルの「名前」をさがすのにたいして、grep はファイルの「中身」をさがすよ。',
       },
       narrative:
-        '洞窟のおくで暗号文を見つけた！この中に「魔法」というキーワードがかくれているらしい。さがしだして、わかったことを書きのこそう。',
-      initialCwd: '/冒険の世界/ひみつの洞窟',
+        '洞窟のおくで cipher.txt（暗号文）を見つけた！この中に「魔法」というキーワードがかくれているらしい。さがしだして、わかったことを decoded.txt（解読結果）に書きのこそう。',
+      initialCwd: '/world/cave',
       initialFS: mission6FS,
       newCommands: ['grep', 'echo'],
       objectives: [
         {
           id: 'obj-k1-06-01',
-          description: '暗号文から「魔法」という言葉をさがそう',
-          checks: [{ type: 'output_contains', pattern: '魔法' }],
+          description: 'cipher.txt（暗号文）から「魔法」という言葉をさがそう',
+          checks: [
+            { type: 'command_executed', command: 'grep' },
+            { type: 'output_contains', pattern: '魔法' },
+          ],
           hints: [
             { level: 1, text: 'ファイルの中からことばをさがすコマンドがあるよ。' },
             { level: 2, text: '「grep」のあとにさがしたいことばとファイル名を書くよ。' },
-            { level: 3, text: '「grep 魔法 暗号文.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「grep 魔法 cipher.txt」とにゅうりょくしてね。cipher は暗号文のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'cat', message: 'cat はファイルのぜんぶを読むコマンドだよ。とくていのことばだけさがすには、べつのコマンドをつかうよ。' },
@@ -775,11 +784,11 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-06-02',
-          description: 'かいどくけっかをファイルに書こう',
+          description: 'grep で見つけた内容を echo と > で decoded.txt に書こう',
           checks: [
             {
               type: 'file_exists',
-              path: '/冒険の世界/ひみつの洞窟/解読結果.txt',
+              path: '/world/cave/decoded.txt',
             },
           ],
           hints: [
@@ -787,7 +796,7 @@ export const storyK1: Story = {
             { level: 2, text: '「echo」のあとに書きたいもじを「"」で囲んで、「>」のあとにファイル名を書くよ。「>」は「ファイルに書きこむ」というマークだよ。' },
             {
               level: 3,
-              text: '「echo "魔法使いが宝の地図をくれた" > 解読結果.txt」とにゅうりょくしてね。',
+              text: '「echo "魔法使いが宝の地図をくれた" > decoded.txt」とにゅうりょくしてね。decoded は解読結果のことだよ。',
             },
           ],
           feedbacks: [
@@ -802,7 +811,7 @@ export const storyK1: Story = {
       id: 'mission-k1-07',
       title: '古い書物を読もう',
       description:
-        'ながい魔法の書の最初と最後をかくにんして、何ページあるかかぞえよう！',
+        'ながい spellbook.txt（魔法の書）の最初と最後をかくにんして、何ページあるかかぞえよう！',
       goal: 'head と tail でファイルの一部を読み、wc で行数をかぞえられるようになる',
       review: {
         question: 'ファイルのさいしょの方だけ読むコマンドはどれかな？',
@@ -811,19 +820,19 @@ export const storyK1: Story = {
         explanation: 'head はファイルのさいしょの方だけひょうじするコマンドだよ。さいごの方を見るには tail をつかうよ。',
       },
       narrative:
-        '古いお城の図書室で、ぶあつい魔法の書を見つけた！ぜんぶ読むのは大変だから、最初と最後だけ読んで、ページ数もかくにんしよう。',
-      initialCwd: '/冒険の世界/古いお城/図書室',
+        'castle（古いお城）の library（図書室）で、ぶあつい spellbook.txt（魔法の書）を見つけた！ぜんぶ読むのは大変だから、最初と最後だけ読んで、ページ数もかくにんしよう。',
+      initialCwd: '/world/castle/library',
       initialFS: mission7FS,
       newCommands: ['head', 'tail', 'wc'],
       objectives: [
         {
           id: 'obj-k1-07-01',
-          description: '魔法の書のさいしょの部分を読もう',
+          description: 'spellbook.txt（魔法の書）のさいしょの部分を読もう',
           checks: [{ type: 'command_executed', command: 'head' }],
           hints: [
             { level: 1, text: 'ファイルのさいしょだけ読むコマンドがあるよ。' },
             { level: 2, text: '「head」コマンドをつかうと、ファイルのさいしょの方だけ見られるよ。' },
-            { level: 3, text: '「head 魔法の書.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「head spellbook.txt」とにゅうりょくしてね。spellbook は魔法の書のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'cat', message: 'cat はファイルのぜんぶをひょうじするよ。さいしょの方だけ見るには、べつのコマンドをつかうよ。' },
@@ -832,12 +841,12 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-07-02',
-          description: '魔法の書のさいごの部分を読もう',
+          description: 'spellbook.txt（魔法の書）のさいごの部分を読もう',
           checks: [{ type: 'command_executed', command: 'tail' }],
           hints: [
             { level: 1, text: 'ファイルのさいごだけ読むコマンドがあるよ。' },
             { level: 2, text: '「tail」コマンドをつかうと、ファイルのさいごの方だけ見られるよ。' },
-            { level: 3, text: '「tail 魔法の書.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「tail spellbook.txt」とにゅうりょくしてね。spellbook は魔法の書のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'cat', message: 'cat はファイルのぜんぶをひょうじするよ。さいごの方だけ見るには、べつのコマンドをつかうよ。' },
@@ -846,7 +855,7 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-07-03',
-          description: '魔法の書が何行あるかかぞえよう',
+          description: 'spellbook.txt（魔法の書）が何行あるかかぞえよう',
           checks: [
             { type: 'command_executed', command: 'wc' },
             { type: 'output_contains', pattern: '21' },
@@ -854,7 +863,7 @@ export const storyK1: Story = {
           hints: [
             { level: 1, text: 'ファイルの行数をかぞえるコマンドがあるよ。' },
             { level: 2, text: '「wc」コマンドをつかうと、行の数がわかるよ。' },
-            { level: 3, text: '「wc 魔法の書.txt」とにゅうりょくしてね。' },
+            { level: 3, text: '「wc spellbook.txt」とにゅうりょくしてね。spellbook は魔法の書のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'cat', message: 'cat はファイルの中身をひょうじするよ。行の数をかぞえるには、べつのコマンドをつかうよ。' },
@@ -869,7 +878,7 @@ export const storyK1: Story = {
       id: 'mission-k1-08',
       title: '仲間リストを整理しよう',
       description:
-        '冒険者の名簿をきれいに整理しよう！',
+        'party.csv（冒険者の名簿）をきれいに整理しよう！',
       goal: 'sort、uniq、cut をつかってデータを整理できるようになる',
       review: {
         question: 'おなじ行をまとめてくれるコマンドはどれかな？',
@@ -878,8 +887,8 @@ export const storyK1: Story = {
         explanation: 'uniq はとなりあうおなじ行をまとめるコマンドだよ。sort でならべてから uniq をつかうと、ぜんぶのおなじ行をまとめられるよ。',
       },
       narrative:
-        '古いお城で冒険者の名簿を見つけた。でも同じ名前が何回も書いてある。きれいに整理して、どんな職業の仲間がいるか調べよう。',
-      initialCwd: '/冒険の世界/古いお城',
+        'castle（古いお城）で party.csv（冒険者の名簿）を見つけた。でも同じ名前が何回も書いてある。きれいに整理して、どんな職業の仲間がいるか調べよう。',
+      initialCwd: '/world/castle',
       initialFS: mission8FS,
       newCommands: ['sort', 'uniq', 'cut'],
       objectives: [
@@ -890,7 +899,7 @@ export const storyK1: Story = {
           hints: [
             { level: 1, text: 'ならびかえるコマンドがあるよ。' },
             { level: 2, text: '「sort」コマンドで行をじゅんばんにできるよ。' },
-            { level: 3, text: '「sort 冒険者名簿.csv」とにゅうりょくしてね。' },
+            { level: 3, text: '「sort party.csv」とにゅうりょくしてね。party は冒険者名簿のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'cat', message: 'cat はファイルをそのままひょうじするよ。じゅんばんにならべるには、べつのコマンドをつかうよ。' },
@@ -904,7 +913,7 @@ export const storyK1: Story = {
           hints: [
             { level: 1, text: 'おなじものをまとめるコマンドがあるよ。パイプ「|」もつかってみよう。' },
             { level: 2, text: '「sort」したあとに「|」（パイプ）で「uniq」につなげると、おなじ行をまとめられるよ。「|」は「けっかをつぎのコマンドにわたす」マークだよ。' },
-            { level: 3, text: '「sort 冒険者名簿.csv | uniq」とにゅうりょくしてね。' },
+            { level: 3, text: '「sort party.csv | uniq」とにゅうりょくしてね。' },
           ],
           feedbacks: [
             { pattern: 'grep', message: 'grep はことばをさがすコマンドだよ。おなじ行をまとめるには、べつのコマンドをつかうよ。' },
@@ -914,13 +923,16 @@ export const storyK1: Story = {
         {
           id: 'obj-k1-08-03',
           description: '名簿の2番目（職業）だけをとりだそう',
-          checks: [{ type: 'output_contains', pattern: '職業' }],
+          checks: [
+            { type: 'command_executed', command: 'cut' },
+            { type: 'output_contains', pattern: '職業' },
+          ],
           hints: [
             { level: 1, text: 'とくていの部分だけきりだすコマンドがあるよ。' },
             { level: 2, text: '「cut」コマンドで「,」でくぎって2ばんめの部分をとりだせるよ。' },
             {
               level: 3,
-              text: '「cut -d, -f2 冒険者名簿.csv」とにゅうりょくしてね。',
+              text: '「cut -d, -f2 party.csv」とにゅうりょくしてね。party は冒険者名簿のことだよ。',
             },
           ],
           feedbacks: [
@@ -935,7 +947,7 @@ export const storyK1: Story = {
       id: 'mission-k1-09',
       title: '封印を解こう',
       description:
-        'ふういんされた呪文をとけるようにして、魔法をつかおう！',
+        'ふういんされた seal.sh（呪文）をとけるようにして、魔法をつかおう！',
       goal: 'chmod でけんげんをかえ、パイプで grep をつなげられるようになる',
       review: {
         question: 'ファイルのけんげん（つかえるかどうか）をかえるコマンドはどれかな？',
@@ -944,19 +956,19 @@ export const storyK1: Story = {
         explanation: 'chmod はファイルのけんげん（パーミッション）をかえるコマンドだよ。「change mode」のりゃくだよ。',
       },
       narrative:
-        '古いお城のおくで、ふういんされた呪文を見つけた！ふういんを解いて実行できるようにしよう。そして魔法の石の中から「光の魔法」をさがしだそう。',
-      initialCwd: '/冒険の世界/古いお城',
+        'castle（古いお城）のおくで、ふういんされた seal.sh（封印の呪文）を見つけた！ふういんを解いて実行できるようにしよう。そして stone.txt（魔法の石）の中から「光の魔法」をさがしだそう。',
+      initialCwd: '/world/castle',
       initialFS: mission9FS,
       newCommands: ['chmod'],
       objectives: [
         {
           id: 'obj-k1-09-01',
-          description: '封印の呪文のふういんを解こう',
+          description: 'seal.sh（封印の呪文）のふういんを解こう',
           checks: [{ type: 'command_executed', command: 'chmod' }],
           hints: [
             { level: 1, text: 'ファイルのけんげん（つかえるかどうか）をかえるコマンドがあるよ。' },
             { level: 2, text: '「chmod」コマンドで「+x」をつけると、実行できるようになるよ。' },
-            { level: 3, text: '「chmod +x 封印の呪文.sh」とにゅうりょくしてね。' },
+            { level: 3, text: '「chmod +x seal.sh」とにゅうりょくしてね。seal は封印の呪文のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。ふういんを解く（けんげんをかえる）には、べつのコマンドをつかうよ。' },
@@ -965,12 +977,15 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-09-02',
-          description: '魔法の石から「光」の魔法をさがそう',
-          checks: [{ type: 'output_contains', pattern: '光の魔法' }],
+          description: 'stone.txt（魔法の石）から「光」の魔法をさがそう',
+          checks: [
+            { type: 'command_executed', command: 'grep' },
+            { type: 'output_contains', pattern: '光の魔法' },
+          ],
           hints: [
             { level: 1, text: 'パイプ「|」をつかって、コマンドをつなげてみよう。' },
             { level: 2, text: '「cat」でファイルを読んで、「|」で「grep」につなげると、ほしい行だけとりだせるよ。' },
-            { level: 3, text: '「cat 魔法の石.txt | grep 光」とにゅうりょくしてね。' },
+            { level: 3, text: '「cat stone.txt | grep 光」とにゅうりょくしてね。stone は魔法の石のことだよ。' },
           ],
           feedbacks: [
             { pattern: 'find', message: 'find はファイルの名前をさがすコマンドだよ。ファイルの中身からさがすには、grep をつかうよ。パイプ「|」でつなげてみよう。' },
@@ -992,8 +1007,8 @@ export const storyK1: Story = {
         explanation: 'git log はいままでのへんこうのきろく（コミット）をひょうじするコマンドだよ。git status はいまのじょうたいをたしかめるコマンドだよ。',
       },
       narrative:
-        '秘密基地にもどってきた。冒険のきろくがgitでのこしてある。いままでの冒険をふりかえってみよう！',
-      initialCwd: '/冒険の世界/秘密基地',
+        'base（秘密基地）にもどってきた。冒険のきろくがgitでのこしてある。いままでの冒険をふりかえってみよう！',
+      initialCwd: '/world/base',
       initialFS: mission10FS,
       newCommands: ['git'],
       objectives: [

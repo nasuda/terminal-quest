@@ -401,7 +401,10 @@ export const story07: Story = {
         {
           id: 'obj-07-03-03',
           description: 'src \u304C\u6B8B\u3063\u3066\u3044\u308B\u3053\u3068\u3092\u78BA\u8A8D\u3059\u308B',
-          checks: [{ type: 'output_contains', pattern: 'main.ts' }],
+          checks: [
+            { type: 'command_executed', command: 'ls' },
+            { type: 'output_contains', pattern: 'main.ts' },
+          ],
           hints: [
             { level: 1, text: '\u30BD\u30FC\u30B9\u30B3\u30FC\u30C9\u304C\u7121\u4E8B\u306B\u6B8B\u3063\u3066\u3044\u308B\u304B\u78BA\u8A8D\u3057\u307E\u3057\u3087\u3046\u3002' },
             { level: 2, text: 'ls \u30B3\u30DE\u30F3\u30C9\u3067 src \u30C7\u30A3\u30EC\u30AF\u30C8\u30EA\u306E\u4E2D\u8EAB\u3092\u78BA\u8A8D\u3057\u307E\u3057\u3087\u3046\u3002' },
@@ -462,7 +465,10 @@ export const story07: Story = {
         {
           id: 'obj-07-04-03',
           description: 'error.log \u3092\u6B8B\u3057\u3066\u3044\u308B\u3053\u3068\u3092\u78BA\u8A8D\u3059\u308B',
-          checks: [{ type: 'output_contains', pattern: 'error.log' }],
+          checks: [
+            { type: 'command_executed', command: 'ls' },
+            { type: 'output_contains', pattern: 'error.log' },
+          ],
           hints: [
             { level: 1, text: '\u6B8B\u3059\u3079\u304D\u30D5\u30A1\u30A4\u30EB\u304C\u7121\u4E8B\u306B\u6B8B\u3063\u3066\u3044\u308B\u304B\u78BA\u8A8D\u3057\u307E\u3057\u3087\u3046\u3002' },
             { level: 2, text: 'ls \u30B3\u30DE\u30F3\u30C9\u3067\u73FE\u5728\u306E\u30D5\u30A1\u30A4\u30EB\u4E00\u89A7\u3092\u8868\u793A\u3057\u307E\u3057\u3087\u3046\u3002' },

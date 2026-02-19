@@ -35,10 +35,16 @@ export function checkMissionFeedback(
   input: string,
   feedbacks: Array<{ pattern: string; message: string }>
 ): string | null {
-  const cmd = input.split(/\s+/)[0];
   for (const fb of feedbacks) {
-    if (cmd === fb.pattern || input.startsWith(fb.pattern)) {
-      return fb.message;
+    try {
+      if (new RegExp(fb.pattern).test(input)) {
+        return fb.message;
+      }
+    } catch {
+      // Fallback to simple matching if invalid regex
+      if (input === fb.pattern || input.startsWith(fb.pattern)) {
+        return fb.message;
+      }
     }
   }
   return null;

@@ -22,6 +22,7 @@ const courseConfig = [
 export function StorySelectScreen({ progress, onNavigate, onResetStory }: StorySelectScreenProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [subMenu, setSubMenu] = useState<{ storyId: string; selectedOption: number } | null>(null);
+  const [lockedMessage, setLockedMessage] = useState<string | null>(null);
 
   const groupedStories = useMemo(() => {
     const groups: Array<{ type: 'header'; label: string } | { type: 'story'; story: typeof stories[number]; flatIndex: number }> = [];
@@ -101,7 +102,15 @@ export function StorySelectScreen({ progress, onNavigate, onResetStory }: StoryS
 
       const story = storyItem.story;
       const unlocked = isStoryUnlocked(progress, story.id, stories);
-      if (!unlocked) return;
+      if (!unlocked) {
+        const reqNames = story.unlockRequires
+          .map(reqId => stories.find(s => s.id === reqId))
+          .filter(Boolean)
+          .map(s => `「${s!.title}」`);
+        setLockedMessage(`🔒 ${reqNames.join(' と ')} をクリアすると解放されます`);
+        return;
+      }
+      setLockedMessage(null);
 
       const storyProg = progress.storyProgress[story.id];
       if (storyProg && storyProg.completedMissions.length > 0) {
@@ -179,9 +188,15 @@ export function StorySelectScreen({ progress, onNavigate, onResetStory }: StoryS
         <MenuItem label="← タイトルに戻る" isSelected={!subMenu && selectedIndex === totalStories} />
       </Box>
 
+      {lockedMessage && (
+        <Box marginTop={1}>
+          <Text color={colors.warning}>{lockedMessage}</Text>
+        </Box>
+      )}
+
       <Box marginTop={1}>
         <Text color={colors.muted}>
-          {subMenu ? '↑↓で選択、Enterで決定、Escで戻る' : '↑↓で選択、Enterで決定、Escで戻る'}
+          ↑↓で選択、Enterで決定、Escで戻る
         </Text>
       </Box>
     </Box>

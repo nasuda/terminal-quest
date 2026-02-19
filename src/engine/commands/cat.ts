@@ -2,8 +2,21 @@ import { VirtualFS } from '../VirtualFS.js';
 import type { CommandResult } from './index.js';
 
 export function cat(fs: VirtualFS, args: string[]): CommandResult {
-  if (args.length === 0) {
+  // Extract stdin
+  let stdin: string | undefined;
+  const stdinIdx = args.findIndex(a => a.startsWith('__stdin__:'));
+  if (stdinIdx !== -1) {
+    stdin = args[stdinIdx].slice('__stdin__:'.length);
+    args = [...args.slice(0, stdinIdx), ...args.slice(stdinIdx + 1)];
+  }
+
+  if (args.length === 0 && stdin == null) {
     return { output: '', error: 'cat: missing file operand' };
+  }
+
+  // If stdin and no file args, pass through stdin (pipe usage)
+  if (args.length === 0 && stdin != null) {
+    return { output: stdin };
   }
 
   const outputs: string[] = [];

@@ -16,18 +16,22 @@ const HELP_TEXT = `使用可能なコマンド:
   head [-n N] file             先頭N行を表示
   tail [-n N] file             末尾N行を表示
   wc [-l] [-w] [-c] file       行数/単語数/バイト数
-  sort [-r] [-n] file          ソート
+  sort [-r] [-n] [-t delim] [-k N] file  ソート
   uniq [-c] file               重複除去
   cut -d delim -f N file       フィールド切り出し
   chmod mode file              権限変更
   echo text [> file]           テキスト出力/ファイル書き込み
   git <subcmd>                 Gitコマンド (status/log/diff/branch/checkout/merge/stash)
+  man [command]                コマンドの詳しい使い方を表示
   clear                        画面クリア
   help                         このヘルプを表示
-  hint                         ヒントを表示
-  objectives / obj             現在の目標を表示
 
-  ヒント: コマンドは | (パイプ) で繋げられます
+ゲーム内コマンド:
+  hint                         ヒントを表示 (Ctrl+H でも可)
+  objectives / obj             現在の目標を表示
+  cmds                         このミッションの新しいコマンドを表示
+
+ヒント: コマンドは | (パイプ) で繋げられます
   例: cat file.txt | grep ERROR | wc -l`;
 
 export function help(_fs: VirtualFS, _args: string[]): CommandResult {

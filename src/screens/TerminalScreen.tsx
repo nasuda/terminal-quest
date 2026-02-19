@@ -207,15 +207,21 @@ export function TerminalScreen({
         }
       }
 
-      const parts = trimmed.split(/\s+/);
-      const cmd = parts[0];
-      const args = parts.slice(1);
+      // Parse all commands in pipe chain for objective checking
+      const pipeSegments = trimmed.split('|').map(s => s.trim()).filter(s => s);
+      let allNewlyCompleted: string[] = [];
+      for (const segment of pipeSegments) {
+        const parts = segment.split(/\s+/);
+        const cmd = parts[0];
+        const args = parts.slice(1);
+        const newlyCompleted = missionEngine.checkObjectives(cmd, args, result.output);
+        allNewlyCompleted.push(...newlyCompleted);
+      }
 
-      const newlyCompleted = missionEngine.checkObjectives(cmd, args, result.output);
-      if (newlyCompleted.length > 0) {
-        setCompletedObjectives(prev => [...prev, ...newlyCompleted]);
+      if (allNewlyCompleted.length > 0) {
+        setCompletedObjectives(prev => [...prev, ...allNewlyCompleted]);
 
-        for (const objId of newlyCompleted) {
+        for (const objId of allNewlyCompleted) {
           const obj = mission.objectives.find(o => o.id === objId);
           if (obj) {
             setOutputLines(prev => [

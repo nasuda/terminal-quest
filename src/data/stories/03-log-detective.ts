@@ -238,7 +238,10 @@ export const story03: Story = {
         {
           id: 'obj-03-02-02',
           description: '500 エラーが何件あるか数えて表示する',
-          checks: [{ type: 'output_contains', pattern: '5' }],
+          checks: [
+            { type: 'command_executed', command: 'wc' },
+            { type: 'output_contains', pattern: '5' },
+          ],
           hints: [
             { level: 1, text: 'grep の結果をさらに別のコマンドに渡して行数を数えられます。| （パイプ）という記号でコマンドをつなぎます。' },
             { level: 2, text: 'grep の結果を wc -l にパイプで渡すと行数を数えられます。' },

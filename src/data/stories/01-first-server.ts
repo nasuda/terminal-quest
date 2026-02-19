@@ -300,7 +300,10 @@ export const story01: Story = {
         {
           id: 'obj-01-02-03',
           description: '/etc/app/config.json の内容を表示する',
-          checks: [{ type: 'output_contains', pattern: 'port' }],
+          checks: [
+            { type: 'command_executed', command: 'cat' },
+            { type: 'output_contains', pattern: 'port' },
+          ],
           hints: [
             { level: 1, text: 'ファイルの内容を表示するコマンドがあります。' },
             { level: 2, text: '猫の鳴き声に似た3文字のコマンドです。パスを指定しましょう。' },

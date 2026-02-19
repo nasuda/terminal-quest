@@ -10,19 +10,19 @@ const mission1FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            '写真': {
+            'photos': {
               type: 'directory',
               children: {},
             },
-            '音楽': {
+            'music': {
               type: 'directory',
               children: {},
             },
-            'メモ': {
+            'memo': {
               type: 'directory',
               children: {},
             },
-            'ようこそ.txt': {
+            'welcome.txt': {
               type: 'file',
               content: 'はじめまして！これはあなたの新しいパソコンです。\nまずは、今いる場所を確認してみましょう。\n',
             },
@@ -43,26 +43,26 @@ const mission2FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            '写真': {
+            'photos': {
               type: 'directory',
               children: {
-                '旅行の写真.txt': {
+                'travel-photo.txt': {
                   type: 'file',
                   content: '海辺で撮った写真です。とてもきれいでした。\n',
                 },
               },
             },
-            '音楽': {
+            'music': {
               type: 'directory',
               children: {
-                'お気に入り.txt': {
+                'favorites.txt': {
                   type: 'file',
                   content: '1. 夏の思い出\n2. 星空のメロディー\n3. 雨の日の歌\n',
                 },
-                'プレイリスト': {
+                'playlist': {
                   type: 'directory',
                   children: {
-                    'ドライブ用.txt': {
+                    'driving.txt': {
                       type: 'file',
                       content: 'アップテンポな曲を集めました！\n',
                     },
@@ -70,10 +70,10 @@ const mission2FS: FSNode = {
                 },
               },
             },
-            'レシピ': {
+            'recipes': {
               type: 'directory',
               children: {
-                'カレー.txt': {
+                'curry.txt': {
                   type: 'file',
                   content: '材料: じゃがいも、にんじん、たまねぎ、お肉\n作り方: 野菜を切って煮込む\n',
                 },
@@ -96,14 +96,14 @@ const mission3FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            '写真': {
+            'photos': {
               type: 'directory',
               children: {
-                '海の写真.txt': {
+                'sea.txt': {
                   type: 'file',
                   content: '青い海と白い砂浜の写真です。\n',
                 },
-                '山の写真.txt': {
+                'mountain.txt': {
                   type: 'file',
                   content: '紅葉がきれいな山の写真です。\n',
                 },
@@ -126,29 +126,29 @@ const mission4FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            '写真': {
+            'photos': {
               type: 'directory',
               children: {
-                '旅行': {
+                'travel': {
                   type: 'directory',
                   children: {},
                 },
-                'ペット': {
+                'pets': {
                   type: 'directory',
                   children: {},
                 },
               },
             },
-            'メモ': {
+            'memo': {
               type: 'directory',
               children: {
-                '買い物リスト.txt': {
+                'shopping.txt': {
                   type: 'file',
                   content: '牛乳、パン、たまご\n',
                 },
               },
             },
-            '大事なメモ.txt': {
+            'important.txt': {
               type: 'file',
               content: '明日の会議は10時から。\n',
             },
@@ -169,49 +169,49 @@ const mission5FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            'メモ': {
+            'memo': {
               type: 'directory',
               children: {
-                '買い物リスト.txt': {
+                'shopping.txt': {
                   type: 'file',
                   content: '牛乳、パン、たまご\n',
                 },
-                'やることリスト.txt': {
+                'todo.txt': {
                   type: 'file',
                   content: '1. 掃除\n2. 買い物\n3. 料理\n',
                 },
-                '古いメモ.tmp': {
+                'old-memo.tmp': {
                   type: 'file',
                   content: '一時ファイルです。\n',
                 },
               },
             },
-            '写真': {
+            'photos': {
               type: 'directory',
               children: {
-                '旅行': {
+                'travel': {
                   type: 'directory',
                   children: {
-                    'おもいで.txt': {
+                    'memories.txt': {
                       type: 'file',
                       content: '楽しい旅行の思い出です。\n',
                     },
                   },
                 },
-                'ゴミ.tmp': {
+                'junk.tmp': {
                   type: 'file',
                   content: '不要な一時ファイルです。\n',
                 },
               },
             },
-            'レシピ': {
+            'recipes': {
               type: 'directory',
               children: {
-                'カレー.txt': {
+                'curry.txt': {
                   type: 'file',
                   content: '材料: じゃがいも、にんじん、たまねぎ、お肉\n作り方: 野菜を切って煮込む\n',
                 },
-                '一時ファイル.tmp': {
+                'temp.tmp': {
                   type: 'file',
                   content: '不要な一時ファイルです。\n',
                 },
@@ -234,7 +234,7 @@ const mission6FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            '日記': {
+            'diary': {
               type: 'directory',
               children: {
                 '2024-01-15.txt': {
@@ -291,7 +291,7 @@ const mission7FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            'レポート.txt': {
+            'report.txt': {
               type: 'file',
               content: reportContent,
             },
@@ -324,7 +324,7 @@ const mission8FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            '連絡先.csv': {
+            'contacts.csv': {
               type: 'file',
               content: contactsCSV,
             },
@@ -345,24 +345,24 @@ const mission9FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            '共有フォルダ': {
+            'shared': {
               type: 'directory',
               children: {
-                'レポート.txt': {
+                'report.txt': {
                   type: 'file',
                   content: 'チームの月次レポートです。\n',
                 },
-                '集計スクリプト.sh': {
+                'count.sh': {
                   type: 'file',
                   content: '#!/bin/bash\necho "集計完了！"\n',
                   permissions: '-rw-r--r--',
                 },
               },
             },
-            'メモ': {
+            'memo': {
               type: 'directory',
               children: {
-                'やることリスト.txt': {
+                'todo.txt': {
                   type: 'file',
                   content: '1. レポート提出\n2. 会議準備\n',
                 },
@@ -402,7 +402,7 @@ const gitStatusOutput10 = [
   '  (use "git add <file>..." to update what will be committed)',
   '  (use "git restore <file>..." to discard changes in working directory)',
   '',
-  '\tmodified:   月次レポート.txt',
+  '\tmodified:   monthly.txt',
   '',
   'no changes added to commit (use "git add" to track)',
 ].join('\n');
@@ -416,7 +416,7 @@ const mission10FS: FSNode = {
         watashi: {
           type: 'directory',
           children: {
-            'レポート': {
+            'reports': {
               type: 'directory',
               children: {
                 '.git': {
@@ -440,7 +440,7 @@ const mission10FS: FSNode = {
                     },
                   },
                 },
-                '月次レポート.txt': {
+                'monthly.txt': {
                   type: 'file',
                   content: '1月の活動報告\n- プロジェクトA: 順調に進行中\n- プロジェクトB: 来月開始予定\n',
                 },
@@ -514,29 +514,32 @@ export const story00: Story = {
         explanation: 'cd (Change Directory) は、別のフォルダに移動するコマンドです。',
       },
       narrative:
-        'パソコンの中には「写真」「音楽」「レシピ」などのフォルダがあるみたい。フォルダの中に移動して、どんなファイルがあるか見てみよう！',
+        'パソコンの中には photos（写真）、music（音楽）、recipes（レシピ）などのフォルダがあるみたい。フォルダの中に移動して、どんなファイルがあるか見てみよう！',
       initialCwd: '/home/watashi',
       initialFS: mission2FS,
       newCommands: ['cd', 'cat'],
       objectives: [
         {
           id: 'obj-00-02-01',
-          description: '音楽フォルダに移動しよう',
-          checks: [{ type: 'cwd_equals', path: '/home/watashi/音楽' }],
+          description: 'music（音楽）フォルダに移動しよう',
+          checks: [{ type: 'cwd_equals', path: '/home/watashi/music' }],
           hints: [
             { level: 1, text: 'フォルダを移動するコマンドがあります。' },
-            { level: 2, text: '「Change Directory」の略で、cd のあとに移動したいフォルダの名前を書きます。例えば cd 音楽 のように。' },
-            { level: 3, text: '「cd 音楽」と入力してEnterキーを押してみましょう。' },
+            { level: 2, text: '「Change Directory」の略で、cd のあとに移動したいフォルダの名前を書きます。例えば cd music のように。' },
+            { level: 3, text: '「cd music」と入力してEnterキーを押してみましょう。music は音楽フォルダのことです。' },
           ],
         },
         {
           id: 'obj-00-02-02',
-          description: 'お気に入り.txt の中身を読もう',
-          checks: [{ type: 'output_contains', pattern: '星空' }],
+          description: 'favorites.txt の中身を読もう',
+          checks: [
+            { type: 'command_executed', command: 'cat' },
+            { type: 'output_contains', pattern: '星空' },
+          ],
           hints: [
             { level: 1, text: 'ファイルの中身を画面に表示するコマンドがあります。' },
             { level: 2, text: '猫の鳴き声に似た3文字のコマンドです。' },
-            { level: 3, text: '「cat お気に入り.txt」と入力してみましょう。' },
+            { level: 3, text: '「cat favorites.txt」と入力してみましょう。favorites はお気に入りのことです。' },
           ],
         },
         {
@@ -564,42 +567,42 @@ export const story00: Story = {
         explanation: 'mkdir (Make Directory) は、新しいフォルダ（ディレクトリ）を作成するコマンドです。',
       },
       narrative:
-        '写真フォルダの中がごちゃごちゃしてきた。「旅行」や「ペット」のフォルダを作って、写真を整理しよう！',
-      initialCwd: '/home/watashi/写真',
+        'photos（写真）フォルダの中がごちゃごちゃしてきた。「travel」（旅行）や「pets」（ペット）のフォルダを作って、写真を整理しよう！',
+      initialCwd: '/home/watashi/photos',
       initialFS: mission3FS,
       newCommands: ['mkdir', 'touch'],
       objectives: [
         {
           id: 'obj-00-03-01',
-          description: '「旅行」フォルダを作ろう',
-          checks: [{ type: 'file_exists', path: '/home/watashi/写真/旅行' }],
+          description: '「travel」（旅行）フォルダを作ろう',
+          checks: [{ type: 'file_exists', path: '/home/watashi/photos/travel' }],
           hints: [
             { level: 1, text: '新しいフォルダを作るコマンドがあります。' },
             { level: 2, text: '「Make Directory」の略で、5文字のコマンドです。' },
-            { level: 3, text: '「mkdir 旅行」と入力してEnterキーを押してみましょう。' },
+            { level: 3, text: '「mkdir travel」と入力してEnterキーを押してみましょう。travel は旅行フォルダです。' },
           ],
         },
         {
           id: 'obj-00-03-02',
-          description: '「ペット」フォルダを作ろう',
-          checks: [{ type: 'file_exists', path: '/home/watashi/写真/ペット' }],
+          description: '「pets」（ペット）フォルダを作ろう',
+          checks: [{ type: 'file_exists', path: '/home/watashi/photos/pets' }],
           hints: [
             { level: 1, text: 'さっきと同じコマンドで、別の名前のフォルダを作りましょう。' },
             { level: 2, text: 'mkdir の後にフォルダ名を指定します。' },
-            { level: 3, text: '「mkdir ペット」と入力してみましょう。' },
+            { level: 3, text: '「mkdir pets」と入力してみましょう。pets はペットフォルダです。' },
           ],
         },
         {
           id: 'obj-00-03-03',
-          description: '旅行フォルダの中に「おもいで.txt」ファイルを作ろう',
-          checks: [{ type: 'file_exists', path: '/home/watashi/写真/旅行/おもいで.txt' }],
+          description: 'travel フォルダの中に「memories.txt」ファイルを作ろう',
+          checks: [{ type: 'file_exists', path: '/home/watashi/photos/travel/memories.txt' }],
           hints: [
             { level: 1, text: '空のファイルを作るコマンドがあります。' },
             { level: 2, text: 'touch コマンドでファイルを作れます。フォルダ名/ファイル名 のように書くと、フォルダの中にファイルを作れます。/ は「の中の」という意味です。' },
-            { level: 3, text: '「touch 旅行/おもいで.txt」と入力してみましょう。' },
+            { level: 3, text: '「touch travel/memories.txt」と入力してみましょう。memories は思い出のことです。' },
           ],
           feedbacks: [
-            { pattern: '^touch おもいで', message: '旅行フォルダの中に作りたいので、「旅行/おもいで.txt」のようにフォルダ名/ファイル名 で指定しましょう。' },
+            { pattern: '^touch memories', message: 'travel フォルダの中に作りたいので、「travel/memories.txt」のようにフォルダ名/ファイル名 で指定しましょう。' },
           ],
         },
       ],
@@ -617,32 +620,32 @@ export const story00: Story = {
         explanation: 'cp (Copy) は、ファイルやフォルダをコピーするコマンドです。mv は移動、rm は削除です。',
       },
       narrative:
-        'あれ？「大事なメモ.txt」がホームフォルダに置きっぱなしだ。これは「メモ」フォルダに入れるべきだよね。ファイルをコピーしたり移動したりして、きちんと整理しよう。',
+        'あれ？「important.txt」（大事なメモ）がホームフォルダに置きっぱなしだ。これは「memo」フォルダに入れるべきだよね。ファイルをコピーしたり移動したりして、きちんと整理しよう。',
       initialCwd: '/home/watashi',
       initialFS: mission4FS,
       newCommands: ['cp', 'mv'],
       objectives: [
         {
           id: 'obj-00-04-01',
-          description: '大事なメモ.txt をメモフォルダにコピーしよう',
-          checks: [{ type: 'file_exists', path: '/home/watashi/メモ/大事なメモ.txt' }],
+          description: 'important.txt を memo フォルダにコピーしよう',
+          checks: [{ type: 'file_exists', path: '/home/watashi/memo/important.txt' }],
           hints: [
             { level: 1, text: 'ファイルをコピーするコマンドがあります。' },
             { level: 2, text: '「Copy」の略で、2文字のコマンドです。cp のあとに「コピーしたいファイル名」「コピー先」の順に書きます。' },
-            { level: 3, text: '「cp 大事なメモ.txt メモ/大事なメモ.txt」と入力してみましょう。' },
+            { level: 3, text: '「cp important.txt memo/important.txt」と入力してみましょう。important は大事なメモのことです。' },
           ],
           feedbacks: [
-            { pattern: 'cp メモ/', message: '順番が逆かもしれません。cp のあとはまず「コピーしたいファイル」、次に「コピー先」を書きます。' },
+            { pattern: 'cp memo/', message: '順番が逆かもしれません。cp のあとはまず「コピーしたいファイル」、次に「コピー先」を書きます。' },
           ],
         },
         {
           id: 'obj-00-04-02',
-          description: 'ホームフォルダの大事なメモ.txt を片付けよう（移動または削除）',
-          checks: [{ type: 'file_not_exists', path: '/home/watashi/大事なメモ.txt' }],
+          description: 'ホームフォルダの important.txt を片付けよう（移動または削除）',
+          checks: [{ type: 'file_not_exists', path: '/home/watashi/important.txt' }],
           hints: [
             { level: 1, text: 'ファイルを移動するコマンドや、削除するコマンドがあります。' },
             { level: 2, text: 'mv コマンドで移動、rm コマンドで削除できます。もうコピー済みなので削除でもOKです。' },
-            { level: 3, text: '「rm 大事なメモ.txt」と入力してみましょう。' },
+            { level: 3, text: '「rm important.txt」と入力してみましょう。' },
           ],
         },
       ],
@@ -668,7 +671,10 @@ export const story00: Story = {
         {
           id: 'obj-00-05-01',
           description: '.tmp ファイルを探そう',
-          checks: [{ type: 'output_contains', pattern: '.tmp' }],
+          checks: [
+            { type: 'command_executed', command: 'find' },
+            { type: 'output_contains', pattern: '.tmp' },
+          ],
           hints: [
             { level: 1, text: 'ファイルを名前で検索するコマンドがあります。' },
             { level: 2, text: 'find コマンドで、特定の名前のファイルを探せます。find のあとに「.」（今いるフォルダ）と -name「名前のパターン」を書きます。' },
@@ -677,32 +683,32 @@ export const story00: Story = {
         },
         {
           id: 'obj-00-05-02',
-          description: 'メモ/古いメモ.tmp を削除しよう',
-          checks: [{ type: 'file_not_exists', path: '/home/watashi/メモ/古いメモ.tmp' }],
+          description: 'memo/old-memo.tmp を削除しよう',
+          checks: [{ type: 'file_not_exists', path: '/home/watashi/memo/old-memo.tmp' }],
           hints: [
             { level: 1, text: 'ファイルを削除するコマンドがあります。' },
             { level: 2, text: '「Remove」の略で、2文字のコマンドです。' },
-            { level: 3, text: '「rm メモ/古いメモ.tmp」と入力してみましょう。' },
+            { level: 3, text: '「rm memo/old-memo.tmp」と入力してみましょう。' },
           ],
         },
         {
           id: 'obj-00-05-03',
-          description: '写真/ゴミ.tmp を削除しよう',
-          checks: [{ type: 'file_not_exists', path: '/home/watashi/写真/ゴミ.tmp' }],
+          description: 'photos/junk.tmp を削除しよう',
+          checks: [{ type: 'file_not_exists', path: '/home/watashi/photos/junk.tmp' }],
           hints: [
             { level: 1, text: 'さっきと同じコマンドで別のファイルを削除しましょう。' },
             { level: 2, text: 'rm コマンドにファイルのパスを指定します。' },
-            { level: 3, text: '「rm 写真/ゴミ.tmp」と入力してみましょう。' },
+            { level: 3, text: '「rm photos/junk.tmp」と入力してみましょう。' },
           ],
         },
         {
           id: 'obj-00-05-04',
-          description: 'レシピ/一時ファイル.tmp を削除しよう',
-          checks: [{ type: 'file_not_exists', path: '/home/watashi/レシピ/一時ファイル.tmp' }],
+          description: 'recipes/temp.tmp を削除しよう',
+          checks: [{ type: 'file_not_exists', path: '/home/watashi/recipes/temp.tmp' }],
           hints: [
             { level: 1, text: '最後の一時ファイルも削除しましょう。' },
             { level: 2, text: 'rm コマンドにファイルのパスを指定します。' },
-            { level: 3, text: '「rm レシピ/一時ファイル.tmp」と入力してみましょう。' },
+            { level: 3, text: '「rm recipes/temp.tmp」と入力してみましょう。' },
           ],
         },
       ],
@@ -720,15 +726,15 @@ export const story00: Story = {
         explanation: 'grep は、ファイルの中身から指定した文字列を含む行を検索するコマンドです。find はファイル名で検索します。',
       },
       narrative:
-        '日記フォルダに過去の日記がある。今日の日記を書いて、それから過去の日記から気になる言葉を探してみよう！',
-      initialCwd: '/home/watashi/日記',
+        'diary（日記）フォルダに過去の日記がある。今日の日記を書いて、それから過去の日記から気になる言葉を探してみよう！',
+      initialCwd: '/home/watashi/diary',
       initialFS: mission6FS,
       newCommands: ['echo', 'grep'],
       objectives: [
         {
           id: 'obj-00-06-01',
           description: '新しい日記ファイル 2024-01-17.txt を作ろう',
-          checks: [{ type: 'file_exists', path: '/home/watashi/日記/2024-01-17.txt' }],
+          checks: [{ type: 'file_exists', path: '/home/watashi/diary/2024-01-17.txt' }],
           hints: [
             { level: 1, text: 'echo コマンドと > 記号を使うと、文字をファイルに書き込めます。> は「ファイルに書き込む」という意味です。' },
             { level: 2, text: 'echo "内容" > ファイル名 の形式で、ファイルを作って内容を書き込めます。' },
@@ -738,7 +744,10 @@ export const story00: Story = {
         {
           id: 'obj-00-06-02',
           description: '過去の日記から「桜」という言葉を探そう',
-          checks: [{ type: 'output_contains', pattern: '桜' }],
+          checks: [
+            { type: 'command_executed', command: 'grep' },
+            { type: 'output_contains', pattern: '桜' },
+          ],
           hints: [
             { level: 1, text: 'ファイルの中から特定の言葉を検索するコマンドがあります。' },
             { level: 2, text: 'grep コマンドで、指定した言葉を含む行を探せます。' },
@@ -760,7 +769,7 @@ export const story00: Story = {
         explanation: 'tail はファイルの末尾（最後の部分）を表示するコマンドです。head は最初の部分を表示します。',
       },
       narrative:
-        '旅行のレポートが長くて全部読むのは大変。最初の部分と最後の部分だけ確認して、全体の行数も数えてみよう。',
+        '旅行のレポート（report.txt）が長くて全部読むのは大変。最初の部分と最後の部分だけ確認して、全体の行数も数えてみよう。',
       initialCwd: '/home/watashi',
       initialFS: mission7FS,
       newCommands: ['head', 'tail', 'wc'],
@@ -772,7 +781,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'ファイルの最初の数行だけを表示するコマンドがあります。' },
             { level: 2, text: '「頭」を意味する英語のコマンドです。' },
-            { level: 3, text: '「head レポート.txt」と入力してみましょう。' },
+            { level: 3, text: '「head report.txt」と入力してみましょう。' },
           ],
         },
         {
@@ -782,7 +791,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'ファイルの最後の数行だけを表示するコマンドがあります。' },
             { level: 2, text: '「しっぽ」を意味する英語のコマンドです。head の反対です。' },
-            { level: 3, text: '「tail レポート.txt」と入力してみましょう。' },
+            { level: 3, text: '「tail report.txt」と入力してみましょう。' },
           ],
         },
         {
@@ -794,7 +803,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'ファイルの行数や文字数を数えるコマンドがあります。' },
             { level: 2, text: '「Word Count」の略のコマンドで、-l オプションをつけると行数だけ表示できます。' },
-            { level: 3, text: '「wc -l レポート.txt」と入力してみましょう。-l は「行数だけを数える」という意味です。' },
+            { level: 3, text: '「wc -l report.txt」と入力してみましょう。-l は「行数だけを数える」という意味です。' },
           ],
         },
       ],
@@ -812,7 +821,7 @@ export const story00: Story = {
         explanation: 'uniq は、隣接する重複行を取り除くコマンドです。sort で並べ替えてから使うのがポイントです。',
       },
       narrative:
-        '連絡先のファイルがぐちゃぐちゃで、同じ人が何回も登録されている。きれいに並べ替えて、重複を取り除こう！',
+        '連絡先のファイル（contacts.csv）がぐちゃぐちゃで、同じ人が何回も登録されている。きれいに並べ替えて、重複を取り除こう！',
       initialCwd: '/home/watashi',
       initialFS: mission8FS,
       newCommands: ['sort', 'uniq', 'cut'],
@@ -824,7 +833,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'ファイルの中身を並べ替えるコマンドがあります。' },
             { level: 2, text: '「並べ替え」を意味する英語のコマンドです。' },
-            { level: 3, text: '「sort 連絡先.csv」と入力してみましょう。' },
+            { level: 3, text: '「sort contacts.csv」と入力してみましょう。' },
           ],
         },
         {
@@ -834,7 +843,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: '重複した行を取り除くコマンドがあります。' },
             { level: 2, text: 'uniq コマンドで重複行を取り除けます。ただし uniq は「隣り合った行」しかまとめないので、先に sort で並べてから使うのがコツです。' },
-            { level: 3, text: '「uniq 連絡先.csv」と入力してみましょう。' },
+            { level: 3, text: '「uniq contacts.csv」と入力してみましょう。' },
           ],
         },
         {
@@ -847,7 +856,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'CSVの特定の列だけを切り出すコマンドがあります。' },
             { level: 2, text: 'cut コマンドで列を取り出せます。-d, は「カンマで区切る」、-f1 は「1列目を取り出す」という意味です。' },
-            { level: 3, text: '「cut -d, -f1 連絡先.csv」と入力してみましょう。' },
+            { level: 3, text: '「cut -d, -f1 contacts.csv」と入力してみましょう。' },
           ],
         },
       ],
@@ -865,7 +874,7 @@ export const story00: Story = {
         explanation: 'chmod (Change Mode) はファイルの権限を変更するコマンドです。+x で実行権限を追加します。',
       },
       narrative:
-        '共有フォルダにある集計スクリプトを実行したいけど、実行する権限がない。権限を設定して使えるようにしよう！',
+        'shared（共有）フォルダにある集計スクリプト（count.sh）を実行したいけど、実行する権限がない。権限を設定して使えるようにしよう！',
       initialCwd: '/home/watashi',
       initialFS: mission9FS,
       newCommands: ['chmod'],
@@ -877,7 +886,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'ファイルの権限（パーミッション）を変更するコマンドがあります。' },
             { level: 2, text: '「Change Mode」の略のコマンドで、+x をつけるとファイルを「実行してもいいよ」という許可を追加できます。プログラムを動かすときに必要です。' },
-            { level: 3, text: '「chmod +x 共有フォルダ/集計スクリプト.sh」と入力してみましょう。' },
+            { level: 3, text: '「chmod +x shared/count.sh」と入力してみましょう。shared は共有フォルダ、count.sh は集計スクリプトです。' },
           ],
         },
         {
@@ -887,7 +896,7 @@ export const story00: Story = {
           hints: [
             { level: 1, text: 'ファイルの中身を並べ替えて表示するコマンドがあります。' },
             { level: 2, text: 'sort コマンドにファイル名を渡すと、中身を並べ替えて表示します。' },
-            { level: 3, text: '「sort メモ/やることリスト.txt」と入力してみましょう。' },
+            { level: 3, text: '「sort memo/todo.txt」と入力してみましょう。' },
           ],
         },
       ],
@@ -905,8 +914,8 @@ export const story00: Story = {
         explanation: 'git status は、どのファイルが変更されたか、ステージされているかなどの現在の状態を表示します。',
       },
       narrative:
-        'レポートフォルダでは git を使って変更履歴を管理している。どんな変更が行われたか確認してみよう！',
-      initialCwd: '/home/watashi/レポート',
+        'reports（レポート）フォルダでは git を使って変更履歴を管理している。どんな変更が行われたか確認してみよう！',
+      initialCwd: '/home/watashi/reports',
       initialFS: mission10FS,
       newCommands: ['git'],
       objectives: [

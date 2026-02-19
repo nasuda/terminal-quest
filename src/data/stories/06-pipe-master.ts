@@ -247,7 +247,10 @@ export const story06: Story = {
         {
           id: 'obj-06-01-01',
           description: 'ファイル一覧の先頭5件を表示する',
-          checks: [{ type: 'output_contains', pattern: 'file05' }],
+          checks: [
+            { type: 'command_executed', command: 'head' },
+            { type: 'output_contains', pattern: 'file05' },
+          ],
           hints: [
             { level: 1, text: 'コマンドの出力を別のコマンドに渡す記号があります。' },
             { level: 2, text: 'ls の出力をパイプ（|）で head に渡します。head -n 5 で先頭5行を取得できます。' },
@@ -313,7 +316,10 @@ export const story06: Story = {
         {
           id: 'obj-06-02-02',
           description: 'wc -l で sales.csv の行数を数える',
-          checks: [{ type: 'output_contains', pattern: '20' }],
+          checks: [
+            { type: 'command_executed', command: 'wc' },
+            { type: 'output_contains', pattern: '20' },
+          ],
           hints: [
             { level: 1, text: '行数を数えるコマンドを使いましょう。' },
             { level: 2, text: 'wc -l コマンドでファイルの行数を数えられます。' },

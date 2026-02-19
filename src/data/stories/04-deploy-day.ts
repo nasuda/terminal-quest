@@ -376,7 +376,10 @@ export const story04: Story = {
         {
           id: 'obj-04-04-02',
           description: 'cat config.json で設定を表示し、production であることを確かめる',
-          checks: [{ type: 'output_contains', pattern: 'production' }],
+          checks: [
+            { type: 'command_executed', command: 'cat' },
+            { type: 'output_contains', pattern: 'production' },
+          ],
           hints: [
             { level: 1, text: 'ファイルの内容を表示するコマンドで設定を確認しましょう。' },
             { level: 2, text: 'cat コマンドで config.json の内容を表示できます。' },
