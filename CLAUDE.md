@@ -65,14 +65,15 @@ npm install -g terminal-quest   # グローバルインストール
 - 目標チェック設計: output_containsのみは避け、必ずcommand_executedと組み合わせる（意図しないコマンドでの達成を防止）
 - 段階的ヒント（3レベル）で学習を支援
 - ストーリー間の依存関係によるアンロックシステム（ロック時は解放条件を表示）
-- パイプ（|）とリダイレクト（>, >>）対応。stdinは __stdin__: プレフィックスで渡す（cat含む全パイプ対応コマンド）
+- パイプ（|）とリダイレクト（>, >>）対応。stdinは __stdin__: プレフィックスで渡す（cat含む全パイプ対応コマンド）。パイプ中間出力は末尾\n付加（Unix準拠）
+- 行処理コマンド（grep/sort/uniq/head/tail/cut）はsplit('\n')後に空末尾要素を除去
 - gitコマンドは .git/ ディレクトリ内のファイルで状態シミュレーション
 - Tabオートコンプリートでコマンド名・パス補完（Ctrl+Hでヒント）
 - 達成バッジシステムで学習モチベーション向上
 - ミッション完了時にふりかえり問題（4択クイズ）で理解度確認（Mission.review: ReviewQuestion）
 - ミッションごとの学習目標（Mission.goal）を設定
 - CommandFeedback: Levenshtein距離によるtypoコマンド提案、ミッション固有フィードバック（正規表現パターンマッチ）
-- コマンド実行回数カウント（StoryProgress.commandsPerMission）
+- コマンド実行回数カウント（StoryProgress.commandsPerMission、useRefで管理）
 - MissionBrief画面で新コマンドを具体例付きで紹介（各例に日本語の説明）
 - ターミナル画面は通常のターミナル風レイアウト（上からコマンドと結果が流れる）
 - ターミナル画面のゲーム内コマンド: hint, objectives/obj, cmds（新コマンド一覧）
@@ -113,8 +114,9 @@ npm install -g terminal-quest   # グローバルインストール
 - 全ミッションにgoal（学習目標）とreview（ふりかえり4択問題）を実装
 - CommandFeedbackエンジン（typo提案・正規表現ミッション固有フィードバック）
 - story-integrity.test.tsで全ストーリーデータの整合性を自動検証
-- パイプコマンドの目標判定対応（各コマンドを個別にチェック）
+- パイプコマンドの目標判定対応（各コマンドを個別にチェック、中間出力末尾\n付加）
 - cat のパイプ入力（stdin）対応
+- achievements useEffectは具体値（totalCommandsExecuted, completedStories, storyProgress）のみ依存
 - npm v1.0.2 公開済み（`npx terminal-quest` で誰でも実行可能）
 - ビルド済みdist配布方式（tsxは開発専用）
 - テスト 184件パス、TypeScriptエラー0
