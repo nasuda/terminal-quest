@@ -35,6 +35,11 @@ export class CommandHandler {
         return result;
       }
       previousOutput = result.output;
+      // Real Unix commands output trailing newline; ensure intermediate pipe
+      // output ends with \n so wc -l and other line-based tools count correctly
+      if (previousOutput && !previousOutput.endsWith('\n') && i < segments.length - 1) {
+        previousOutput += '\n';
+      }
     }
 
     return { output: previousOutput };

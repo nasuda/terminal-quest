@@ -451,7 +451,11 @@ export const story07: Story = {
         {
           id: 'obj-07-04-02',
           description: 'find で見つけた app-2024-*.log を rm で削除する',
-          checks: [{ type: 'file_not_exists', path: '/home/project/logs/app-2024-01.log' }],
+          checks: [
+            { type: 'file_not_exists', path: '/home/project/logs/app-2024-01.log' },
+            { type: 'file_not_exists', path: '/home/project/logs/app-2024-02.log' },
+            { type: 'file_not_exists', path: '/home/project/logs/app-2024-03.log' },
+          ],
           hints: [
             { level: 1, text: 'find \u3067\u898B\u3064\u3051\u305F\u30D5\u30A1\u30A4\u30EB\u3092\u524A\u9664\u3057\u307E\u3057\u3087\u3046\u3002' },
             { level: 2, text: '前の find で表示されたファイル名を rm コマンドに指定して削除しましょう。' },

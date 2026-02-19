@@ -54,6 +54,8 @@ export function tail(fs: VirtualFS, args: string[]): CommandResult {
 
   if (content === '') return { output: '' };
   const lines = content.split('\n');
+  // Remove trailing empty element from trailing newline (pipe or file)
+  if (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
   const selected = lines.slice(-lineCount);
   return { output: selected.join('\n') };
 }

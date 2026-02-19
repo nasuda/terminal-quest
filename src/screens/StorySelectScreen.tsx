@@ -13,6 +13,8 @@ interface StorySelectScreenProps {
   onResetStory: (storyId: string) => void;
 }
 
+const SUB_MENU_OPTIONS = 3; // つづきから, はじめから, もどる
+
 const courseConfig = [
   { key: 'kids' as const, label: '✨ 小学生向けコース', emoji: '✨' },
   { key: 'beginner' as const, label: '💻 はじめてコース', emoji: '💻' },
@@ -60,7 +62,7 @@ export function StorySelectScreen({ progress, onNavigate, onResetStory }: StoryS
         setSubMenu(prev => prev ? { ...prev, selectedOption: Math.max(0, prev.selectedOption - 1) } : null);
       }
       if (key.downArrow) {
-        setSubMenu(prev => prev ? { ...prev, selectedOption: Math.min(2, prev.selectedOption + 1) } : null);
+        setSubMenu(prev => prev ? { ...prev, selectedOption: Math.min(SUB_MENU_OPTIONS - 1, prev.selectedOption + 1) } : null);
       }
       if (key.return) {
         const story = stories.find(s => s.id === subMenu.storyId);

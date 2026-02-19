@@ -246,15 +246,15 @@ export const story06: Story = {
       objectives: [
         {
           id: 'obj-06-01-01',
-          description: 'ファイル一覧の先頭5件を表示する',
+          description: 'ログの先頭5行だけを表示する',
           checks: [
             { type: 'command_executed', command: 'head' },
-            { type: 'output_contains', pattern: 'file05' },
+            { type: 'output_contains', pattern: '08:00:01' },
           ],
           hints: [
             { level: 1, text: 'コマンドの出力を別のコマンドに渡す記号があります。' },
-            { level: 2, text: 'ls の出力をパイプ（|）で head に渡します。head -n 5 で先頭5行を取得できます。' },
-            { level: 3, text: '「ls | head -n 5」と入力してEnterを押してください。' },
+            { level: 2, text: 'cat でログを表示し、パイプ（|）で head に渡します。head -n 5 で先頭5行だけ取得できます。' },
+            { level: 3, text: '「cat logs/access.log | head -n 5」と入力してEnterを押してください。' },
           ],
         },
         {

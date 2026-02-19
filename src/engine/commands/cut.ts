@@ -69,6 +69,8 @@ export function cut(fs: VirtualFS, args: string[]): CommandResult {
   }
 
   const lines = content.split('\n');
+  // Remove trailing empty element from trailing newline (pipe or file)
+  if (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
   const result = lines.map(line => {
     const parts = line.split(delimiter);
     return fields.map(f => parts[f - 1] ?? '').join(delimiter);

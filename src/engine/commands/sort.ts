@@ -66,6 +66,8 @@ export function sort(fs: VirtualFS, args: string[]): CommandResult {
   }
 
   const lines = content.split('\n');
+  // Remove trailing empty element from trailing newline (pipe or file)
+  if (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
 
   const getKey = (line: string): string => {
     if (delimiter !== undefined && keyField !== undefined) {

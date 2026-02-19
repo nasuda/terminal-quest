@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useRef } from 'react';
 import { Box, Text, useInput } from 'ink';
 import { colors } from '../utils/colors.js';
 import { stories } from '../data/stories/index.js';
@@ -63,7 +63,7 @@ export function TerminalScreen({
   const [completedObjectives, setCompletedObjectives] = useState<string[]>([]);
   const [currentHint, setCurrentHint] = useState<Hint | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
-  const [commandCount, setCommandCount] = useState(0);
+  const commandCountRef = useRef(0);
   const [cmdsHintShown, setCmdsHintShown] = useState<Set<string>>(new Set());
 
   useInput((input, key) => {
@@ -106,7 +106,7 @@ export function TerminalScreen({
       if (!trimmed || !commandHandler || !missionEngine || !mission) return;
 
       setCommandHistory(prev => [...prev, trimmed]);
-      setCommandCount(prev => prev + 1);
+      commandCountRef.current += 1;
       onCommandExecuted();
 
       const cwd = missionEngine.getFS().getCwd();
@@ -234,13 +234,14 @@ export function TerminalScreen({
         setCurrentHint(null);
 
         if (missionEngine.isAllComplete()) {
+          const finalCount = commandCountRef.current;
           setTimeout(() => {
-            onMissionComplete(storyId, mission.id, hintEngine.getTotalHintsUsed(), commandCount + 1);
+            onMissionComplete(storyId, mission.id, hintEngine.getTotalHintsUsed(), finalCount);
             const isLast = story ? missionIndex >= story.missions.length - 1 : false;
             if (isLast) {
               onStoryComplete(storyId);
             }
-            onNavigate({ type: 'missionComplete', storyId, missionIndex, commandCount: commandCount + 1 });
+            onNavigate({ type: 'missionComplete', storyId, missionIndex, commandCount: finalCount });
           }, 500);
         }
       }
@@ -253,7 +254,6 @@ export function TerminalScreen({
       missionIndex,
       story,
       completedObjectives,
-      commandCount,
       hintEngine,
       onCommandExecuted,
       onMissionComplete,

@@ -52,6 +52,8 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
     }
 
     const lines = stdin.split('\n');
+    // Remove trailing empty element from trailing newline (pipe)
+    if (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
     const results: string[] = [];
     let matchCount = 0;
     for (let i = 0; i < lines.length; i++) {
@@ -89,6 +91,8 @@ export function grep(fs: VirtualFS, args: string[]): CommandResult {
     try {
       const content = fs.readFile(filePath);
       const lines = content.split('\n');
+      // Remove trailing empty element from trailing newline
+      if (lines.length > 0 && lines[lines.length - 1] === '') lines.pop();
       let fileMatchCount = 0;
       for (let i = 0; i < lines.length; i++) {
         if (regex.test(lines[i])) {

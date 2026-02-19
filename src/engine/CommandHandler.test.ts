@@ -420,8 +420,8 @@ describe('CommandHandler', () => {
 
     it('should count lines from pipe correctly', () => {
       const result = handler.execute('echo "line1\nline2\nline3" | wc -l');
-      // pipe content: "line1\nline2\nline3" → 2 newlines
-      expect(result.output).toBe('2');
+      // pipe adds trailing \n: "line1\nline2\nline3\n" → 3 newlines → 3 lines
+      expect(result.output).toBe('3');
     });
   });
 
@@ -510,9 +510,9 @@ describe('CommandHandler', () => {
     it('should handle 3-stage pipe: cat | grep | wc -l', () => {
       // hello.txt: "Hello, World!\nThis is a test file.\nHello again!"
       // grep Hello matches 2 lines -> "Hello, World!\nHello again!"
-      // wc -l counts newlines: 1 newline in that string
+      // pipe adds trailing \n → wc -l counts 2 newlines → 2 lines
       const result = handler.execute('cat hello.txt | grep Hello | wc -l');
-      expect(result.output).toBe('1');
+      expect(result.output).toBe('2');
     });
 
     it('should pipe cat into sort', () => {

@@ -157,10 +157,6 @@ const mission2FS: FSNode = {
                       type: 'file',
                       content: gitStatusOutput,
                     },
-                    stash: {
-                      type: 'file',
-                      content: '',
-                    },
                   },
                 },
                 src: {
@@ -415,7 +411,7 @@ export const story05: Story = {
           description: 'コミット履歴を確認する',
           checks: [
             { type: 'command_executed', command: 'git' },
-            { type: 'output_contains', pattern: 'commit' },
+            { type: 'output_contains', pattern: 'Author' },
           ],
           hints: [
             { level: 1, text: 'コミットの履歴を表示するGitコマンドがあります。' },
@@ -574,7 +570,10 @@ export const story05: Story = {
         {
           id: 'obj-05-05-01',
           description: 'main ブランチに切り替える',
-          checks: [{ type: 'command_executed', command: 'git' }],
+          checks: [
+            { type: 'command_executed', command: 'git' },
+            { type: 'output_contains', pattern: 'Switched' },
+          ],
           hints: [
             { level: 1, text: 'ブランチを切り替えるGitコマンドがあります。' },
             { level: 2, text: 'git checkout コマンドでブランチを切り替えられます。' },

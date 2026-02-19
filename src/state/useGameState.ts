@@ -87,7 +87,7 @@ export function useGameState() {
         };
       });
     }
-  }, [progress]);
+  }, [progress.totalCommandsExecuted, progress.completedStories, progress.storyProgress]);
 
   const resetStory = useCallback((storyId: string) => {
     setProgress(prev => {
@@ -101,7 +101,7 @@ export function useGameState() {
   }, []);
 
   const resetAll = useCallback(() => {
-    setProgress(initialGameState.progress);
+    setProgress({ ...initialGameState.progress });
   }, []);
 
   return {
