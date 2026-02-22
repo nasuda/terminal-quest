@@ -947,7 +947,7 @@ export const storyK1: Story = {
       id: 'mission-k1-09',
       title: '封印を解こう',
       description:
-        'ふういんされた seal.sh（呪文）をとけるようにして、魔法をつかおう！',
+        'seal.sh に「じっこうしてもいいよ」のきょかを出して、魔法の石から「光」をさがそう！',
       goal: 'chmod でけんげんをかえ、パイプで grep をつなげられるようになる',
       review: {
         question: 'ファイルのけんげん（つかえるかどうか）をかえるコマンドはどれかな？',
@@ -956,14 +956,14 @@ export const storyK1: Story = {
         explanation: 'chmod はファイルのけんげん（パーミッション）をかえるコマンドだよ。「change mode」のりゃくだよ。',
       },
       narrative:
-        'castle（古いお城）のおくで、ふういんされた seal.sh（封印の呪文）を見つけた！ふういんを解いて実行できるようにしよう。そして stone.txt（魔法の石）の中から「光の魔法」をさがしだそう。',
+        'castle（古いお城）のおくで、seal.sh（封印の呪文）を見つけた！でも今はロックされていて動かせない。chmod コマンドで「じっこうOK」にしてあげよう。それから stone.txt（魔法の石）にはたくさんの魔法が書いてあるよ。grep コマンドで「光」の魔法だけをとりだそう！',
       initialCwd: '/world/castle',
       initialFS: mission9FS,
       newCommands: ['chmod'],
       objectives: [
         {
           id: 'obj-k1-09-01',
-          description: 'seal.sh（封印の呪文）のふういんを解こう',
+          description: 'chmod をつかって seal.sh を「じっこうOK」にしよう',
           checks: [{ type: 'command_executed', command: 'chmod' }],
           hints: [
             { level: 1, text: 'ファイルのけんげん（つかえるかどうか）をかえるコマンドがあるよ。' },
@@ -977,7 +977,7 @@ export const storyK1: Story = {
         },
         {
           id: 'obj-k1-09-02',
-          description: 'stone.txt（魔法の石）から「光」の魔法をさがそう',
+          description: 'grep をつかって stone.txt から「光」の行だけとりだそう',
           checks: [
             { type: 'command_executed', command: 'grep' },
             { type: 'output_contains', pattern: '光の魔法' },
