@@ -598,7 +598,7 @@ export const story00: Story = {
           checks: [{ type: 'file_exists', path: '/home/watashi/photos/travel/memories.txt' }],
           hints: [
             { level: 1, text: '空のファイルを作るコマンドがあります。' },
-            { level: 2, text: 'touch コマンドでファイルを作れます。フォルダ名/ファイル名 のように書くと、フォルダの中にファイルを作れます。/ は「の中の」という意味です。' },
+            { level: 2, text: 'touch コマンドでファイルを作れます。フォルダ名/ファイル名 のように書くと、フォルダの中にファイルを作れます。/ は「の中の」という意味です。たとえば travel/memories.txt は「travel フォルダの中の memories.txt」ということです。' },
             { level: 3, text: '「touch travel/memories.txt」と入力してみましょう。memories は思い出のことです。' },
           ],
           feedbacks: [
@@ -654,8 +654,8 @@ export const story00: Story = {
     {
       id: 'mission-00-05',
       title: 'いらないファイルを片付けよう',
-      description: '不要な一時ファイルを探し出して、削除しよう。',
-      goal: 'find でファイルを検索し、rm で不要ファイルを削除できるようになる',
+      description: 'もう使わない一時ファイル（.tmp）を探し出して、削除しよう。.tmp はパソコンが一時的に作ったファイルで、もう不要なものです。',
+      goal: 'find でファイルを名前で検索し、rm で不要ファイルを削除できるようになる',
       review: {
         question: 'ファイルを名前で検索するコマンドはどれですか？',
         choices: ['grep', 'find', 'ls', 'cat'],
@@ -663,7 +663,7 @@ export const story00: Story = {
         explanation: 'find は、ファイルやフォルダを名前やタイプで検索するコマンドです。grep はファイルの中身を検索します。',
       },
       narrative:
-        'パソコンの中に「.tmp」という拡張子の一時ファイルがたまっている。これは不要なファイルなので、探し出して片付けよう！',
+        'パソコンの中に名前の最後が「.tmp」のファイルがたまっている。.tmp は「temporary（一時的）」の略で、パソコンが一時的に作ったいらないファイルだよ。ファイル名の「.」のあとの部分（.txt や .tmp など）はファイルの種類を表しているんだ。探し出して片付けよう！',
       initialCwd: '/home/watashi',
       initialFS: mission5FS,
       newCommands: ['rm', 'find'],
@@ -802,7 +802,7 @@ export const story00: Story = {
           ],
           hints: [
             { level: 1, text: 'ファイルの行数や文字数を数えるコマンドがあります。' },
-            { level: 2, text: '「Word Count」の略のコマンドで、-l オプションをつけると行数だけ表示できます。' },
+            { level: 2, text: 'wc（Word Count の略）コマンドで数を数えられます。コマンドのあとに「-」から始まるオプション（追加の指示）をつけると動きが変わります。-l は「行数（Lines）だけ数えて」という追加の指示です。' },
             { level: 3, text: '「wc -l report.txt」と入力してみましょう。-l は「行数だけを数える」という意味です。' },
           ],
         },
@@ -812,13 +812,13 @@ export const story00: Story = {
     {
       id: 'mission-00-08',
       title: '連絡先を整理しよう',
-      description: '連絡先データを並べ替えたり、重複を取り除いたりしてみよう。',
-      goal: 'sort、uniq、cut を使ってデータを加工・整理できるようになる',
+      description: '連絡先データを名前順に並べ替えたり、同じ人が2回登録されているのを取り除いたり、名前だけを取り出したりしてみよう。',
+      goal: 'sort で並べ替え、uniq で重複をまとめ、cut でほしい列だけを取り出せるようになる',
       review: {
         question: '重複した行を取り除くために sort と組み合わせて使うコマンドはどれですか？',
         choices: ['grep', 'cut', 'uniq', 'wc'],
         correctIndex: 2,
-        explanation: 'uniq は、隣接する重複行を取り除くコマンドです。sort で並べ替えてから使うのがポイントです。',
+        explanation: 'uniq は、となり合った同じ行を1つにまとめるコマンドです。ただし、離れた場所にある同じ行には気づけません。だから先に sort で並べて、同じ行をとなりどうしにしてから uniq を使うのがコツです。',
       },
       narrative:
         '連絡先のファイル（contacts.csv）がぐちゃぐちゃで、同じ人が何回も登録されている。きれいに並べ替えて、重複を取り除こう！',
@@ -842,7 +842,7 @@ export const story00: Story = {
           checks: [{ type: 'command_executed', command: 'uniq' }],
           hints: [
             { level: 1, text: '重複した行を取り除くコマンドがあります。' },
-            { level: 2, text: 'uniq コマンドで重複行を取り除けます。ただし uniq は「隣り合った行」しかまとめないので、先に sort で並べてから使うのがコツです。' },
+            { level: 2, text: 'uniq コマンドで同じ行を1つにまとめられます。ただし、uniq は「上の行と同じかどうか」しか見ないので、離れた場所にある同じ行には気づけません。だから先に sort で並べて、同じ行をとなりどうしにしてから使いましょう。' },
             { level: 3, text: '「uniq contacts.csv」と入力してみましょう。' },
           ],
         },
@@ -854,8 +854,8 @@ export const story00: Story = {
             { type: 'output_contains', pattern: '名前' },
           ],
           hints: [
-            { level: 1, text: 'CSVの特定の列だけを切り出すコマンドがあります。' },
-            { level: 2, text: 'cut コマンドで列を取り出せます。-d, は「カンマで区切る」、-f1 は「1列目を取り出す」という意味です。' },
+            { level: 1, text: 'contacts.csv は「,」（カンマ）でデータが区切られています。この中から名前の部分だけを切り出すコマンドがあります。' },
+            { level: 2, text: 'cut コマンドで列を取り出せます。-d, は「カンマで区切って」、-f1 は「1番目の列（名前）を取り出して」という追加の指示です。' },
             { level: 3, text: '「cut -d, -f1 contacts.csv」と入力してみましょう。' },
           ],
         },
@@ -865,27 +865,27 @@ export const story00: Story = {
     {
       id: 'mission-00-09',
       title: '共有ファイルの設定',
-      description: 'ファイルの権限を設定して、スクリプトを実行できるようにしよう。',
-      goal: 'chmod で権限を変更し、パイプでコマンドを連携できるようになる',
+      description: 'ファイルには「読んでいい」「書き込んでいい」「動かしていい」の3つの許可があります。集計スクリプトに「動かしていい」の許可を追加しよう。',
+      goal: 'chmod でファイルの許可を変更し、プログラムを実行できるようになる',
       review: {
         question: 'ファイルに実行権限を追加するコマンドはどれですか？',
         choices: ['chown +x', 'chmod +x', 'cp +x', 'mv +x'],
         correctIndex: 1,
-        explanation: 'chmod (Change Mode) はファイルの権限を変更するコマンドです。+x で実行権限を追加します。',
+        explanation: 'chmod (Change Mode) はファイルの許可を変更するコマンドです。+x の x は「execute（実行）」の頭文字で、「このファイルをプログラムとして動かしていいよ」という許可を追加します。',
       },
       narrative:
-        'shared（共有）フォルダにある集計スクリプト（count.sh）を実行したいけど、実行する権限がない。権限を設定して使えるようにしよう！',
+        'shared（共有）フォルダにある集計スクリプト（count.sh）を動かしたいけど、「動かしていい」の許可がまだ出ていない。パソコンではファイルごとに「読んでいい」「書き込んでいい」「動かしていい」の許可を設定できるんだ。chmod コマンドで「動かしていい」の許可を追加しよう！',
       initialCwd: '/home/watashi',
       initialFS: mission9FS,
       newCommands: ['chmod'],
       objectives: [
         {
           id: 'obj-00-09-01',
-          description: '集計スクリプトに実行権限をつけよう（chmod コマンド）',
+          description: '集計スクリプトに「動かしていい」の許可をつけよう（chmod コマンド）',
           checks: [{ type: 'command_executed', command: 'chmod' }],
           hints: [
-            { level: 1, text: 'ファイルの権限（パーミッション）を変更するコマンドがあります。' },
-            { level: 2, text: '「Change Mode」の略のコマンドで、+x をつけるとファイルを「実行してもいいよ」という許可を追加できます。プログラムを動かすときに必要です。' },
+            { level: 1, text: 'ファイルの許可（できること）を変更するコマンドがあります。' },
+            { level: 2, text: 'chmod（Change Mode の略）コマンドで、+x をつけると「このファイルを動かしていいよ」の許可を追加できます。x は「execute（実行）」の頭文字です。プログラム（.sh ファイルなど）を動かすときに必要です。' },
             { level: 3, text: '「chmod +x shared/count.sh」と入力してみましょう。shared は共有フォルダ、count.sh は集計スクリプトです。' },
           ],
         },
@@ -905,16 +905,16 @@ export const story00: Story = {
     {
       id: 'mission-00-10',
       title: '変更履歴を管理しよう',
-      description: 'git を使ってレポートの変更履歴を確認してみよう。',
-      goal: 'git status と git log で変更の状態と履歴を確認できるようになる',
+      description: 'git（ギット）は「いつ・誰が・何を変えたか」を記録してくれるツールです。レポートの変更履歴を確認してみよう。',
+      goal: 'git status で今の状態を確認し、git log でこれまでの変更の記録（履歴）を見られるようになる',
       review: {
         question: 'ファイルの変更状態を確認する git コマンドはどれですか？',
         choices: ['git log', 'git status', 'git diff', 'git add'],
         correctIndex: 1,
-        explanation: 'git status は、どのファイルが変更されたか、ステージされているかなどの現在の状態を表示します。',
+        explanation: 'git status は、「どのファイルが変更されたか」「まだ記録していない変更があるか」などの今の状態を表示します。',
       },
       narrative:
-        'reports（レポート）フォルダでは git を使って変更履歴を管理している。どんな変更が行われたか確認してみよう！',
+        'reports（レポート）フォルダでは git（ギット）を使って変更の記録を管理しているよ。git は「いつ・誰が・何を変えたか」をぜんぶ覚えてくれる便利なツールなんだ。どんな変更が行われたか確認してみよう！',
       initialCwd: '/home/watashi/reports',
       initialFS: mission10FS,
       newCommands: ['git'],

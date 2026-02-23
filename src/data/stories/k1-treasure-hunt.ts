@@ -878,16 +878,16 @@ export const storyK1: Story = {
       id: 'mission-k1-08',
       title: '仲間リストを整理しよう',
       description:
-        'party.csv（冒険者の名簿）をきれいに整理しよう！',
-      goal: 'sort、uniq、cut をつかってデータを整理できるようになる',
+        'party.csv（冒険者の名簿）をきれいに整理しよう！このファイルはデータが「,」（コンマ）でくぎられているよ。',
+      goal: 'sort でならびかえ、uniq でおなじ行をまとめ、cut でほしい部分だけをとりだせるようになる',
       review: {
         question: 'おなじ行をまとめてくれるコマンドはどれかな？',
         choices: ['sort', 'uniq', 'cut', 'grep'],
         correctIndex: 1,
-        explanation: 'uniq はとなりあうおなじ行をまとめるコマンドだよ。sort でならべてから uniq をつかうと、ぜんぶのおなじ行をまとめられるよ。',
+        explanation: 'uniq はとなりあうおなじ行を1つにまとめるコマンドだよ。でも、はなれた場所にあるおなじ行は気づけないんだ。だから先に sort でならべて、おなじ行をとなりどうしにしてから uniq をつかうのがコツだよ。',
       },
       narrative:
-        'castle（古いお城）で party.csv（冒険者の名簿）を見つけた。でも同じ名前が何回も書いてある。きれいに整理して、どんな職業の仲間がいるか調べよう。',
+        'castle（古いお城）で party.csv（冒険者の名簿）を見つけた。csv は「,」（コンマ）でデータをくぎって書くファイルだよ。でも同じ名前が何回も書いてある！きれいに整理して、どんな職業の仲間がいるか調べよう。',
       initialCwd: '/world/castle',
       initialFS: mission8FS,
       newCommands: ['sort', 'uniq', 'cut'],
@@ -929,7 +929,7 @@ export const storyK1: Story = {
           ],
           hints: [
             { level: 1, text: 'とくていの部分だけきりだすコマンドがあるよ。' },
-            { level: 2, text: '「cut」コマンドで「,」でくぎって2ばんめの部分をとりだせるよ。' },
+            { level: 2, text: '「cut」コマンドで「,」（コンマ）でくぎって2ばんめの部分をとりだせるよ。-d, は「コンマでくぎる」、-f2 は「2ばんめをとりだす」という意味だよ。' },
             {
               level: 3,
               text: '「cut -d, -f2 party.csv」とにゅうりょくしてね。party は冒険者名簿のことだよ。',
@@ -947,32 +947,32 @@ export const storyK1: Story = {
       id: 'mission-k1-09',
       title: '封印を解こう',
       description:
-        'seal.sh に「じっこうしてもいいよ」のきょかを出して、魔法の石から「光」をさがそう！',
-      goal: 'chmod でけんげんをかえ、パイプで grep をつなげられるようになる',
+        'seal.sh（封印の呪文）はプログラムだけど、いまは「動かしちゃダメ」になっている。chmod で「動かしてOK」にかえて、魔法の石から「光」をさがそう！',
+      goal: 'chmod でファイルを「動かしてもいいよ」にかえ、パイプ（|）で grep をつなげられるようになる',
       review: {
-        question: 'ファイルのけんげん（つかえるかどうか）をかえるコマンドはどれかな？',
+        question: 'ファイルを「動かしてもいいよ」にかえるコマンドはどれかな？',
         choices: ['chown', 'chmod', 'mv', 'cp'],
         correctIndex: 1,
-        explanation: 'chmod はファイルのけんげん（パーミッション）をかえるコマンドだよ。「change mode」のりゃくだよ。',
+        explanation: 'chmod はファイルの「できること」をかえるコマンドだよ。+x をつけると「プログラムとして動かしてOK」になるよ。「change mode」のりゃくだよ。',
       },
       narrative:
-        'castle（古いお城）のおくで、seal.sh（封印の呪文）を見つけた！でも今はロックされていて動かせない。chmod コマンドで「じっこうOK」にしてあげよう。それから stone.txt（魔法の石）にはたくさんの魔法が書いてあるよ。grep コマンドで「光」の魔法だけをとりだそう！',
+        'castle（古いお城）のおくで、seal.sh（封印の呪文）を見つけた！でも今は「動かしちゃダメ」のロックがかかっていて動かせない。chmod コマンドで「動かしてOK」にしてあげよう。それから stone.txt（魔法の石）にはたくさんの魔法が書いてあるよ。cat と grep をパイプ（|）でつなげて「光」の魔法だけをとりだそう！',
       initialCwd: '/world/castle',
       initialFS: mission9FS,
       newCommands: ['chmod'],
       objectives: [
         {
           id: 'obj-k1-09-01',
-          description: 'chmod をつかって seal.sh を「じっこうOK」にしよう',
+          description: 'chmod をつかって seal.sh を「動かしてOK」にしよう',
           checks: [{ type: 'command_executed', command: 'chmod' }],
           hints: [
-            { level: 1, text: 'ファイルのけんげん（つかえるかどうか）をかえるコマンドがあるよ。' },
-            { level: 2, text: '「chmod」コマンドで「+x」をつけると、実行できるようになるよ。' },
-            { level: 3, text: '「chmod +x seal.sh」とにゅうりょくしてね。seal は封印の呪文のことだよ。' },
+            { level: 1, text: 'ファイルを「動かしてもいいよ」にかえるコマンドがあるよ。' },
+            { level: 2, text: '「chmod」コマンドで「+x」をつけると、プログラムとして動かせるようになるよ。x は「execute（じっこう）」の頭文字で、+x は「動かしてOK」という意味だよ。' },
+            { level: 3, text: '「chmod +x seal.sh」とにゅうりょくしてね。seal は封印の呪文のことだよ。+x は「動かしてOK」のマークだよ。' },
           ],
           feedbacks: [
-            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。ふういんを解く（けんげんをかえる）には、べつのコマンドをつかうよ。' },
-            { pattern: 'rm', message: 'rm はファイルをけすコマンドだよ。ふういんを解くには、けんげんをかえるコマンドをつかおう。' },
+            { pattern: 'cat', message: 'cat はファイルの中身を読むコマンドだよ。ファイルを「動かしてOK」にかえるには、べつのコマンドをつかうよ。' },
+            { pattern: 'rm', message: 'rm はファイルをけすコマンドだよ。ファイルを「動かしてOK」にかえるには、べつのコマンドをつかおう。' },
           ],
         },
         {
@@ -998,16 +998,16 @@ export const storyK1: Story = {
       id: 'mission-k1-10',
       title: '冒険の記録をつけよう',
       description:
-        'gitをつかって、冒険のきろくをかくにんしよう！',
-      goal: 'git status と git log で変更のきろくをかくにんできるようになる',
+        'git（ギット）は「いつ・なにを変えたか」をきろくするツールだよ。冒険のきろくをかくにんしよう！',
+      goal: 'git status でいまのじょうたいを見て、git log でこれまでのきろく（れきし）をかくにんできるようになる',
       review: {
         question: 'いままでのきろく（ログ）を見るgitコマンドはどれかな？',
         choices: ['git status', 'git log', 'git add', 'git diff'],
         correctIndex: 1,
-        explanation: 'git log はいままでのへんこうのきろく（コミット）をひょうじするコマンドだよ。git status はいまのじょうたいをたしかめるコマンドだよ。',
+        explanation: 'git log はいままでの変更きろくをじゅんばんにひょうじするコマンドだよ。「いつ・だれが・なにをした」がわかるよ。git status はいまの状態をたしかめるコマンドだよ。',
       },
       narrative:
-        'base（秘密基地）にもどってきた。冒険のきろくがgitでのこしてある。いままでの冒険をふりかえってみよう！',
+        'base（秘密基地）にもどってきた。git（ギット）というべんりなツールで冒険のきろくがのこしてある。git は「いつ・なにを変えたか」をぜんぶおぼえてくれるツールだよ。いままでの冒険をふりかえってみよう！',
       initialCwd: '/world/base',
       initialFS: mission10FS,
       newCommands: ['git'],
