@@ -64,6 +64,7 @@ export function TerminalScreen({
   const [currentHint, setCurrentHint] = useState<Hint | null>(null);
   const [hintLevel, setHintLevel] = useState(0);
   const commandCountRef = useRef(0);
+  const missionCompleteTriggeredRef = useRef(false);
   const [cmdsHintShown, setCmdsHintShown] = useState<Set<string>>(new Set());
 
   useInput((input, key) => {
@@ -120,6 +121,11 @@ export function TerminalScreen({
         return;
       }
 
+      if (trimmed === 'clear') {
+        setOutputLines([]);
+        return;
+      }
+
       if (trimmed === 'objectives' || trimmed === 'obj') {
         mission.objectives.forEach((obj, i) => {
           const done = completedObjectives.includes(obj.id);
@@ -167,11 +173,6 @@ export function TerminalScreen({
 
       const result = commandHandler.execute(trimmed);
 
-      if (result.output === 'CLEAR_SCREEN') {
-        setOutputLines([]);
-        return;
-      }
-
       if (result.error) {
         let errorText = result.error!;
         if (course === 'kids' && errorText.endsWith(': command not found')) {
@@ -207,13 +208,14 @@ export function TerminalScreen({
         }
       }
 
-      // Parse all commands in pipe chain for objective checking
-      const pipeSegments = trimmed.split('|').map(s => s.trim()).filter(s => s);
+      // Parse all commands in pipe chain for objective checking (quote-aware)
+      const pipeSegments = commandHandler.splitOnPipe(trimmed).map(s => s.trim()).filter(s => s);
       let allNewlyCompleted: string[] = [];
       for (const segment of pipeSegments) {
-        const parts = segment.split(/\s+/);
-        const cmd = parts[0];
-        const args = parts.slice(1);
+        const tokens = commandHandler.tokenize(segment);
+        if (tokens.length === 0) continue;
+        const cmd = tokens[0];
+        const args = tokens.slice(1);
         const newlyCompleted = missionEngine.checkObjectives(cmd, args, result.output);
         allNewlyCompleted.push(...newlyCompleted);
       }
@@ -233,7 +235,8 @@ export function TerminalScreen({
 
         setCurrentHint(null);
 
-        if (missionEngine.isAllComplete()) {
+        if (missionEngine.isAllComplete() && !missionCompleteTriggeredRef.current) {
+          missionCompleteTriggeredRef.current = true;
           const finalCount = commandCountRef.current;
           setTimeout(() => {
             onMissionComplete(storyId, mission.id, hintEngine.getTotalHintsUsed(), finalCount);

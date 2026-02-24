@@ -7,8 +7,6 @@ import { grep } from './grep.js';
 import { cp } from './cp.js';
 import { echo } from './echo.js';
 import { help } from './help.js';
-import { hint } from './hint.js';
-import { clear } from './clear.js';
 import { git } from './git.js';
 import { mkdir } from './mkdir.js';
 import { mv } from './mv.js';
@@ -40,8 +38,6 @@ export const commandRegistry: Record<string, CommandFn> = {
   cp,
   echo,
   help,
-  hint,
-  clear,
   git,
   mkdir,
   mv,

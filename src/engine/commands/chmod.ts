@@ -30,7 +30,8 @@ export function chmod(fs: VirtualFS, args: string[]): CommandResult {
   try {
     fs.setPermissions(filePath, newPerms);
   } catch (e) {
-    return { output: '', error: `chmod: ${(e as Error).message}` };
+    const msg = e instanceof Error ? e.message : String(e);
+    return { output: '', error: `chmod: ${msg}` };
   }
 
   return { output: '' };

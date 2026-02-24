@@ -38,7 +38,8 @@ export function rm(fs: VirtualFS, args: string[]): CommandResult {
       fs.remove(path, recursive);
     } catch (e) {
       if (!force) {
-        return { output: '', error: `rm: ${(e as Error).message}` };
+        const msg = e instanceof Error ? e.message : String(e);
+        return { output: '', error: `rm: ${msg}` };
       }
     }
   }

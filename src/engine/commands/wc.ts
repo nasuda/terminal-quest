@@ -46,7 +46,8 @@ export function wc(fs: VirtualFS, args: string[]): CommandResult {
       try {
         content = fs.readFile(filename);
       } catch (e) {
-        return { output: '', error: `wc: ${(e as Error).message}` };
+        const msg = e instanceof Error ? e.message : String(e);
+        return { output: '', error: `wc: ${msg}` };
       }
 
       const lines = content === '' ? 0 : (content.match(/\n/g) || []).length;

@@ -60,7 +60,8 @@ export function cut(fs: VirtualFS, args: string[]): CommandResult {
     try {
       content = fs.readFile(files[0]);
     } catch (e) {
-      return { output: '', error: `cut: ${(e as Error).message}` };
+      const msg = e instanceof Error ? e.message : String(e);
+      return { output: '', error: `cut: ${msg}` };
     }
   } else if (stdin !== undefined) {
     content = stdin;

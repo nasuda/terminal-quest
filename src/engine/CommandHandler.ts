@@ -67,7 +67,13 @@ export class CommandHandler {
       ? [...args, `__stdin__:${stdin}`]
       : args;
 
-    const result = commandFn(this.fs, finalArgs);
+    let result: CommandResult;
+    try {
+      result = commandFn(this.fs, finalArgs);
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      return { output: '', error: `${commandName}: ${msg}` };
+    }
 
     // Handle redirect
     if (redirect && !result.error) {
@@ -139,7 +145,7 @@ export class CommandHandler {
     };
   }
 
-  private splitOnPipe(input: string): string[] {
+  splitOnPipe(input: string): string[] {
     const segments: string[] = [];
     let current = '';
     let inSingle = false;
@@ -170,7 +176,7 @@ export class CommandHandler {
    * Tokenize input string, handling single and double quotes.
    * Quoted strings preserve internal spaces. Quotes are removed from the result.
    */
-  private tokenize(input: string): string[] {
+  tokenize(input: string): string[] {
     const tokens: string[] = [];
     let current = '';
     let inSingle = false;

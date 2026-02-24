@@ -12,7 +12,8 @@ export function mv(fs: VirtualFS, args: string[]): CommandResult {
   try {
     fs.move(source, dest);
   } catch (e) {
-    return { output: '', error: `mv: ${(e as Error).message}` };
+    const msg = e instanceof Error ? e.message : String(e);
+    return { output: '', error: `mv: ${msg}` };
   }
 
   return { output: '' };

@@ -59,6 +59,10 @@ export function App() {
         return <ProgressScreen progress={progress} onNavigate={navigateTo} />;
       case 'settings':
         return <SettingsScreen onNavigate={navigateTo} onReset={resetAll} />;
+      default: {
+        const _exhaustive: never = screen;
+        return <TitleScreen onNavigate={navigateTo} />;
+      }
     }
   };
 

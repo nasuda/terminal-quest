@@ -117,6 +117,12 @@ npm install -g terminal-quest   # グローバルインストール
 - パイプコマンドの目標判定対応（各コマンドを個別にチェック、中間出力末尾\n付加）
 - cat のパイプ入力（stdin）対応
 - achievements useEffectは具体値（totalCommandsExecuted, completedStories, storyProgress）のみ依存
-- npm v1.0.2 公開済み（`npx terminal-quest` で誰でも実行可能）
+- npm v1.3.0 公開済み（`npx terminal-quest` で誰でも実行可能）
 - ビルド済みdist配布方式（tsxは開発専用）
 - テスト 184件パス、TypeScriptエラー0
+- ProgressStore: 読み込み/保存エラーのログ出力、破損ファイルバックアップ、フィールドマイグレーション対応
+- hint/clearはTerminalScreen側で直接処理（commandRegistry非登録、パイプでのセンチネル漏洩防止）
+- パイプ目標判定: CommandHandler.splitOnPipe/tokenize（クォート考慮）を公開メソッド化して使用
+- CommandHandler.executeSingle: コマンド実行をtry-catchで保護
+- VirtualFS.move: 自身のサブディレクトリへの移動を検出してエラー
+- 全コマンドのcatchブロック: `e instanceof Error ? e.message : String(e)` に統一

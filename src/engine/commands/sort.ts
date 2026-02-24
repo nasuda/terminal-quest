@@ -57,7 +57,8 @@ export function sort(fs: VirtualFS, args: string[]): CommandResult {
     try {
       content = fs.readFile(files[0]);
     } catch (e) {
-      return { output: '', error: `sort: ${(e as Error).message}` };
+      const msg = e instanceof Error ? e.message : String(e);
+      return { output: '', error: `sort: ${msg}` };
     }
   } else if (stdin !== undefined) {
     content = stdin;
@@ -81,8 +82,8 @@ export function sort(fs: VirtualFS, args: string[]): CommandResult {
     lines.sort((a, b) => {
       const ka = getKey(a);
       const kb = getKey(b);
-      const na = parseFloat(ka) || 0;
-      const nb = parseFloat(kb) || 0;
+      const na = isNaN(parseFloat(ka)) ? 0 : parseFloat(ka);
+      const nb = isNaN(parseFloat(kb)) ? 0 : parseFloat(kb);
       return na - nb;
     });
   } else {

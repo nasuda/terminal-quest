@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync } from 'fs';
 import { join } from 'path';
 import { homedir } from 'os';
 import type { GameProgress } from '../data/types.js';
@@ -7,17 +7,40 @@ import { initialProgress } from './GameState.js';
 const SAVE_DIR = join(homedir(), '.terminal-quest');
 const SAVE_FILE = join(SAVE_DIR, 'progress.json');
 
+let saveWarningShown = false;
+
+function migrateProgress(parsed: Record<string, unknown>): GameProgress {
+  return {
+    completedStories: Array.isArray(parsed.completedStories) ? parsed.completedStories as string[] : [],
+    storyProgress: (parsed.storyProgress && typeof parsed.storyProgress === 'object') ? parsed.storyProgress as GameProgress['storyProgress'] : {},
+    totalCommandsExecuted: typeof parsed.totalCommandsExecuted === 'number' ? parsed.totalCommandsExecuted : 0,
+    totalHintsUsed: typeof parsed.totalHintsUsed === 'number' ? parsed.totalHintsUsed : 0,
+    achievements: Array.isArray(parsed.achievements) ? parsed.achievements as string[] : [],
+  };
+}
+
 export function loadProgress(): GameProgress {
   try {
     if (!existsSync(SAVE_FILE)) return { ...initialProgress };
     const data = readFileSync(SAVE_FILE, 'utf-8');
-    const parsed = JSON.parse(data) as GameProgress;
-    // Migration: add achievements if missing
-    if (!parsed.achievements) {
-      parsed.achievements = [];
+    const parsed = JSON.parse(data);
+    if (!parsed || typeof parsed !== 'object') {
+      throw new Error('Invalid progress file format');
     }
-    return parsed;
-  } catch {
+    return migrateProgress(parsed as Record<string, unknown>);
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    process.stderr.write(
+      `[terminal-quest] 進捗ファイルの読み込みに失敗しました: ${msg}\n` +
+      `新しい進捗データで開始します。\n`
+    );
+    try {
+      if (existsSync(SAVE_FILE)) {
+        const backupPath = SAVE_FILE + '.backup.' + Date.now();
+        copyFileSync(SAVE_FILE, backupPath);
+        process.stderr.write(`[terminal-quest] バックアップを保存しました: ${backupPath}\n`);
+      }
+    } catch { /* backup is best-effort */ }
     return { ...initialProgress };
   }
 }
@@ -28,8 +51,16 @@ export function saveProgress(progress: GameProgress): void {
       mkdirSync(SAVE_DIR, { recursive: true });
     }
     writeFileSync(SAVE_FILE, JSON.stringify(progress, null, 2), 'utf-8');
-  } catch {
-    // 保存失敗は無視（ゲーム継続可能）
+    saveWarningShown = false;
+  } catch (e) {
+    if (!saveWarningShown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      process.stderr.write(
+        `[terminal-quest] 進捗の保存に失敗しました: ${msg}\n` +
+        `進捗データが保持されない可能性があります。\n`
+      );
+      saveWarningShown = true;
+    }
   }
 }
 

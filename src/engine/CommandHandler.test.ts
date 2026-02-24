@@ -294,17 +294,17 @@ describe('CommandHandler', () => {
 
   // --- hint ---
   describe('hint', () => {
-    it('should return HINT_REQUEST', () => {
+    it('should return command not found (handled by TerminalScreen)', () => {
       const result = handler.execute('hint');
-      expect(result.output).toBe('HINT_REQUEST');
+      expect(result.error).toBe('hint: command not found');
     });
   });
 
   // --- clear ---
   describe('clear', () => {
-    it('should return CLEAR_SCREEN', () => {
+    it('should return command not found (handled by TerminalScreen)', () => {
       const result = handler.execute('clear');
-      expect(result.output).toBe('CLEAR_SCREEN');
+      expect(result.error).toBe('clear: command not found');
     });
   });
 

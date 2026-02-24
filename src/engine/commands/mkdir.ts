@@ -26,7 +26,8 @@ export function mkdir(fs: VirtualFS, args: string[]): CommandResult {
     try {
       fs.mkdir(path, recursive);
     } catch (e) {
-      return { output: '', error: `mkdir: ${(e as Error).message}` };
+      const msg = e instanceof Error ? e.message : String(e);
+      return { output: '', error: `mkdir: ${msg}` };
     }
   }
 

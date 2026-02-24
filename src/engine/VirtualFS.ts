@@ -212,6 +212,15 @@ export class VirtualFS {
     const srcNode = this.getNode(src);
     if (!srcNode) throw new Error(`No such file or directory: ${src}`);
 
+    const resolvedSrc = this.resolvePath(src);
+    const resolvedDest = this.resolvePath(dest);
+    if (resolvedDest === resolvedSrc) {
+      throw new Error(`'${src}' and '${dest}' are the same file`);
+    }
+    if (resolvedDest.startsWith(resolvedSrc + '/')) {
+      throw new Error(`Cannot move '${src}' to a subdirectory of itself`);
+    }
+
     const cloned = this.deepClone(srcNode);
 
     if (this.exists(dest) && this.isDirectory(dest)) {

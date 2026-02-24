@@ -16,7 +16,8 @@ export function touch(fs: VirtualFS, args: string[]): CommandResult {
   try {
     fs.writeFile(filename, '');
   } catch (e) {
-    return { output: '', error: `touch: ${(e as Error).message}` };
+    const msg = e instanceof Error ? e.message : String(e);
+    return { output: '', error: `touch: ${msg}` };
   }
 
   return { output: '' };

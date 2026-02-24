@@ -208,7 +208,12 @@ function gitStash(fs: VirtualFS, args: string[]): CommandResult {
       return { output: '', error: 'No stash entries found.' };
     }
 
-    const entry = JSON.parse(fs.readFile(stashPath));
+    let entry;
+    try {
+      entry = JSON.parse(fs.readFile(stashPath));
+    } catch {
+      return { output: '', error: 'error: corrupt stash entry' };
+    }
 
     // Restore state
     if (entry.status) {
@@ -239,8 +244,12 @@ function gitStash(fs: VirtualFS, args: string[]): CommandResult {
     for (let i = stashCount - 1; i >= 0; i--) {
       const stashPath = `.git/stash-stack/${i}`;
       if (fs.exists(stashPath)) {
-        const entry = JSON.parse(fs.readFile(stashPath));
-        lines.push(`stash@{${stashCount - 1 - i}}: WIP on ${entry.branch}`);
+        try {
+          const entry = JSON.parse(fs.readFile(stashPath));
+          lines.push(`stash@{${stashCount - 1 - i}}: WIP on ${entry.branch}`);
+        } catch {
+          lines.push(`stash@{${stashCount - 1 - i}}: (corrupt entry)`);
+        }
       }
     }
     return { output: lines.join('\n') };

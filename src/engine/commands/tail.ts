@@ -44,7 +44,8 @@ export function tail(fs: VirtualFS, args: string[]): CommandResult {
     try {
       content = fs.readFile(files[0]);
     } catch (e) {
-      return { output: '', error: `tail: ${(e as Error).message}` };
+      const msg = e instanceof Error ? e.message : String(e);
+      return { output: '', error: `tail: ${msg}` };
     }
   } else if (stdin !== undefined) {
     content = stdin;
